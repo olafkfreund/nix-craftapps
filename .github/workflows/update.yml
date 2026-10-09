@@ -1,0 +1,35 @@
+name: update
+on:
+  schedule:
+    - cron: "17 5 * * *"
+  workflow_dispatch:
+permissions:
+  contents: write
+  pull-requests: write
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: cachix/install-nix-action@v31
+      - name: Bump nixpkgs on Mondays
+        run: if [ "$(date -u +%u)" = 1 ]; then nix flake update; fi
+      - name: Update apps.json
+        id: update
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          {
+            echo 'summary<<EOF'
+            python3 scripts/update.py
+            echo EOF
+          } >> "$GITHUB_OUTPUT"
+      - run: nix flake check -L
+      - uses: peter-evans/create-pull-request@v7
+        with:
+          branch: update/craft-apps
+          title: "chore: update Craft apps"
+          commit-message: "chore: update Craft apps"
+          body: |
+            ${{ steps.update.outputs.summary }}
+          delete-branch: true
