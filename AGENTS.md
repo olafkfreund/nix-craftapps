@@ -78,7 +78,9 @@ When storytold publishes a 13th app:
 4. Launch the GUI on a real session. Run `timeout 8 ./result/bin/<newapp>`;
    exit status 124 means it stayed up. If it panics about a missing library,
    add that library to `runtimeDependencies` in `package.nix`.
-5. Add it to the app tables in `README.md` and `llms.txt`.
+5. Add it to the app tables in `README.md` and `llms.txt`. If it has its
+   own GPU switches (`strings` the binary for `*_GPU*`), note them in
+   `docs/GPU.md`.
 
 ## Traps already found
 
@@ -98,6 +100,13 @@ When storytold publishes a 13th app:
 - **CI on update PRs.** A PR opened with `GITHUB_TOKEN` does not trigger
   `pull_request` workflows, so `update.yml` dispatches `ci.yml` on the PR
   branch itself.
+- **GPU.** All apps render through wgpu (egui/eframe): Vulkan first, then
+  GLES through EGL. Drivers are found only in `/run/opengl-driver`.
+  `WGPU_BACKEND=gl` is honoured (verified). The modules must never set
+  `hardware.graphics`, `hardware.nvidia` or any driver option, and
+  `docs/GPU.md` promises users exactly that. If you change GPU-related
+  behaviour, update that page's tables and its "What has been tested"
+  section.
 - **Launching a GUI.** Running a GUI with an unknown flag such as `--help`
   opens a window instead of printing help. Use the `-cli` binary for
   anything headless.

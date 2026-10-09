@@ -52,9 +52,9 @@ launcher entry and icons.
 - Nix with flakes enabled. If `nix flake --help` fails, add
   `experimental-features = nix-command flakes` to `~/.config/nix/nix.conf`,
   or to `/etc/nix/nix.conf` on a multi-user install.
-- A graphical session, Wayland or X11, with working GPU drivers. On a
-  distribution other than NixOS, see
-  [GPU drivers on other distributions](#gpu-drivers-on-other-distributions).
+- A graphical session, Wayland or X11. **On NixOS** the GPU needs nothing
+  extra. **On other distributions** one extra step is needed; see
+  [docs/GPU.md](docs/GPU.md).
 
 ## Quick start: try an app without installing
 
@@ -234,51 +234,20 @@ your distribution already provides `/usr/share/fonts`.
 #### GPU drivers on other distributions
 
 Programs built by Nix cannot find your distribution's OpenGL and Vulkan
-drivers on their own. Without them, the apps fail to open a window, or fall
-back to slow software rendering. Home Manager can fix this. Add to `home.nix`:
+drivers on their own, so you need one extra step. There are two ways:
 
-```nix
-{
-  targets.genericLinux.enable = true;
-}
-```
+- **Recommended:** add `targets.genericLinux.enable = true;` to `home.nix`,
+  then run the `sudo …/non-nixos-gpu-setup` command that `home-manager
+  switch` prints, once. It adds `/run/opengl-driver` and one tmpfiles file,
+  and touches nothing your distribution uses.
+- **No sudo:** wrap the apps with nixGL. This changes nothing on the system.
 
-On the next `home-manager switch`, Home Manager prints a one-time command
-like the one below. Run it with `sudo`:
+**NVIDIA's proprietary driver needs its exact version in `home.nix`,** and
+that version has to be updated whenever your distribution updates the
+driver.
 
-```text
-GPU drivers require an update, run
-  sudo /nix/store/…-non-nixos-gpu/bin/non-nixos-gpu-setup
-```
-
-This links matching drivers into `/run/opengl-driver`, where Nix programs
-look for them, and keeps the link across reboots. NVIDIA's proprietary driver
-needs extra settings under `targets.genericLinux.gpu.nvidia`. See the Home
-Manager manual,
-[GPU on non-NixOS systems](https://nix-community.github.io/home-manager/index.xhtml#sec-usage-gpu-non-nixos).
-
-**No sudo?** Wrap the apps with nixGL instead. Add `nixGL` as a flake input
-(`github:nix-community/nixGL`), and pass your inputs to Home Manager by adding
-`extraSpecialArgs = { inherit inputs; };` to `homeManagerConfiguration`
-(with `outputs = inputs@{ ... }:`). Then in `home.nix`:
-
-```nix
-{ config, inputs, ... }:
-{
-  targets.genericLinux.nixGL.packages = inputs.nixGL.packages;
-
-  programs.craftapps = {
-    enable = true;
-    apps.photocraft = {
-      enable = true;
-      package = config.lib.nixGL.wrap inputs.nix-craftapps.packages.x86_64-linux.photocraft;
-    };
-  };
-}
-```
-
-`config.lib.nixGL.wrap` changes nothing until `nixGL.packages` is set, so
-the same `home.nix` also works on NixOS.
+The full steps, what each one changes, how to undo it, hybrid laptops, VMs
+and per-launch GPU switches are in **[docs/GPU.md](docs/GPU.md)**.
 
 ## Choosing apps
 
@@ -379,9 +348,11 @@ also boot the previous generation.
 **The app doesn't open, or prints `Failed to create … adapter`, `no Vulkan
 driver` or `could not open display`.**
 
-- On another distribution, set up the GPU drivers first, as described in
-  [GPU drivers on other distributions](#gpu-drivers-on-other-distributions).
+- Work through [docs/GPU.md](docs/GPU.md#checking-your-setup). It has
+  read-only checks for every platform.
 - On NixOS, check that `hardware.graphics.enable = true` is set.
+- To rule out a GPU driver bug, force software rendering for one launch:
+  `WGPU_BACKEND=gl LIBGL_ALWAYS_SOFTWARE=1 photocraft`.
 - To test without the GPU, try the CLI first. `photocraft-cli --version`
   needs no display.
 
@@ -426,7 +397,8 @@ These are upstream's prebuilt binaries, not source builds: the
 from source would mean compiling twelve large Rust workspaces on every daily
 release.
 
-To work on this repository, start with [AGENTS.md](AGENTS.md).
+To work on this repository, start with [AGENTS.md](AGENTS.md). GPU details
+are in [docs/GPU.md](docs/GPU.md).
 
 ## License
 

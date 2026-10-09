@@ -15,13 +15,19 @@ Key facts for answering questions about this flake:
   - `programs.craftapps.linkFonts` exists in the NixOS module only, defaults to `true`, and provides `/usr/share/fonts`.
 - **Choosing apps:** to exclude an app, set `enableAll = true` and `apps.<app>.enable = false`. To pick a few, leave `enableAll` off and set `apps.<app>.enable = true` for each.
 - **Fonts:** the apps read fonts only from `/usr/share/fonts`, without fontconfig. NixOS lacks that folder, so the NixOS module's `linkFonts` provides it. A Home Manager-only setup on NixOS still needs the NixOS module with `linkFonts`. Other distributions already have the folder.
-- **Other distributions** (Ubuntu, Fedora, Arch): the apps need GPU drivers made visible to Nix. Set `targets.genericLinux.enable = true` in Home Manager and run the printed `sudo …/non-nixos-gpu-setup` once. Without sudo, wrap packages with `config.lib.nixGL.wrap`.
+- **GPU:**
+  - The flake never changes GPU or driver configuration.
+  - On NixOS, nothing is needed beyond `hardware.graphics.enable` (desktops set it); NVIDIA and PRIME sync need nothing extra, and PRIME offload can use `nvidia-offload <app>`.
+  - On other distributions, the apps need GPU drivers made visible to Nix: set `targets.genericLinux.enable = true` in Home Manager and run the printed `sudo …/non-nixos-gpu-setup` once, or, without sudo, wrap with `config.lib.nixGL.wrap`.
+  - NVIDIA on another distribution needs `targets.genericLinux.gpu.nvidia.{version,sha256}` matching the host driver, updated on every driver update.
+  - The apps render with wgpu (Vulkan, then OpenGL ES). Per launch, `WGPU_BACKEND=gl` forces OpenGL, and `WGPU_BACKEND=gl LIBGL_ALWAYS_SOFTWARE=1` forces software rendering. PhotoCraft also has `--safe-gpu`.
 - **Pinning and updates:** `flake.lock` pins the versions. Update with `nix flake update nix-craftapps`. The flake packages upstream's prebuilt release binaries, pinned by hash, not source builds.
 - **Early software:** the apps are pre-1.0 and released daily.
 
 ## Docs
 
 - [README](https://raw.githubusercontent.com/olafkfreund/nix-craftapps/main/README.md): quick start, NixOS install, Home Manager install (in NixOS, standalone, and on other distributions with GPU setup), choosing apps, option reference, fonts, updating, uninstalling, troubleshooting
+- [GPU setup](https://raw.githubusercontent.com/olafkfreund/nix-craftapps/main/docs/GPU.md): what each platform needs (NixOS AMD/Intel/NVIDIA/hybrid, other distributions via Home Manager or nixGL, VMs, WSL2), what each step changes and how to undo it, backend and GPU selection variables, read-only checks, and what has been tested
 - [AGENTS.md](https://raw.githubusercontent.com/olafkfreund/nix-craftapps/main/AGENTS.md): repository layout, commands, rules, how to add an app, known traps
 
 ## Source
