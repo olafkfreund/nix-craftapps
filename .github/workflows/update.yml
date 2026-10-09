@@ -4,6 +4,7 @@ on:
     - cron: "17 5 * * *"
   workflow_dispatch:
 permissions:
+  actions: write
   contents: write
   pull-requests: write
 jobs:
@@ -26,6 +27,7 @@ jobs:
           } >> "$GITHUB_OUTPUT"
       - run: nix flake check -L
       - uses: peter-evans/create-pull-request@v7
+        id: pr
         with:
           branch: update/craft-apps
           title: "chore: update Craft apps"
@@ -33,3 +35,9 @@ jobs:
           body: |
             ${{ steps.update.outputs.summary }}
           delete-branch: true
+      # PRs opened with GITHUB_TOKEN do not trigger pull_request workflows;
+      # workflow_dispatch is exempt, so run the two-arch CI on the branch.
+      - if: steps.pr.outputs.pull-request-number
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: gh workflow run ci.yml --ref update/craft-apps

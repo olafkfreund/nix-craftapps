@@ -67,8 +67,10 @@ def entry_for(app, release, old):
         url = assets.get(asset_name(app, version, arch))
         if url:
             sources[system] = {"url": url, "hash": prefetch(url)}
-    if not sources:
-        raise RuntimeError(f"no linux tarball in {release['tag_name']}")
+    missing = set(old.get("sources", SYSTEMS)) - set(sources)
+    if missing or not sources:
+        # Keep the old entry and retry next run: assets often upload one by one.
+        raise RuntimeError(f"{release['tag_name']} lacks {sorted(missing) or 'linux tarballs'}")
     return {
         "title": old.get("title", title),
         "description": old.get("description", description),
@@ -89,6 +91,17 @@ def self_test():
     assert asset_name("x", "1.2.3", "aarch64") == "x-1.2.3-linux-aarch64.tar.gz"
     assert dump({"b": 1, "a": 2}).startswith('{\n  "a"')
     assert set(SYSTEMS) == {"x86_64-linux", "aarch64-linux"}
+    global prefetch
+    prefetch = lambda url: "sha256-x"
+    rel = {"tag_name": "v1.0.0", "assets": [
+        {"name": "x-1.0.0-linux-x86_64.tar.gz", "browser_download_url": "u"}]}
+    APPS["x"] = ("X", "x")
+    try:
+        entry_for("x", rel, {"sources": {"x86_64-linux": {}, "aarch64-linux": {}}})
+        raise AssertionError("accepted a release missing an arch")
+    except RuntimeError:
+        pass
+    assert entry_for("x", rel, {"sources": {"x86_64-linux": {}}})["version"] == "1.0.0"
     print("self-test ok")
 
 
