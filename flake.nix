@@ -41,6 +41,7 @@
                 programs.craftapps = {
                   enable = true;
                   enableAll = true;
+                  apps.soundcraft.enable = false;
                 };
                 boot.loader.grub.enable = false;
                 fileSystems."/" = {
@@ -58,11 +59,13 @@
             let
               cfg = node.config;
               ok =
-                builtins.length cfg.programs.craftapps.packages == builtins.length names
+                builtins.length cfg.programs.craftapps.packages == builtins.length names - 1
+                && !builtins.elem "soundcraft" (map (p: p.pname) cfg.programs.craftapps.packages)
                 && builtins.any (lib.hasInfix "/usr/share/fonts") cfg.systemd.tmpfiles.rules
                 && cfg.fonts.fontDir.enable;
             in
-            assert lib.assertMsg ok "craftapps NixOS module did not install every app and link the fonts";
+            assert lib.assertMsg ok
+              "craftapps NixOS module: enableAll with one exclusion, or the font link, is wrong";
             pkgs.runCommand "craftapps-module-check" { } "touch $out";
           cli = pkgs.runCommand "craftapps-cli-check" { } ''
             ${lib.concatMapStringsSep "\n" (

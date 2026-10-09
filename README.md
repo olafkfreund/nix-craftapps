@@ -44,9 +44,10 @@ nix shell github:olafkfreund/nix-craftapps#deckcraft   # GUI and deckcraft-cli
   imports = [ inputs.nix-craftapps.nixosModules.default ];
   programs.craftapps = {
     enable = true;
-    enableAll = true;                  # or pick apps:
-    apps.photocraft.enable = true;
-    apps.deckcraft.enable = true;
+    enableAll = true;                  # every app on by default...
+    apps.soundcraft.enable = false;    # ...minus the ones you exclude
+    # or leave enableAll off and turn single apps on:
+    # apps.photocraft.enable = true;
   };
 }
 ```
@@ -54,8 +55,8 @@ nix shell github:olafkfreund/nix-craftapps#deckcraft   # GUI and deckcraft-cli
 | Option                                | Default       | Meaning                                    |
 | ------------------------------------- | ------------- | ------------------------------------------ |
 | `programs.craftapps.enable`           | `false`       | Turn the module on                         |
-| `programs.craftapps.enableAll`        | `false`       | Install all twelve apps                    |
-| `programs.craftapps.apps.<n>.enable`  | `false`       | Install one app                            |
+| `programs.craftapps.enableAll`        | `false`       | Default for every `apps.<n>.enable`        |
+| `programs.craftapps.apps.<n>.enable`  | `enableAll`   | Include (`true`) or exclude (`false`) one app |
 | `programs.craftapps.apps.<n>.package` | this flake's  | Override the package                       |
 | `programs.craftapps.linkFonts`        | `true`        | NixOS only: provide `/usr/share/fonts`     |
 
