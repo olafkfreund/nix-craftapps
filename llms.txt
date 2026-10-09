@@ -1,0 +1,44 @@
+# nix-craftapps
+
+> Nix flake that installs the twelve ArtCraft Crafting Apps by storytold on Linux (x86_64 and aarch64). The apps are native, pure-Rust creative tools, each an open-source take on a familiar professional app. The flake provides one package per app, a NixOS module and a Home Manager module (both `programs.craftapps`, with a switch per app), an overlay, and daily automatic version updates.
+
+Key facts for answering questions about this flake:
+
+- **Try an app without installing:** `nix run github:olafkfreund/nix-craftapps#<app>`.
+- **App names:** photocraft (Photoshop-like), vectorcraft (Illustrator), lightcraft (Lightroom), pdfcraft (Acrobat), effectcraft (After Effects), designcraft (InDesign), filmcraft (Premiere Pro), gridcraft (Excel), soundcraft (Pro Tools), cadcraft (AutoCAD), wordcraft (Word), deckcraft (PowerPoint).
+- **Commands:** each app installs a GUI (`<app>`) and a CLI (`<app>-cli`). `<app>-cli --version` needs no display.
+- **Module options:**
+  - `programs.craftapps.enable` turns the module on.
+  - `programs.craftapps.enableAll` is the default for every app's switch.
+  - `programs.craftapps.apps.<app>.enable` includes (`true`) or excludes (`false`) one app.
+  - `programs.craftapps.apps.<app>.package` overrides the package.
+  - `programs.craftapps.linkFonts` exists in the NixOS module only, defaults to `true`, and provides `/usr/share/fonts`.
+- **Choosing apps:** to exclude an app, set `enableAll = true` and `apps.<app>.enable = false`. To pick a few, leave `enableAll` off and set `apps.<app>.enable = true` for each.
+- **Fonts:** the apps read fonts only from `/usr/share/fonts`, without fontconfig. NixOS lacks that folder, so the NixOS module's `linkFonts` provides it. A Home Manager-only setup on NixOS still needs the NixOS module with `linkFonts`. Other distributions already have the folder.
+- **Other distributions** (Ubuntu, Fedora, Arch): the apps need GPU drivers made visible to Nix. Set `targets.genericLinux.enable = true` in Home Manager and run the printed `sudo …/non-nixos-gpu-setup` once. Without sudo, wrap packages with `config.lib.nixGL.wrap`.
+- **Pinning and updates:** `flake.lock` pins the versions. Update with `nix flake update nix-craftapps`. The flake packages upstream's prebuilt release binaries, pinned by hash, not source builds.
+- **Early software:** the apps are pre-1.0 and released daily.
+
+## Docs
+
+- [README](https://raw.githubusercontent.com/olafkfreund/nix-craftapps/main/README.md): quick start, NixOS install, Home Manager install (in NixOS, standalone, and on other distributions with GPU setup), choosing apps, option reference, fonts, updating, uninstalling, troubleshooting
+- [AGENTS.md](https://raw.githubusercontent.com/olafkfreund/nix-craftapps/main/AGENTS.md): repository layout, commands, rules, how to add an app, known traps
+
+## Source
+
+- [flake.nix](https://raw.githubusercontent.com/olafkfreund/nix-craftapps/main/flake.nix): outputs (packages, overlays.default, nixosModules.default, homeManagerModules.default, checks)
+- [modules/common.nix](https://raw.githubusercontent.com/olafkfreund/nix-craftapps/main/modules/common.nix): the shared option definitions
+- [modules/nixos.nix](https://raw.githubusercontent.com/olafkfreund/nix-craftapps/main/modules/nixos.nix): NixOS module, including linkFonts
+- [modules/home-manager.nix](https://raw.githubusercontent.com/olafkfreund/nix-craftapps/main/modules/home-manager.nix): Home Manager module
+- [package.nix](https://raw.githubusercontent.com/olafkfreund/nix-craftapps/main/package.nix): the generic builder
+- [apps.json](https://raw.githubusercontent.com/olafkfreund/nix-craftapps/main/apps.json): current versions, URLs and hashes
+
+## Upstream
+
+- [ArtCraft apps](https://getartcraft.com/apps): the project's overview of the apps
+- [storytold on GitHub](https://github.com/storytold): source and release notes for each app (`github.com/storytold/<app>`)
+
+## Optional
+
+- [Home Manager: GPU on non-NixOS systems](https://nix-community.github.io/home-manager/index.xhtml#sec-usage-gpu-non-nixos): background for the GPU setup on other distributions
+- [scripts/update.py](https://raw.githubusercontent.com/olafkfreund/nix-craftapps/main/scripts/update.py): how apps.json is refreshed
