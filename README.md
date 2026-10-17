@@ -323,17 +323,20 @@ programs.craftapps.mcp.enable = true;
 programs.claude-code.enableMcpIntegration = true;
 ```
 
-Codex, Cursor and other clients have the same `enableMcpIntegration` switch.
+Codex, Copilot CLI and other clients have the same `enableMcpIntegration`
+switch; Cursor has it per profile (`programs.cursor.profiles.<name>`).
 This needs a Home Manager new enough to have `programs.mcp`; on older
 versions the module skips it.
 
 **NixOS without Home Manager.** The module writes `/etc/craftapps/mcp.json`.
-Add its servers to Claude Code once per user:
+Add its servers to Claude Code per user, and run this again after each
+rebuild that updates the apps, because the entries hold store paths:
 
-```sh
+```bash
 jq -r '.mcpServers | to_entries[] | "\(.key)\t\(.value | tojson)"' \
   /etc/craftapps/mcp.json |
 while IFS=$'\t' read -r name json; do
+  claude mcp remove --scope user "$name" 2>/dev/null || true
   claude mcp add-json --scope user "$name" "$json"
 done
 ```
@@ -353,8 +356,9 @@ drive a running GUI instead, or to add file-root flags, set the arguments:
 programs.craftapps.apps.photocraft.mcp.args = [ "mcp" "--bridge" "127.0.0.1:<port>" ];
 ```
 
-The entries use store paths. A copy of `/etc/craftapps/mcp.json` that you
-paste somewhere by hand goes stale after a rebuild that updates the apps.
+The entries use store paths. Home Manager refreshes them on every switch;
+anything you copied from `/etc/craftapps/mcp.json` by hand goes stale after a
+rebuild that updates the apps.
 
 ## Fonts
 

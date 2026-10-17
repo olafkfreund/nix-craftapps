@@ -52,7 +52,19 @@
               default = false;
             };
             servers = lib.mkOption {
-              type = lib.types.attrsOf lib.types.anything;
+              type = lib.types.attrsOf (
+                lib.types.submodule {
+                  freeformType = lib.types.attrsOf lib.types.anything;
+                  options.command = lib.mkOption {
+                    type = lib.types.nullOr lib.types.str;
+                    default = null;
+                  };
+                  options.args = lib.mkOption {
+                    type = lib.types.listOf lib.types.str;
+                    default = [ ];
+                  };
+                }
+              );
               default = { };
             };
           };
@@ -60,7 +72,12 @@
             inherit system;
             modules = [
               self.nixosModules.default
-              { options.home-manager.sharedModules = lib.mkOption { type = lib.types.listOf lib.types.raw; }; }
+              {
+                options.home-manager.sharedModules = lib.mkOption {
+                  type = lib.types.listOf lib.types.raw;
+                  default = [ ];
+                };
+              }
               {
                 programs.craftapps = {
                   enable = true;
@@ -134,10 +151,15 @@
               shared = lib.evalModules {
                 modules = node.config.home-manager.sharedModules ++ [
                   mcpStub
-                  { programs.mcp.servers.gridcraft.args = [ "x" ]; }
+                  {
+                    programs.mcp.servers.gridcraft.args = [ "x" ];
+                    programs.mcp.servers.photocraft.enabled = false;
+                  }
                 ];
               };
               without = eval packagesOpt;
+              sharedWithout = lib.evalModules { modules = node.config.home-manager.sharedModules; };
+              off = node.extendModules { modules = [ { programs.craftapps.mcp.enable = lib.mkForce false; } ]; };
               mcp = withMcp.config.programs.mcp;
               ok =
                 mcp.enable
@@ -146,10 +168,13 @@
                 && shared.config.programs.mcp.enable
                 &&
                   builtins.length (builtins.attrNames shared.config.programs.mcp.servers) == builtins.length names - 1
-                && shared.config.programs.mcp.servers.gridcraft.args == [ "x" ];
+                && shared.config.programs.mcp.servers.gridcraft.args == [ "x" ]
+                && shared.config.programs.mcp.servers.photocraft.command != null
+                && off.config.home-manager.sharedModules == [ ]
+                && !(off.config.environment.etc ? "craftapps/mcp.json");
             in
             assert lib.assertMsg ok "craftapps Home Manager module, or the NixOS per-user MCP module, is wrong";
-            builtins.seq without.config.home.packages (
+            builtins.seq (without.config.home.packages ++ [ sharedWithout.config ]) (
               pkgs.runCommand "craftapps-hm-module-check" { } "touch $out"
             );
           mcp = pkgs.runCommand "craftapps-mcp-check" { } ''
@@ -159,7 +184,11 @@
                 app = self.packages.${system}.${name};
                 args = lib.escapeShellArgs node.config.programs.craftapps.apps.${name}.mcp.args;
               in
-              "echo '${initialize}' | HOME=$TMPDIR ${app}/bin/${name}-cli ${args} | grep -qF '\"result\"'"
+              ''
+                resp=$(echo '${initialize}' | HOME=$TMPDIR timeout 30 ${app}/bin/${name}-cli ${args} || true)
+                [[ $resp == *'"result"'* && $resp == *'"id":1'* ]] || { echo "${name}: no initialize result: $resp"; exit 1; }
+              ''
+
             ) names}
             touch $out
           '';

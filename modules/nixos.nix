@@ -44,8 +44,9 @@ in
               config = lib.optionalAttrs (options.programs ? mcp) {
                 programs.mcp = {
                   enable = lib.mkDefault true;
-                  # Per entry, so a user's own craftapps HM module replaces ours instead of concatenating args.
-                  servers = lib.mapAttrs (_: lib.mkDefault) servers;
+                  # Per field: a user's own args replace ours instead of concatenating, and
+                  # a partial override (`enabled = false`) keeps our command.
+                  servers = lib.mapAttrs (_: lib.mapAttrs (_: lib.mkDefault)) servers;
                 };
               };
             }

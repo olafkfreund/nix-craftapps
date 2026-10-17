@@ -212,6 +212,43 @@ spec: spec/2026-10-17-3-mcp-servers.md
    Traps:
    - Plain language; no narrating.
 
+## Review fixes (fresh Opus review, after step 5)
+
+- **Step 3: per-field defaults.** The per-user module now uses
+  `lib.mapAttrs (_: lib.mapAttrs (_: lib.mkDefault)) servers`. With
+  whole-entry `mkDefault`, a user line like
+  `programs.mcp.servers.photocraft.enabled = false` dropped our
+  `command` under Home Manager's submodule type. This was reproduced with
+  real Home Manager before the fix.
+- **Step 4: `mcpStub` and `hm-module` coverage.**
+  - `mcpStub.servers` is now a submodule (`command` nullOr str, `args`
+    listOf str, freeform), like Home Manager's.
+  - `hm-module` additionally asserts that `photocraft.command` survives
+    `enabled = false`.
+  - It also checks that `mcp.enable = false` (`node.extendModules`)
+    yields no `/etc` file and no `sharedModules`.
+  - It also checks that the per-user module evaluates without
+    `programs.mcp`.
+  - The test node's `sharedModules` stub gets `default = [ ]`.
+- **Step 4: `mcp` check.** The response is captured in `resp` (a
+  variable named `out` would shadow the build's `$out`). The server runs
+  under `timeout 30`, and the check is a bash pattern test for `"result"`
+  and `"id":1`. This replaces `| grep -q`, which can SIGPIPE under the
+  stdenv `pipefail`.
+- **Step 1: `defaultText`.**
+  - `mcp.servers` gets a `literalMD` `defaultText`, because its default
+    holds store paths.
+  - `apps.<name>.mcp.args` keeps no `defaultText`: its default is plain
+    data and renders correctly per app. A fixed text would hide
+    vectorcraft's `--headless`.
+- **Step 5: docs.**
+  - The README loop removes each entry before `add-json`, so re-runs
+    work. It says to re-run after updates, and the block is labelled
+    `bash`.
+  - Cursor's switch is described as per profile.
+  - The AGENTS.md layout rows and the `nix flake check` comment now
+    name the new options and checks.
+
 ## Tests
 
 ```sh

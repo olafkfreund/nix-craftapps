@@ -59,6 +59,7 @@ in
     mcp.servers = lib.mkOption {
       type = lib.types.attrsOf (lib.types.attrsOf lib.types.anything);
       readOnly = true;
+      defaultText = lib.literalMD "one `{ command, args }` per enabled app while `mcp.enable` is on, else `{ }`";
       default = lib.optionalAttrs cfg.mcp.enable (
         lib.genAttrs enabled (name: {
           command = "${cfg.apps.${name}.package}/bin/${name}-cli";

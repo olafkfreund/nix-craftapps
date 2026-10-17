@@ -21,10 +21,10 @@ outputs are:
 apps.json                 registry: version, tag, url + SRI hash per system, per app
 package.nix               the ONE generic builder (fetchurl + autoPatchelfHook + wrapper)
 default.nix               { pkgs }: maps apps.json → packages, + craftapps-all
-flake.nix                 outputs; checks build every app, test each CLI, eval the module
-modules/common.nix        shared options (enable, enableAll, apps.<n>.{enable,package})
-modules/nixos.nix         + linkFonts (fonts.fontDir + /usr/share/fonts tmpfiles link)
-modules/home-manager.nix  home.packages; no linkFonts (HM cannot write /usr/share)
+flake.nix                 outputs; checks build every app, test each CLI and MCP server, eval both modules
+modules/common.nix        shared options (enable, enableAll, apps.<n>.{enable,package,mcp.args}, mcp.*)
+modules/nixos.nix         + linkFonts (fonts.fontDir + /usr/share/fonts link), /etc/craftapps/mcp.json, HM sharedModules
+modules/home-manager.nix  home.packages, programs.mcp; no linkFonts (HM cannot write /usr/share)
 scripts/update.py         refreshes apps.json from GitHub releases (stdlib only)
 .github/workflows/ci.yml      nix flake check on x86_64 and aarch64 runners
 .github/workflows/update.yml  daily update.py → flake check → PR → dispatch ci.yml
@@ -33,7 +33,7 @@ scripts/update.py         refreshes apps.json from GitHub releases (stdlib only)
 ## Commands
 
 ```sh
-nix flake check -L                  # builds all 12, runs the CLI + module checks
+nix flake check -L                  # builds all 12, runs the cli, mcp, module + hm-module checks
 nix build .#photocraft              # one app
 nix fmt                             # nixfmt
 python3 scripts/update.py --self-test   # offline tests of the updater
