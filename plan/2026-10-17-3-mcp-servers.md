@@ -108,6 +108,17 @@ spec: spec/2026-10-17-3-mcp-servers.md
    - Write nothing under `/etc/claude-code/`.
    - Never set `hardware.*` (docs/GPU.md promises this).
 
+   **Deviation (implementation):**
+   - The per-user module sets its values under `config = lib.optionalAttrs (options.programs ? mcp) { … }`.
+     A top-level `optionalAttrs` on `options` recursed infinitely under real
+     Home Manager. The stub checks did not show this; an eval with
+     `home-manager.nixosModules.home-manager` and two users did.
+   - `servers = lib.mapAttrs (_: lib.mkDefault) servers`, per entry. Without
+     it, a user who also enables MCP in their own craftapps HM module gets
+     concatenated `args` (`[ "mcp" "mcp" ]`). A whole-attrset `mkDefault`
+     would drop our servers as soon as the user defines any server of their
+     own.
+
 4. **`flake.nix`: checks.** The current checks are at lines 32-81.
    1. In the NixOS test node (lines 41-45), add `mcp.enable = true;`.
    2. Extend `module`'s `ok` (lines 61-65). Let
@@ -154,6 +165,19 @@ spec: spec/2026-10-17-3-mcp-servers.md
    - The `node` has soundcraft disabled. For the `mcp` check, read args
      through `node.config.programs.craftapps.apps.${name}.mcp.args`. The
      options exist for disabled apps too.
+
+   **Deviation (implementation):**
+   - `module` wraps the JSON text in `builtins.unsafeDiscardStringContext`
+     before `fromJSON`, because the store-path context makes `fromJSON` fail.
+   - `hm-module` also covers the NixOS per-user module. The test node
+     declares a stub `home-manager.sharedModules` option, and the check
+     evaluates those modules with a `programs.mcp` stub (`mcpStub`, shared
+     by both evaluations). It also defines a user entry
+     `gridcraft.args = [ "x" ]`.
+   - The check asserts all of these: `enable`, 11 servers, and that the
+     user's entry wins.
+   - A mutation test confirmed that it fails without the per-entry
+     `mkDefault`.
 
 5. **Docs.**
    1. **README.md:**
