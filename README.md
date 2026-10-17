@@ -39,6 +39,7 @@ launcher entry and icons.
 - [Install with Home Manager](#install-with-home-manager)
 - [Choosing apps](#choosing-apps)
 - [Option reference](#option-reference)
+- [MCP servers](#mcp-servers)
 - [Fonts](#fonts)
 - [Updating](#updating)
 - [Uninstalling](#uninstalling)
@@ -283,13 +284,19 @@ Both work the same in the NixOS and Home Manager modules.
 
 All options live under `programs.craftapps`.
 
-| Option                | Type    | Default      | Description                                                       |
-| --------------------- | ------- | ------------ | ----------------------------------------------------------------- |
-| `enable`              | bool    | `false`      | Turn the module on. Nothing is installed without it.              |
-| `enableAll`           | bool    | `false`      | Default for every `apps.<name>.enable`.                           |
-| `apps.<name>.enable`  | bool    | `enableAll`  | Install (`true`) or leave out (`false`) one app.                  |
-| `apps.<name>.package` | package | this flake's | Use a different build, for example one wrapped with nixGL.        |
-| `linkFonts`           | bool    | `true`       | **NixOS only.** Provide `/usr/share/fonts` (see [Fonts](#fonts)). |
+| Option                 | Type            | Default      | Description                                                                      |
+| ---------------------- | --------------- | ------------ | -------------------------------------------------------------------------------- |
+| `enable`               | bool            | `false`      | Turn the module on. Nothing is installed without it.                             |
+| `enableAll`            | bool            | `false`      | Default for every `apps.<name>.enable`.                                          |
+| `apps.<name>.enable`   | bool            | `enableAll`  | Install (`true`) or leave out (`false`) one app.                                 |
+| `apps.<name>.package`  | package         | this flake's | Use a different build, for example one wrapped with nixGL.                       |
+| `linkFonts`            | bool            | `true`       | **NixOS only.** Provide `/usr/share/fonts` (see [Fonts](#fonts)).                |
+| `mcp.enable`           | bool            | `false`      | Define an MCP server for every enabled app (see [MCP servers](#mcp-servers)).    |
+| `apps.<name>.mcp.args` | list of strings | `[ "mcp" ]`  | Arguments for `<name>-cli` as an MCP server. VectorCraft also gets `--headless`. |
+| `mcp.servers`          | attrs           | read-only    | The resulting servers: one `{ command, args }` per enabled app.                  |
+
+On NixOS with `mcp.enable`, the same servers are written to
+`/etc/craftapps/mcp.json`. Home Manager does not write that file.
 
 `<name>` is any app from the table at the top.
 
@@ -300,6 +307,54 @@ Without the modules, `overlays.default` adds `pkgs.craftapps.<name>`, plus
 nixpkgs.overlays = [ inputs.nix-craftapps.overlays.default ];
 environment.systemPackages = [ pkgs.craftapps.photocraft ];
 ```
+
+## MCP servers
+
+Every app has a built-in [MCP](https://modelcontextprotocol.io) server:
+`<app>-cli mcp`, over stdio. The client starts it, so there is no service to
+run. Set `programs.craftapps.mcp.enable = true` and the module defines one
+server for each enabled app.
+
+**Home Manager.** The module sets `programs.mcp.servers`. Turn on your
+client's integration to read them:
+
+```nix
+programs.craftapps.mcp.enable = true;
+programs.claude-code.enableMcpIntegration = true;
+```
+
+Codex, Cursor and other clients have the same `enableMcpIntegration` switch.
+This needs a Home Manager new enough to have `programs.mcp`; on older
+versions the module skips it.
+
+**NixOS without Home Manager.** The module writes `/etc/craftapps/mcp.json`.
+Add its servers to Claude Code once per user:
+
+```sh
+jq -r '.mcpServers | to_entries[] | "\(.key)\t\(.value | tojson)"' \
+  /etc/craftapps/mcp.json |
+while IFS=$'\t' read -r name json; do
+  claude mcp add-json --scope user "$name" "$json"
+done
+```
+
+With the NixOS module and Home Manager together, every Home Manager user also
+gets the servers through `programs.mcp`.
+
+The module does not write `/etc/claude-code/managed-mcp.json`. Claude Code
+treats that file as exclusive control of MCP and ignores users' own servers,
+and its managed policy accepts only `https` servers.
+
+VectorCraft's default mode sends tool calls to a running app on
+`127.0.0.1:7979`, so the module starts it with `--headless`. To make any app
+drive a running GUI instead, or to add file-root flags, set the arguments:
+
+```nix
+programs.craftapps.apps.photocraft.mcp.args = [ "mcp" "--bridge" "127.0.0.1:<port>" ];
+```
+
+The entries use store paths. A copy of `/etc/craftapps/mcp.json` that you
+paste somewhere by hand goes stale after a rebuild that updates the apps.
 
 ## Fonts
 

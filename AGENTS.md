@@ -75,6 +75,8 @@ When storytold publishes a 13th app:
 2. Run `python3 scripts/update.py <newapp>`. It writes the `apps.json` entry.
 3. Run `nix build .#<newapp>`. autoPatchelf must report `0 dependencies could
    not be satisfied`, and `<newapp>-cli --version` must print the version.
+   Also check that `<newapp>-cli mcp` answers `initialize` headless; the
+   `mcp` check does this.
 4. Launch the GUI on a real session. Run `timeout 8 ./result/bin/<newapp>`;
    exit status 124 means it stayed up. If it panics about a missing library,
    add that library to `runtimeDependencies` in `package.nix`.
@@ -107,6 +109,10 @@ When storytold publishes a 13th app:
   `docs/GPU.md` promises users exactly that. If you change GPU-related
   behaviour, update that page's tables and its "What has been tested"
   section.
+- **MCP.** The servers are stdio (`<app>-cli mcp`), so there is no service.
+  Never write `/etc/claude-code/managed-mcp.json`; it takes exclusive
+  control of MCP. Defaults that are not headless go in `mcpArgs` in
+  `modules/common.nix`.
 - **Launching a GUI.** Running a GUI with an unknown flag such as `--help`
   opens a window instead of printing help. Use the `-cli` binary for
   anything headless.
