@@ -11,6 +11,11 @@ let
   cfg = config.programs.craftapps;
   available = craftapps pkgs;
   names = builtins.attrNames (lib.importJSON ../apps.json);
+  enabled = builtins.filter (name: cfg.apps.${name}.enable) names;
+  # vectorcraft's default mode drives a running app on 127.0.0.1:7979; --headless runs standalone.
+  mcpArgs = {
+    vectorcraft = [ "--headless" ];
+  };
 in
 {
   options.programs.craftapps = {
@@ -21,6 +26,8 @@ in
       default = false;
       description = "Default for every `apps.<name>.enable`; exclude single apps by setting theirs to false.";
     };
+
+    mcp.enable = lib.mkEnableOption "an MCP server for every enabled app (`<app>-cli mcp`, stdio)";
 
     apps = lib.genAttrs names (name: {
       enable = lib.mkOption {
@@ -35,15 +42,30 @@ in
         defaultText = lib.literalExpression "nix-craftapps.packages.\${system}.${name}";
         description = "The ${name} package to install.";
       };
+      mcp.args = lib.mkOption {
+        type = lib.types.listOf lib.types.str;
+        default = [ "mcp" ] ++ (mcpArgs.${name} or [ ]);
+        description = "Arguments for `${name}-cli` when it runs as an MCP server. Add flags such as `--bridge <addr>` or file-root options here.";
+      };
     });
 
     packages = lib.mkOption {
       type = lib.types.listOf lib.types.package;
       readOnly = true;
       internal = true;
-      default = map (name: cfg.apps.${name}.package) (
-        builtins.filter (name: cfg.apps.${name}.enable) names
+      default = map (name: cfg.apps.${name}.package) enabled;
+    };
+
+    mcp.servers = lib.mkOption {
+      type = lib.types.attrsOf (lib.types.attrsOf lib.types.anything);
+      readOnly = true;
+      default = lib.optionalAttrs cfg.mcp.enable (
+        lib.genAttrs enabled (name: {
+          command = "${cfg.apps.${name}.package}/bin/${name}-cli";
+          inherit (cfg.apps.${name}.mcp) args;
+        })
       );
+      description = "MCP servers for the enabled apps. Feeds `programs.mcp.servers` and `/etc/craftapps/mcp.json`.";
     };
   };
 }
