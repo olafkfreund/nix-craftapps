@@ -13,7 +13,8 @@ Key facts for answering questions about this flake:
   - `programs.craftapps.apps.<app>.enable` includes (`true`) or excludes (`false`) one app.
   - `programs.craftapps.apps.<app>.package` overrides the package.
   - `programs.craftapps.linkFonts` exists in the NixOS module only, defaults to `true`, and provides `/usr/share/fonts`.
-  - `programs.craftapps.mcp.enable` defines a stdio MCP server (`<app>-cli mcp`) for every enabled app. `programs.craftapps.apps.<app>.mcp.args` sets its arguments, and `programs.craftapps.mcp.servers` (read-only) holds the result. Home Manager sets `programs.mcp.servers`; the NixOS module also writes `/etc/craftapps/mcp.json`.
+  - `programs.craftapps.mcp.enable` defines a stdio MCP server (`<app>-cli mcp`) for every enabled app. `programs.craftapps.apps.<app>.mcp.args` sets its arguments, and `programs.craftapps.mcp.servers` (read-only) holds the result. Home Manager sets `programs.mcp.servers`; the NixOS module also writes `/etc/craftapps/mcp.json`. PdfCraft's server starts with `--compact` (a core set plus `tool_search`/`tool_call` instead of 163 tools); override with `apps.pdfcraft.mcp.args = [ "mcp" ]`.
+  - `programs.craftapps.skill.enable` (off by default) installs the `craftapps` agent skill as `programs.<agent>.skills.craftapps` for claude-code, codex, opencode, crush, github-copilot-cli and antigravity-cli, where Home Manager has that option.
 - **Choosing apps:** to exclude an app, set `enableAll = true` and `apps.<app>.enable = false`. To pick a few, leave `enableAll` off and set `apps.<app>.enable = true` for each.
 - **Fonts:** the apps read fonts only from `/usr/share/fonts`, without fontconfig. NixOS lacks that folder, so the NixOS module's `linkFonts` provides it. A Home Manager-only setup on NixOS still needs the NixOS module with `linkFonts`. Other distributions already have the folder.
 - **GPU:**

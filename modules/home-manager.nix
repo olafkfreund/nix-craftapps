@@ -12,7 +12,10 @@ let
   cfg = config.programs.craftapps;
 in
 {
-  imports = [ (import ./common.nix craftapps) ];
+  imports = [
+    (import ./common.nix craftapps)
+    (import ./skill.nix (c: c.programs.craftapps.enable && c.programs.craftapps.skill.enable))
+  ];
 
   config = lib.mkIf cfg.enable (
     lib.mkMerge [

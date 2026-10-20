@@ -15,6 +15,8 @@ let
   # vectorcraft's default mode drives a running app on 127.0.0.1:7979; --headless runs standalone.
   mcpArgs = {
     vectorcraft = [ "--headless" ];
+    # pdfcraft lists 163 tools (~154 KB); --compact lists 17 plus tool_search/tool_call.
+    pdfcraft = [ "--compact" ];
   };
 in
 {
@@ -28,6 +30,8 @@ in
     };
 
     mcp.enable = lib.mkEnableOption "an MCP server for every enabled app (`<app>-cli mcp`, stdio)";
+
+    skill.enable = lib.mkEnableOption "the craftapps agent skill for every Home Manager agent with a skills option";
 
     apps = lib.genAttrs names (name: {
       enable = lib.mkOption {

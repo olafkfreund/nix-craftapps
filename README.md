@@ -293,8 +293,9 @@ All options live under `programs.craftapps`.
 | `apps.<name>.package`  | package         | this flake's | Use a different build, for example one wrapped with nixGL.                       |
 | `linkFonts`            | bool            | `true`       | **NixOS only.** Provide `/usr/share/fonts` (see [Fonts](#fonts)).                |
 | `mcp.enable`           | bool            | `false`      | Define an MCP server for every enabled app (see [MCP servers](#mcp-servers)).    |
-| `apps.<name>.mcp.args` | list of strings | `[ "mcp" ]`  | Arguments for `<name>-cli` as an MCP server. VectorCraft also gets `--headless`. |
+| `apps.<name>.mcp.args` | list of strings | `[ "mcp" ]`  | Arguments for `<name>-cli` as an MCP server. VectorCraft: `--headless`; PdfCraft: `--compact`. |
 | `mcp.servers`          | attrs           | read-only    | The resulting servers: one `{ command, args }` per enabled app.                  |
+| `skill.enable`         | bool            | `false`      | Install the agent skill (see [Agent skill](#agent-skill)).                       |
 
 On NixOS with `mcp.enable`, the same servers are written to
 `/etc/craftapps/mcp.json`. Home Manager does not write that file.
@@ -327,7 +328,9 @@ programs.claude-code.enableMcpIntegration = true;
 Codex, Copilot CLI and other clients have the same `enableMcpIntegration`
 switch; Cursor has it per profile (`programs.cursor.profiles.<name>`).
 This needs a Home Manager new enough to have `programs.mcp`; on older
-versions the module skips it.
+versions the module skips it. For other agents, set
+`programs.<agent>.enableMcpIntegration = true;`. To check that Claude Code
+sees the servers, run `claude mcp list`.
 
 **NixOS without Home Manager.** The module writes `/etc/craftapps/mcp.json`.
 Add its servers to Claude Code per user, and run this again after each
@@ -349,6 +352,10 @@ The module does not write `/etc/claude-code/managed-mcp.json`. Claude Code
 treats that file as exclusive control of MCP and ignores users' own servers,
 and its managed policy accepts only `https` servers.
 
+PdfCraft's server lists 163 tools, so the module starts it with `--compact`:
+a core set plus `tool_search` and `tool_call`. For the full list, set
+`programs.craftapps.apps.pdfcraft.mcp.args = [ "mcp" ];`.
+
 VectorCraft's default mode sends tool calls to a running app on
 `127.0.0.1:7979`, so the module starts it with `--headless`. To make any app
 drive a running GUI instead, or to add file-root flags, set the arguments:
@@ -360,6 +367,22 @@ programs.craftapps.apps.photocraft.mcp.args = [ "mcp" "--bridge" "127.0.0.1:<por
 The entries use store paths. Home Manager refreshes them on every switch;
 anything you copied from `/etc/craftapps/mcp.json` by hand goes stale after a
 rebuild that updates the apps.
+
+### Agent skill
+
+```nix
+programs.craftapps.skill.enable = true;
+```
+
+This installs one skill, `craftapps`, for every Home Manager agent that has a
+`programs.<agent>.skills` option: Claude Code, Codex, opencode, Crush, Copilot
+CLI and Antigravity CLI. It covers how to use the apps headless, how to
+connect to a running app, and the file roots. It is independent of
+`mcp.enable`. With the NixOS module, it applies to every Home Manager user.
+
+If your own `programs.<agent>.skills` is a path (a whole skills directory),
+Home Manager reports conflicting definitions when this is on. Make it an
+attribute set (`skills.mine = ./mine;`) instead.
 
 ## Fonts
 

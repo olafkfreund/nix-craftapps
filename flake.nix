@@ -68,6 +68,10 @@
               default = { };
             };
           };
+          skillStub.options.programs.claude-code.skills = lib.mkOption {
+            type = with lib.types; either (attrsOf (either lines path)) path;
+            default = { };
+          };
           node = lib.nixosSystem {
             inherit system;
             modules = [
@@ -83,6 +87,7 @@
                   enable = true;
                   enableAll = true;
                   mcp.enable = true;
+                  skill.enable = true;
                   apps.soundcraft.enable = false;
                 };
                 boot.loader.grub.enable = false;
@@ -116,6 +121,11 @@
                     "mcp"
                     "--headless"
                   ]
+                &&
+                  s.pdfcraft.args == [
+                    "mcp"
+                    "--compact"
+                  ]
                 && builtins.all (v: lib.hasSuffix "-cli" v.command) (builtins.attrValues s);
             in
             assert lib.assertMsg ok
@@ -135,6 +145,7 @@
                         enable = true;
                         enableAll = true;
                         mcp.enable = true;
+                        skill.enable = true;
                         apps.soundcraft.enable = false;
                       };
                     }
@@ -147,10 +158,25 @@
                   mcpStub
                 ];
               };
+              withSkill = eval {
+                imports = [
+                  packagesOpt
+                  mcpStub
+                  skillStub
+                ];
+              };
+              skillOff = eval {
+                imports = [
+                  packagesOpt
+                  skillStub
+                  { programs.craftapps.skill.enable = lib.mkForce false; }
+                ];
+              };
               # The NixOS module's per-user module; a user's own entry must replace the shared one.
               shared = lib.evalModules {
                 modules = node.config.home-manager.sharedModules ++ [
                   mcpStub
+                  skillStub
                   {
                     programs.mcp.servers.gridcraft.args = [ "x" ];
                     programs.mcp.servers.photocraft.enabled = false;
@@ -159,7 +185,14 @@
               };
               without = eval packagesOpt;
               sharedWithout = lib.evalModules { modules = node.config.home-manager.sharedModules; };
-              off = node.extendModules { modules = [ { programs.craftapps.mcp.enable = lib.mkForce false; } ]; };
+              off = node.extendModules {
+                modules = [
+                  {
+                    programs.craftapps.mcp.enable = lib.mkForce false;
+                    programs.craftapps.skill.enable = lib.mkForce false;
+                  }
+                ];
+              };
               mcp = withMcp.config.programs.mcp;
               ok =
                 mcp.enable
@@ -170,6 +203,9 @@
                   builtins.length (builtins.attrNames shared.config.programs.mcp.servers) == builtins.length names - 1
                 && shared.config.programs.mcp.servers.gridcraft.args == [ "x" ]
                 && shared.config.programs.mcp.servers.photocraft.command != null
+                && withSkill.config.programs.claude-code.skills ? craftapps
+                && shared.config.programs.claude-code.skills ? craftapps
+                && skillOff.config.programs.claude-code.skills == { }
                 && off.config.home-manager.sharedModules == [ ]
                 && !(off.config.environment.etc ? "craftapps/mcp.json");
             in

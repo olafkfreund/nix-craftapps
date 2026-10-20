@@ -25,6 +25,8 @@ flake.nix                 outputs; checks build every app, test each CLI and MCP
 modules/common.nix        shared options (enable, enableAll, apps.<n>.{enable,package,mcp.args}, mcp.*)
 modules/nixos.nix         + linkFonts (fonts.fontDir + /usr/share/fonts link), /etc/craftapps/mcp.json, HM sharedModules
 modules/home-manager.nix  home.packages, programs.mcp; no linkFonts (HM cannot write /usr/share)
+modules/skill.nix         installs the skill into every HM agent with a skills option
+skills/craftapps/SKILL.md agent skill installed by skill.enable
 scripts/update.py         refreshes apps.json from GitHub releases (stdlib only)
 .github/workflows/ci.yml      nix flake check on x86_64 and aarch64 runners
 .github/workflows/update.yml  daily update.py → flake check → PR → dispatch ci.yml
@@ -83,6 +85,7 @@ When storytold publishes a 14th app:
 5. Add it to the app tables in `README.md` and `llms.txt`. If it has its
    own GPU switches (`strings` the binary for `*_GPU*`), note them in
    `docs/GPU.md`.
+6. Add the app and its bridge flag to `skills/craftapps/SKILL.md`.
 
 ## Traps already found
 
@@ -113,7 +116,8 @@ When storytold publishes a 14th app:
 - **MCP.** The servers are stdio (`<app>-cli mcp`), so there is no service.
   Never write `/etc/claude-code/managed-mcp.json`; it takes exclusive
   control of MCP. Defaults that are not headless go in `mcpArgs` in
-  `modules/common.nix`.
+  `modules/common.nix`. pdfcraft defaults to `--compact` there (163 tools
+  otherwise).
 - **Launching a GUI.** Running a GUI with an unknown flag such as `--help`
   opens a window instead of printing help. Use the `-cli` binary for
   anything headless.
