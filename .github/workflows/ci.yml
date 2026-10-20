@@ -17,3 +17,16 @@ jobs:
       - uses: actions/checkout@v4
       - uses: cachix/install-nix-action@v31
       - run: nix flake check -L
+  automerge:
+    needs: check
+    if: github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/update/craft-apps'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+    steps:
+      - env:
+          GH_TOKEN: ${{ github.token }}
+        run: >
+          gh pr merge update/craft-apps --repo "$GITHUB_REPOSITORY"
+          --squash --delete-branch --match-head-commit "$GITHUB_SHA"

@@ -101,7 +101,8 @@ When storytold publishes a 14th app:
   1 or 2. `--version` exits 0 everywhere, and the `cli` check uses it.
 - **CI on update PRs.** A PR opened with `GITHUB_TOKEN` does not trigger
   `pull_request` workflows, so `update.yml` dispatches `ci.yml` on the PR
-  branch itself.
+  branch itself. Once both architectures pass, the `automerge` job in `ci.yml`
+  squash-merges the PR; a failure leaves it open.
 - **GPU.** All apps render through wgpu (egui/eframe): Vulkan first, then
   GLES through EGL. Drivers are found only in `/run/opengl-driver`.
   `WGPU_BACKEND=gl` is honoured (verified). The modules must never set

@@ -451,6 +451,7 @@ described in [Updating](#updating), or pin one app to an older build with
   option definitions.
 - **`scripts/update.py`** checks GitHub for new releases and refreshes
   `apps.json`. A daily GitHub Actions job runs it.
+  It opens a PR that merges itself once CI passes on x86_64 and aarch64.
 
 These are upstream's prebuilt binaries, not source builds: the
 `sourceProvenance` in each package's `meta` says `binaryNativeCode`. Building
