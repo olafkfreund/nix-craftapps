@@ -293,7 +293,7 @@ All options live under `programs.craftapps`.
 | `apps.<name>.package`  | package         | this flake's | Use a different build, for example one wrapped with nixGL.                       |
 | `linkFonts`            | bool            | `true`       | **NixOS only.** Provide `/usr/share/fonts` (see [Fonts](#fonts)).                |
 | `mcp.enable`           | bool            | `false`      | Define an MCP server for every enabled app (see [MCP servers](#mcp-servers)).    |
-| `apps.<name>.mcp.args` | list of strings | `[ "mcp" ]`  | Arguments for `<name>-cli` as an MCP server. VectorCraft: `--headless`; PdfCraft: `--compact`. |
+| `apps.<name>.mcp.args` | list of strings | `[ "mcp" ]`  | Arguments for `<name>-cli` as an MCP server. VectorCraft: `--headless`; PdfCraft and LightCraft: `--compact`. |
 | `mcp.servers`          | attrs           | read-only    | The resulting servers: one `{ command, args }` per enabled app.                  |
 | `skill.enable`         | bool            | `false`      | Install the agent skill (see [Agent skill](#agent-skill)).                       |
 
@@ -351,9 +351,11 @@ The module does not write `/etc/claude-code/managed-mcp.json`. Claude Code
 treats that file as exclusive control of MCP and ignores users' own servers,
 and its managed policy accepts only `https` servers.
 
-PdfCraft's server lists 163 tools, so the module starts it with `--compact`:
-a core set plus `tool_search` and `tool_call`. For the full list, set
-`programs.craftapps.apps.pdfcraft.mcp.args = [ "mcp" ];`.
+PdfCraft and LightCraft list hundreds of tools, so the module starts both
+with `--compact`. PdfCraft then lists a core set plus `tool_search` and
+`tool_call`; LightCraft lists its helper tools and runs every other command
+through `run_command`. For the full list, set
+`programs.craftapps.apps.<app>.mcp.args = [ "mcp" ];`.
 
 VectorCraft's default mode sends tool calls to a running app on
 `127.0.0.1:7979`, so the module starts it with `--headless`. To make any app

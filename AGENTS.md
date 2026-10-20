@@ -116,8 +116,8 @@ When storytold publishes a 14th app:
 - **MCP.** The servers are stdio (`<app>-cli mcp`), so there is no service.
   Never write `/etc/claude-code/managed-mcp.json`; it takes exclusive
   control of MCP. Defaults that are not headless go in `mcpArgs` in
-  `modules/common.nix`. pdfcraft defaults to `--compact` there (163 tools
-  otherwise).
+  `modules/common.nix`. pdfcraft and lightcraft default to `--compact`
+  there (163 and 388 tools otherwise).
 - **Launching a GUI.** Running a GUI with an unknown flag such as `--help`
   opens a window instead of printing help. Use the `-cli` binary for
   anything headless.

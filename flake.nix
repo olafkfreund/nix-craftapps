@@ -126,6 +126,11 @@
                     "mcp"
                     "--compact"
                   ]
+                &&
+                  s.lightcraft.args == [
+                    "mcp"
+                    "--compact"
+                  ]
                 && builtins.all (v: lib.hasSuffix "-cli" v.command) (builtins.attrValues s);
             in
             assert lib.assertMsg ok

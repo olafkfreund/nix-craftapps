@@ -17,6 +17,8 @@ let
     vectorcraft = [ "--headless" ];
     # pdfcraft lists 163 tools (~154 KB); --compact lists 17 plus tool_search/tool_call.
     pdfcraft = [ "--compact" ];
+    # lightcraft lists 388 tools (~205 KB); --compact lists 17 helpers, the rest via run_command.
+    lightcraft = [ "--compact" ];
   };
 in
 {

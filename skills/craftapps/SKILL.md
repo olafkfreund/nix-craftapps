@@ -84,12 +84,18 @@ pdfcraft also takes `--root DIR`. Paths you pass to tools are then relative
 to, or must sit inside, these roots. If a read or save is refused, check
 the roots before anything else.
 
-## pdfcraft tool list
+## Compact tool lists
 
-pdfcraft has a very large tool list. The packaged MCP setup starts it with
-`--compact`, which lists a core set plus `tool_search` and `tool_call`.
-Find the rest with `tool_search`, then run it with `tool_call`. If the full
-list is wanted, run `pdfcraft-cli mcp` without `--compact`.
+pdfcraft and lightcraft have very large tool lists. The packaged MCP setup
+starts both with `--compact`.
+
+- pdfcraft lists a core set plus `tool_search` and `tool_call`. Find the
+  rest with `tool_search`, then run it with `tool_call`.
+- lightcraft lists a small set of helper tools. For any other command, find
+  its id with `command_list` (or `list_commands`) and run it with
+  `run_command` (`command`, `params`). It has no `tool_search`.
+
+For the full list, run the server without `--compact`.
 
 ## Troubleshooting
 
