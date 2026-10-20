@@ -1,5 +1,5 @@
 ---
-status: draft
+status: approved
 issue: 13
 intent: intent/2026-10-20-13-lightcraft-compact.md
 ---
