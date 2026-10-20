@@ -5,17 +5,17 @@
     "repo": "storytold/cadcraft",
     "sources": {
       "aarch64-linux": {
-        "hash": "sha256-FcPLCHNdkQkMZQeqojOAlKoqpKOHiIcmicFTsujy9s4=",
-        "url": "https://github.com/storytold/cadcraft/releases/download/v0.7.0/cadcraft-0.7.0-linux-aarch64.tar.gz"
+        "hash": "sha256-5+eoBdaDQzczp3lRMmFjUG8gO9Xe5RX0ZaXFdWadP4U=",
+        "url": "https://github.com/storytold/cadcraft/releases/download/v0.8.0/cadcraft-0.8.0-linux-aarch64.tar.gz"
       },
       "x86_64-linux": {
-        "hash": "sha256-z41KqG0EbzTrdwrmzS3z7uF9HzsSklfxVYVDBGyVXMA=",
-        "url": "https://github.com/storytold/cadcraft/releases/download/v0.7.0/cadcraft-0.7.0-linux-x86_64.tar.gz"
+        "hash": "sha256-3zwuZoQ58EEFZLH6nSGCe7Zj6z0BcDkCxB8CucUnYZM=",
+        "url": "https://github.com/storytold/cadcraft/releases/download/v0.8.0/cadcraft-0.8.0-linux-x86_64.tar.gz"
       }
     },
-    "tag": "v0.7.0",
+    "tag": "v0.8.0",
     "title": "CADCraft",
-    "version": "0.7.0"
+    "version": "0.8.0"
   },
   "deckcraft": {
     "description": "PowerPoint-style presentations and slide shows",
@@ -23,17 +23,17 @@
     "repo": "storytold/deckcraft",
     "sources": {
       "aarch64-linux": {
-        "hash": "sha256-zeH34nRo6ODaAbyVQXKqZvvqV+cZwJ3CMgz0+XsybWA=",
-        "url": "https://github.com/storytold/deckcraft/releases/download/v0.7.0/deckcraft-0.7.0-linux-aarch64.tar.gz"
+        "hash": "sha256-cyXAJ31ezOM12i2r1dvqTZC3BO3M3k0jpkIxieC83MQ=",
+        "url": "https://github.com/storytold/deckcraft/releases/download/v0.8.0/deckcraft-0.8.0-linux-aarch64.tar.gz"
       },
       "x86_64-linux": {
-        "hash": "sha256-Mwovsu+IkNre2RCE5b/SnfpBHjOisnwBrDueUg/5jZ8=",
-        "url": "https://github.com/storytold/deckcraft/releases/download/v0.7.0/deckcraft-0.7.0-linux-x86_64.tar.gz"
+        "hash": "sha256-InuMnN0sBreGaAf5lf5dLQZ1UjphII+bwmzydg/dy48=",
+        "url": "https://github.com/storytold/deckcraft/releases/download/v0.8.0/deckcraft-0.8.0-linux-x86_64.tar.gz"
       }
     },
-    "tag": "v0.7.0",
+    "tag": "v0.8.0",
     "title": "DeckCraft",
-    "version": "0.7.0"
+    "version": "0.8.0"
   },
   "designcraft": {
     "description": "InDesign-style page layout and publishing",
@@ -41,17 +41,17 @@
     "repo": "storytold/designcraft",
     "sources": {
       "aarch64-linux": {
-        "hash": "sha256-hkGSY9s7TH39C/YZSOsZMbMs6lbOnKyltLA80UbdOSY=",
-        "url": "https://github.com/storytold/designcraft/releases/download/v0.8.0/designcraft-0.8.0-linux-aarch64.tar.gz"
+        "hash": "sha256-i6KTrnjXbZkGhP5Ac4Lh+Ei9BrkfZZF1k6CJEdfILeE=",
+        "url": "https://github.com/storytold/designcraft/releases/download/v0.9.0/designcraft-0.9.0-linux-aarch64.tar.gz"
       },
       "x86_64-linux": {
-        "hash": "sha256-lqg1/Ynr9pcLfeyTZS4bLwgRI6aceOGZmMpshMoyLXc=",
-        "url": "https://github.com/storytold/designcraft/releases/download/v0.8.0/designcraft-0.8.0-linux-x86_64.tar.gz"
+        "hash": "sha256-nFeICInWtcOZxFC1Mhumw3yeVOWKwIFh14V6ERXYl1U=",
+        "url": "https://github.com/storytold/designcraft/releases/download/v0.9.0/designcraft-0.9.0-linux-x86_64.tar.gz"
       }
     },
-    "tag": "v0.8.0",
+    "tag": "v0.9.0",
     "title": "DesignCraft",
-    "version": "0.8.0"
+    "version": "0.9.0"
   },
   "effectcraft": {
     "description": "After Effects-style motion graphics and VFX",
@@ -59,17 +59,17 @@
     "repo": "storytold/effectcraft",
     "sources": {
       "aarch64-linux": {
-        "hash": "sha256-lnvlIisuVIC3saB0Pkc3mg+g7wGAF84xsu2kUEavAZs=",
-        "url": "https://github.com/storytold/effectcraft/releases/download/v0.10.0/effectcraft-0.10.0-linux-aarch64.tar.gz"
+        "hash": "sha256-7lBH0PbDq1/GE8GYSt6GIdVikawko0KzNYpsVM7EM/s=",
+        "url": "https://github.com/storytold/effectcraft/releases/download/v0.11.1/effectcraft-0.11.1-linux-aarch64.tar.gz"
       },
       "x86_64-linux": {
-        "hash": "sha256-dvv8CprTQ5lwGhjv6xwXhVfQHQoPS0A1FPLaxdiHVy4=",
-        "url": "https://github.com/storytold/effectcraft/releases/download/v0.10.0/effectcraft-0.10.0-linux-x86_64.tar.gz"
+        "hash": "sha256-ucss5o3WZFjMFkQ35DE3bpTjjjPjtlKfqP1F+M+WiTQ=",
+        "url": "https://github.com/storytold/effectcraft/releases/download/v0.11.1/effectcraft-0.11.1-linux-x86_64.tar.gz"
       }
     },
-    "tag": "v0.10.0",
+    "tag": "v0.11.1",
     "title": "EffectCraft",
-    "version": "0.10.0"
+    "version": "0.11.1"
   },
   "filmcraft": {
     "description": "Premiere-style video editor",
@@ -77,17 +77,17 @@
     "repo": "storytold/filmcraft",
     "sources": {
       "aarch64-linux": {
-        "hash": "sha256-Gv4qw8YBO3w27t0b+96vwXPOXUcKNfHd/n4fqsUDwOY=",
-        "url": "https://github.com/storytold/filmcraft/releases/download/v0.8.0/filmcraft-0.8.0-linux-aarch64.tar.gz"
+        "hash": "sha256-7gpUwhVKs0YAptHJijNIrDu8xfRJYd+kLCwWs6bxPHk=",
+        "url": "https://github.com/storytold/filmcraft/releases/download/v0.9.0/filmcraft-0.9.0-linux-aarch64.tar.gz"
       },
       "x86_64-linux": {
-        "hash": "sha256-sWaHeQWuihtVBQZtbd5g184Fgxz7MJus1deXD0uwF+E=",
-        "url": "https://github.com/storytold/filmcraft/releases/download/v0.8.0/filmcraft-0.8.0-linux-x86_64.tar.gz"
+        "hash": "sha256-6meVPMdUv9gnLg5fqUBRjhYGiulva3Ki3OVm7WmmFjI=",
+        "url": "https://github.com/storytold/filmcraft/releases/download/v0.9.0/filmcraft-0.9.0-linux-x86_64.tar.gz"
       }
     },
-    "tag": "v0.8.0",
+    "tag": "v0.9.0",
     "title": "FilmCraft",
-    "version": "0.8.0"
+    "version": "0.9.0"
   },
   "gridcraft": {
     "description": "Excel-style spreadsheet",
@@ -95,17 +95,17 @@
     "repo": "storytold/gridcraft",
     "sources": {
       "aarch64-linux": {
-        "hash": "sha256-t3WR26XzXIXujyJzYOYL1to0LEjMfVQ5QIO8LudHaM4=",
-        "url": "https://github.com/storytold/gridcraft/releases/download/v0.7.0/gridcraft-0.7.0-linux-aarch64.tar.gz"
+        "hash": "sha256-DUyIKs3P1LVyGm3R7HTJjOD7Fg0CMZc6aUddpuyejn0=",
+        "url": "https://github.com/storytold/gridcraft/releases/download/v0.8.0/gridcraft-0.8.0-linux-aarch64.tar.gz"
       },
       "x86_64-linux": {
-        "hash": "sha256-wBvC3EKVVW9TgQ3+1KhaP1g4hVLBV6ED4QYmwGmznhw=",
-        "url": "https://github.com/storytold/gridcraft/releases/download/v0.7.0/gridcraft-0.7.0-linux-x86_64.tar.gz"
+        "hash": "sha256-SgKeINqGutRnBjOc5FFqIERcExwNgvahFHciCMXYMbM=",
+        "url": "https://github.com/storytold/gridcraft/releases/download/v0.8.0/gridcraft-0.8.0-linux-x86_64.tar.gz"
       }
     },
-    "tag": "v0.7.0",
+    "tag": "v0.8.0",
     "title": "GridCraft",
-    "version": "0.7.0"
+    "version": "0.8.0"
   },
   "lightcraft": {
     "description": "Lightroom-style photo library and raw processor",
@@ -113,17 +113,17 @@
     "repo": "storytold/lightcraft",
     "sources": {
       "aarch64-linux": {
-        "hash": "sha256-zlY0mO4BwWupRSDIIxI+GMLm2EbtxY59GgR1goGBwcM=",
-        "url": "https://github.com/storytold/lightcraft/releases/download/v0.8.0/lightcraft-0.8.0-linux-aarch64.tar.gz"
+        "hash": "sha256-Mj3HywIbxcqN3dmsZkIAc6fdqhXKtwUWizU8FgsQqRY=",
+        "url": "https://github.com/storytold/lightcraft/releases/download/v0.9.1/lightcraft-0.9.1-linux-aarch64.tar.gz"
       },
       "x86_64-linux": {
-        "hash": "sha256-n+Dsxpt/Hzo1ocYwQps8Uv20QZuiCLVXm0UBuTj1GNE=",
-        "url": "https://github.com/storytold/lightcraft/releases/download/v0.8.0/lightcraft-0.8.0-linux-x86_64.tar.gz"
+        "hash": "sha256-f2KX06FZqjkbE6rASTl3MDBcwEqNvxKrD/YfhvVR96k=",
+        "url": "https://github.com/storytold/lightcraft/releases/download/v0.9.1/lightcraft-0.9.1-linux-x86_64.tar.gz"
       }
     },
-    "tag": "v0.8.0",
+    "tag": "v0.9.1",
     "title": "LightCraft",
-    "version": "0.8.0"
+    "version": "0.9.1"
   },
   "pdfcraft": {
     "description": "Acrobat-style PDF reader, organizer and editor",
@@ -131,17 +131,17 @@
     "repo": "storytold/pdfcraft",
     "sources": {
       "aarch64-linux": {
-        "hash": "sha256-SOGAyIllEu0bEIkrr5WnXfS72Gb3IFFQZiy0faKkv5c=",
-        "url": "https://github.com/storytold/pdfcraft/releases/download/v0.8.0/pdfcraft-0.8.0-linux-aarch64.tar.gz"
+        "hash": "sha256-fIMDXr5cbcEGSedvUgIBesLaDeSPJNt/h/yvCa30Jhk=",
+        "url": "https://github.com/storytold/pdfcraft/releases/download/v0.9.0/pdfcraft-0.9.0-linux-aarch64.tar.gz"
       },
       "x86_64-linux": {
-        "hash": "sha256-P0/V3dmYAqPTSUdMYc89q9H7cZjqDfANJMwxBRa9HCo=",
-        "url": "https://github.com/storytold/pdfcraft/releases/download/v0.8.0/pdfcraft-0.8.0-linux-x86_64.tar.gz"
+        "hash": "sha256-/199o2oQiTQOP9umlrKGzDF6yPBwXMjETBxJ2cpMVOA=",
+        "url": "https://github.com/storytold/pdfcraft/releases/download/v0.9.0/pdfcraft-0.9.0-linux-x86_64.tar.gz"
       }
     },
-    "tag": "v0.8.0",
+    "tag": "v0.9.0",
     "title": "PdfCraft",
-    "version": "0.8.0"
+    "version": "0.9.0"
   },
   "photocraft": {
     "description": "Photoshop-style image editor",
@@ -149,17 +149,17 @@
     "repo": "storytold/photocraft",
     "sources": {
       "aarch64-linux": {
-        "hash": "sha256-yVYIRERlMULdJSdM/wjbwX6L+ZgVOA239k7sAm6IL8c=",
-        "url": "https://github.com/storytold/photocraft/releases/download/v0.9.0/photocraft-0.9.0-linux-aarch64.tar.gz"
+        "hash": "sha256-gpeA0zHmRD3fG62pMu0H4OncVBshOydfPDoyCWB7x8c=",
+        "url": "https://github.com/storytold/photocraft/releases/download/v0.10.0/photocraft-0.10.0-linux-aarch64.tar.gz"
       },
       "x86_64-linux": {
-        "hash": "sha256-kTAMFIWtcQg5YEsIVTHJDnesfr2yowJZMJrXSvz9uQ0=",
-        "url": "https://github.com/storytold/photocraft/releases/download/v0.9.0/photocraft-0.9.0-linux-x86_64.tar.gz"
+        "hash": "sha256-xdRVeF2cLq9pW/jmMnxNbSOjnduVamEU8MW2Qyb5hOE=",
+        "url": "https://github.com/storytold/photocraft/releases/download/v0.10.0/photocraft-0.10.0-linux-x86_64.tar.gz"
       }
     },
-    "tag": "v0.9.0",
+    "tag": "v0.10.0",
     "title": "PhotoCraft",
-    "version": "0.9.0"
+    "version": "0.10.0"
   },
   "soundcraft": {
     "description": "Pro Tools-style audio workstation",
@@ -167,17 +167,17 @@
     "repo": "storytold/soundcraft",
     "sources": {
       "aarch64-linux": {
-        "hash": "sha256-W1FSRkvWo65sSL4CbYDgxODaWNWBpF/ktYA9b8+74AY=",
-        "url": "https://github.com/storytold/soundcraft/releases/download/v0.7.0/soundcraft-0.7.0-linux-aarch64.tar.gz"
+        "hash": "sha256-YR+EdO8EA9cd/UEVHXoDYxZsPrlwmZ+ZP/7QxYKnNPg=",
+        "url": "https://github.com/storytold/soundcraft/releases/download/v0.8.0/soundcraft-0.8.0-linux-aarch64.tar.gz"
       },
       "x86_64-linux": {
-        "hash": "sha256-jXr75f5DPLM4t8zuCCAoXWzhv8jABtVRyohAwnqRGrI=",
-        "url": "https://github.com/storytold/soundcraft/releases/download/v0.7.0/soundcraft-0.7.0-linux-x86_64.tar.gz"
+        "hash": "sha256-V6K4d21RiAzuaRGFaKOWwJ+sppSdy/UPGYedcdWW9cw=",
+        "url": "https://github.com/storytold/soundcraft/releases/download/v0.8.0/soundcraft-0.8.0-linux-x86_64.tar.gz"
       }
     },
-    "tag": "v0.7.0",
+    "tag": "v0.8.0",
     "title": "SoundCraft",
-    "version": "0.7.0"
+    "version": "0.8.0"
   },
   "vectorcraft": {
     "description": "Illustrator-style vector illustration",
@@ -185,17 +185,17 @@
     "repo": "storytold/vectorcraft",
     "sources": {
       "aarch64-linux": {
-        "hash": "sha256-8eelwA68g9hCvFfcs115Ff7bCZZYXKLyep4esqaVa+g=",
-        "url": "https://github.com/storytold/vectorcraft/releases/download/v0.12.0/vectorcraft-0.12.0-linux-aarch64.tar.gz"
+        "hash": "sha256-iudq9juo+gxWqCS81W/HVxSKhHWLLUJ5nbynIfvA/Wg=",
+        "url": "https://github.com/storytold/vectorcraft/releases/download/v0.13.1/vectorcraft-0.13.1-linux-aarch64.tar.gz"
       },
       "x86_64-linux": {
-        "hash": "sha256-Z1DbEJ06JTxRyCl1r2UPQjhLonp2j3JSlDHt+1hQgmk=",
-        "url": "https://github.com/storytold/vectorcraft/releases/download/v0.12.0/vectorcraft-0.12.0-linux-x86_64.tar.gz"
+        "hash": "sha256-NcD89tP56/9vM9JX/3Du9BQpbzfw2B8oTm+XDiD9ssg=",
+        "url": "https://github.com/storytold/vectorcraft/releases/download/v0.13.1/vectorcraft-0.13.1-linux-x86_64.tar.gz"
       }
     },
-    "tag": "v0.12.0",
+    "tag": "v0.13.1",
     "title": "VectorCraft",
-    "version": "0.12.0"
+    "version": "0.13.1"
   },
   "wordcraft": {
     "description": "Word-style word processor",
@@ -203,16 +203,16 @@
     "repo": "storytold/wordcraft",
     "sources": {
       "aarch64-linux": {
-        "hash": "sha256-tfzn8xu784gowXFNfUMkSuhfA0u+dh36QB4ET5drpF4=",
-        "url": "https://github.com/storytold/wordcraft/releases/download/v0.7.0/wordcraft-0.7.0-linux-aarch64.tar.gz"
+        "hash": "sha256-qGLeIlbkPJh9yOoAm6Uqwl2zQJH9ZJtmYTOTGsaOAsw=",
+        "url": "https://github.com/storytold/wordcraft/releases/download/v0.8.0/wordcraft-0.8.0-linux-aarch64.tar.gz"
       },
       "x86_64-linux": {
-        "hash": "sha256-YwCfiOPbrqcKwTePq8hVWuFHddMoKRdcXaJVGr4Dky8=",
-        "url": "https://github.com/storytold/wordcraft/releases/download/v0.7.0/wordcraft-0.7.0-linux-x86_64.tar.gz"
+        "hash": "sha256-Ds4Hzz2RuSPf2A+QMQ4EmDveZvAnnGtg3c6JWW3eDd8=",
+        "url": "https://github.com/storytold/wordcraft/releases/download/v0.8.0/wordcraft-0.8.0-linux-x86_64.tar.gz"
       }
     },
-    "tag": "v0.7.0",
+    "tag": "v0.8.0",
     "title": "WordCraft",
-    "version": "0.7.0"
+    "version": "0.8.0"
   }
 }
