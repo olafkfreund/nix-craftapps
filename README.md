@@ -340,7 +340,7 @@ All options live under `programs.craftapps`.
 | `apps.<name>.package`  | package         | this flake's | Use a different build, for example one wrapped with nixGL.                       |
 | `linkFonts`            | bool            | `true`       | **NixOS only.** Provide `/usr/share/fonts` (see [Fonts](#fonts)).                |
 | `mcp.enable`           | bool            | `false`      | Define an MCP server for every enabled app (see [MCP servers](#mcp-servers)).    |
-| `apps.<name>.mcp.args` | list of strings | `[ "mcp" ]`  | Arguments for `<name>-cli` as an MCP server. VectorCraft: `--headless`; PdfCraft and LightCraft: `--compact`. |
+| `apps.<name>.mcp.args` | list of strings | `[ "mcp" ]`  | Arguments for `<name>-cli` as an MCP server. VectorCraft: `--headless`; PdfCraft and LightCraft: `--compact`; PhotoCraft: file roots `/`. |
 | `mcp.servers`          | attrs           | read-only    | The resulting servers: one `{ command, args }` per enabled app.                  |
 | `skill.enable`         | bool            | `false`      | Install the agent skill (see [Agent skill](#agent-skill)).                       |
 

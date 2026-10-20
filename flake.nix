@@ -157,6 +157,14 @@
                 "mcp"
                 "--compact"
               ]
+            &&
+              s.photocraft.args == [
+                "mcp"
+                "--automation-read-root"
+                "/"
+                "--automation-write-root"
+                "/"
+              ]
             && builtins.all (v: lib.hasSuffix "-cli" v.command) (builtins.attrValues s);
         in
         lib.removeAttrs self.packages.${system} [ "default" ]

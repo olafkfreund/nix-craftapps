@@ -19,6 +19,13 @@ let
     pdfcraft = [ "--compact" ];
     # lightcraft lists 388 tools (~205 KB); --compact lists 17 helpers, the rest via run_command.
     lightcraft = [ "--compact" ];
+    # photocraft denies all file access without roots; / matches the other servers, which are unrestricted.
+    photocraft = [
+      "--automation-read-root"
+      "/"
+      "--automation-write-root"
+      "/"
+    ];
   };
 in
 {

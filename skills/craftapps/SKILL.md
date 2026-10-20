@@ -111,6 +111,7 @@ engine only; a bridged app enforces its own, set when it was started.
 pdfcraft also takes `--root DIR`. Paths you pass to tools are then relative
 to, or must sit inside, these roots. If a read or save is refused, check
 the roots before anything else.
+The packaged PhotoCraft server is rooted at `/`, so give it absolute paths; a relative path resolves against `/`.
 
 ## Compact tool lists
 
