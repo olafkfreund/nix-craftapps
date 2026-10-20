@@ -1,5 +1,5 @@
 ---
-status: draft
+status: approved
 issue: 16
 intent: intent/2026-10-20-16-photocraft-roots.md
 ---
