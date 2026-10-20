@@ -10,6 +10,7 @@
       systems = [
         "x86_64-linux"
         "aarch64-linux"
+        "aarch64-darwin"
       ];
       forAllSystems = f: lib.genAttrs systems (system: f nixpkgs.legacyPackages.${system});
       craftapps = pkgs: import ./default.nix { inherit pkgs; };
@@ -40,6 +41,7 @@
       overlays.default = final: _prev: { craftapps = craftapps final; };
 
       nixosModules.default = import ./modules/nixos.nix craftapps;
+      darwinModules.default = import ./modules/darwin.nix craftapps;
       homeManagerModules.default = import ./modules/home-manager.nix craftapps;
 
       checks = forAllSystems (
@@ -78,24 +80,24 @@
               default = { };
             };
           };
-          node = lib.nixosSystem {
+          hmStub.options.home-manager.sharedModules = lib.mkOption {
+            type = lib.types.listOf lib.types.raw;
+            default = [ ];
+          };
+          settings.programs.craftapps = {
+            enable = true;
+            enableAll = true;
+            mcp.enable = true;
+            skill.enable = true;
+            apps.soundcraft.enable = false;
+          };
+          nixos = lib.nixosSystem {
             inherit system;
             modules = [
               self.nixosModules.default
+              hmStub
+              settings
               {
-                options.home-manager.sharedModules = lib.mkOption {
-                  type = lib.types.listOf lib.types.raw;
-                  default = [ ];
-                };
-              }
-              {
-                programs.craftapps = {
-                  enable = true;
-                  enableAll = true;
-                  mcp.enable = true;
-                  skill.enable = true;
-                  apps.soundcraft.enable = false;
-                };
                 boot.loader.grub.enable = false;
                 fileSystems."/" = {
                   device = "none";
@@ -105,43 +107,79 @@
               }
             ];
           };
-        in
-        lib.removeAttrs self.packages.${system} [ "default" ]
-        // {
-          module =
+          # nix-darwin's own options, stubbed as the Home Manager ones are below.
+          darwin = lib.evalModules {
+            modules = [
+              self.darwinModules.default
+              hmStub
+              settings
+              {
+                options.environment.systemPackages = lib.mkOption {
+                  type = lib.types.listOf lib.types.package;
+                  default = [ ];
+                };
+                options.environment.etc = lib.mkOption {
+                  type = lib.types.attrsOf (
+                    lib.types.submodule { options.text = lib.mkOption { type = lib.types.lines; }; }
+                  );
+                  default = { };
+                };
+                config._module.args.pkgs = pkgs;
+              }
+            ];
+          };
+          node = if pkgs.stdenv.hostPlatform.isDarwin then darwin else nixos;
+          systemOk =
+            cfg:
             let
-              cfg = node.config;
               s =
                 (builtins.fromJSON (
                   builtins.unsafeDiscardStringContext cfg.environment.etc."craftapps/mcp.json".text
                 )).mcpServers;
+            in
+            builtins.length cfg.programs.craftapps.packages == builtins.length names - 1
+            && !builtins.elem "soundcraft" (map (p: p.pname) cfg.programs.craftapps.packages)
+            && builtins.all (p: builtins.elem p cfg.environment.systemPackages) cfg.programs.craftapps.packages
+            && builtins.length (builtins.attrNames s) == builtins.length names - 1
+            && !(s ? soundcraft)
+            &&
+              s.vectorcraft.args == [
+                "mcp"
+                "--headless"
+              ]
+            &&
+              s.pdfcraft.args == [
+                "mcp"
+                "--compact"
+              ]
+            &&
+              s.lightcraft.args == [
+                "mcp"
+                "--compact"
+              ]
+            && builtins.all (v: lib.hasSuffix "-cli" v.command) (builtins.attrValues s);
+        in
+        lib.removeAttrs self.packages.${system} [ "default" ]
+        // lib.optionalAttrs pkgs.stdenv.hostPlatform.isLinux {
+          module =
+            let
+              cfg = nixos.config;
               ok =
-                builtins.length cfg.programs.craftapps.packages == builtins.length names - 1
-                && !builtins.elem "soundcraft" (map (p: p.pname) cfg.programs.craftapps.packages)
+                systemOk cfg
                 && builtins.any (lib.hasInfix "/usr/share/fonts") cfg.systemd.tmpfiles.rules
-                && cfg.fonts.fontDir.enable
-                && builtins.length (builtins.attrNames s) == builtins.length names - 1
-                && !(s ? soundcraft)
-                &&
-                  s.vectorcraft.args == [
-                    "mcp"
-                    "--headless"
-                  ]
-                &&
-                  s.pdfcraft.args == [
-                    "mcp"
-                    "--compact"
-                  ]
-                &&
-                  s.lightcraft.args == [
-                    "mcp"
-                    "--compact"
-                  ]
-                && builtins.all (v: lib.hasSuffix "-cli" v.command) (builtins.attrValues s);
+                && cfg.fonts.fontDir.enable;
             in
             assert lib.assertMsg ok
               "craftapps NixOS module: enableAll with one exclusion, the font link, or the MCP servers are wrong";
             pkgs.runCommand "craftapps-module-check" { } "touch $out";
+        }
+        // lib.optionalAttrs pkgs.stdenv.hostPlatform.isDarwin {
+          darwin-module =
+            assert lib.assertMsg (systemOk darwin.config)
+              "craftapps nix-darwin module: enableAll with one exclusion, or the MCP servers are wrong";
+            pkgs.runCommand "craftapps-darwin-module-check" { } "touch $out";
+        }
+        // {
           hm-module =
             let
               eval =

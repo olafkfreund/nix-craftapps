@@ -6,7 +6,8 @@ how to undo it.
 
 **Short version:** on NixOS with a working desktop you normally do nothing.
 On another distribution you need one extra step, because programs built by
-Nix cannot see your distribution's graphics drivers on their own.
+Nix cannot see your distribution's graphics drivers on their own. On macOS
+you never need to do anything.
 
 ## Contents
 
@@ -16,6 +17,7 @@ Nix cannot see your distribution's graphics drivers on their own.
 - [NixOS](#nixos)
 - [Other distributions (Ubuntu, Fedora, Arch, …)](#other-distributions-ubuntu-fedora-arch-)
 - [Virtual machines and computers without a GPU](#virtual-machines-and-computers-without-a-gpu)
+- [macOS](#macos)
 - [Choosing the backend or GPU](#choosing-the-backend-or-gpu)
 - [Checking your setup](#checking-your-setup)
 - [What has been tested](#what-has-been-tested)
@@ -30,7 +32,8 @@ any driver option. It does only three things:
 2. sets `fonts.fontDir.enable = true` (only with `linkFonts`, the default);
 3. links `/usr/share/fonts` to the system fonts (only with `linkFonts`).
 
-The Home Manager module only adds the packages to `home.packages`.
+The nix-darwin module only installs the packages. The Home Manager module
+only adds the packages to `home.packages`.
 
 So enabling this flake cannot break a working GPU setup. Every
 GPU-related step below is one **you** choose to take. Each section says what
@@ -50,12 +53,14 @@ that step touches and how to undo it.
 | Other distro, hybrid laptop             | **Yes**: as above; use offload if you want the NVIDIA GPU                   | Same                                                 |
 | Other distro, VM / no GPU               | **Yes**: same step; Mesa's software renderers are included                  | Same                                                 |
 | WSL2                                    | Untested. Software rendering is expected to work                            | See [WSL2](#wsl2)                                    |
+| macOS on Apple silicon                  | No. The apps render with Metal                                              | Nothing                                              |
 
 ## How the apps use the GPU
 
 All thirteen apps draw their windows with [wgpu](https://wgpu.rs), a
-cross-platform GPU library, through egui/eframe. On Linux, wgpu has two
-backends:
+cross-platform GPU library, through egui/eframe. On macOS it uses Metal,
+which is part of the system; the rest of this section is about Linux. On
+Linux, wgpu has two backends:
 
 - **Vulkan**, which it tries first;
 - **OpenGL ES through EGL**, the fallback.
@@ -330,6 +335,14 @@ The apps run with software rendering:
 Expect lower frame rates, especially in FilmCraft and EffectCraft. If a VM
 offers a virtual GPU (virtio-gpu / VirGL), Mesa uses it automatically.
 
+## macOS
+
+Nothing to do. The apps draw with Metal, which every Mac has, and they link
+only system frameworks, so there is no driver path to set up. The
+`/run/opengl-driver`, Vulkan and EGL notes on this page do not apply. Of the
+variables below, only `WGPU_POWER_PREF` and `WGPU_ADAPTER_NAME` are relevant,
+and only on Macs with more than one GPU.
+
 ## Choosing the backend or GPU
 
 These environment variables apply to a single launch and change nothing
@@ -407,6 +420,7 @@ Tested by launching the GUIs on real hardware with
 | --- | --- |
 | NixOS, AMD Radeon (RX 7900 XTX), Hyprland/Wayland | Runs on the GPU via Vulkan (`radeon`). Also runs with `WGPU_BACKEND=gl`, with lavapipe, and with llvmpipe |
 | NixOS, hybrid Intel + NVIDIA laptop, PRIME sync, proprietary driver 615.71, Hyprland/Wayland | Runs on the NVIDIA GPU in every mode tried |
+| macOS 27.0.1, Apple M5 Pro, nix-darwin | All thirteen stay up (`timeout 8 <app>` exits 124) |
 
 Not yet tested, but documented from how the libraries and Home Manager work:
 

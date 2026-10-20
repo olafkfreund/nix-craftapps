@@ -14,7 +14,7 @@ import urllib.request
 from pathlib import Path
 
 REGISTRY = Path(__file__).resolve().parent.parent / "apps.json"
-SYSTEMS = {"x86_64-linux": "x86_64", "aarch64-linux": "aarch64"}
+SYSTEMS = ("x86_64-linux", "aarch64-linux", "aarch64-darwin")
 APPS = {
     "cadcraft": ("CADCraft", "AutoCAD-style CAD and drafting"),
     "deckcraft": ("DeckCraft", "PowerPoint-style presentations and slide shows"),
@@ -36,8 +36,29 @@ def version_key(v):
     return tuple(int(x) for x in v.split("."))
 
 
-def asset_name(app, version, arch):
-    return f"{app}-{version}-linux-{arch}.tar.gz"
+def asset_names(app, version, system):
+    # The macOS DMG holds only the GUI; its CLI is a separate universal zip.
+    if system.endswith("-darwin"):
+        return [
+            f"{app}-{version}-macos-universal.dmg",
+            f"{app}-cli-{version}-macos-universal.zip",
+        ]
+    return [f"{app}-{version}-linux-{system.removesuffix('-linux')}.tar.gz"]
+
+
+def systems_in(app, release):
+    version = release["tag_name"].removeprefix("v")
+    names = {a["name"] for a in release["assets"]}
+    return {s for s in SYSTEMS if set(asset_names(app, version, s)) <= names}
+
+
+def gained_systems(old, release, app):
+    """Systems to add, or None when the release brings nothing new."""
+    if not old:
+        return sorted(systems_in(app, release))
+    new, cur = (version_key(v) for v in (release["tag_name"].removeprefix("v"), old["version"]))
+    gained = sorted(systems_in(app, release) - set(old["sources"]))
+    return gained if new > cur or (new == cur and gained) else None
 
 
 def latest_release(repo):
@@ -63,15 +84,23 @@ def entry_for(app, release, old):
     version = release["tag_name"].removeprefix("v")
     assets = {a["name"]: a["browser_download_url"] for a in release["assets"]}
     title, description = APPS[app]
+    # Same URL, same file: a release that only gains a system re-downloads nothing.
+    known = {
+        s["url"]: s["hash"]
+        for src in old.get("sources", {}).values()
+        for s in (src, src.get("cli", {}))
+        if s
+    }
     sources = {}
-    for system, arch in SYSTEMS.items():
-        url = assets.get(asset_name(app, version, arch))
-        if url:
-            sources[system] = {"url": url, "hash": prefetch(url)}
+    for system in sorted(systems_in(app, release)):
+        main, *cli = ({"url": assets[n]} for n in asset_names(app, version, system))
+        for s in (main, *cli):
+            s["hash"] = known.get(s["url"]) or prefetch(s["url"])
+        sources[system] = main | ({"cli": cli[0]} if cli else {})
     missing = set(old.get("sources", SYSTEMS)) - set(sources)
     if missing or not sources:
         # Keep the old entry and retry next run: assets often upload one by one.
-        raise RuntimeError(f"{release['tag_name']} lacks {sorted(missing) or 'linux tarballs'}")
+        raise RuntimeError(f"{release['tag_name']} lacks {sorted(missing) or 'release assets'}")
     return {
         "title": old.get("title", title),
         "description": old.get("description", description),
@@ -89,20 +118,35 @@ def dump(registry):
 
 def self_test():
     assert version_key("0.10.0") > version_key("0.9.9")
-    assert asset_name("x", "1.2.3", "aarch64") == "x-1.2.3-linux-aarch64.tar.gz"
+    assert asset_names("x", "1.2.3", "aarch64-linux") == ["x-1.2.3-linux-aarch64.tar.gz"]
+    assert asset_names("x", "1.2.3", "aarch64-darwin") == [
+        "x-1.2.3-macos-universal.dmg", "x-cli-1.2.3-macos-universal.zip"]
     assert dump({"b": 1, "a": 2}).startswith('{\n  "a"')
-    assert set(SYSTEMS) == {"x86_64-linux", "aarch64-linux"}
+    assert set(SYSTEMS) == {"x86_64-linux", "aarch64-linux", "aarch64-darwin"}
     global prefetch
-    prefetch = lambda url: "sha256-x"
-    rel = {"tag_name": "v1.0.0", "assets": [
-        {"name": "x-1.0.0-linux-x86_64.tar.gz", "browser_download_url": "u"}]}
+    prefetched = []
+    prefetch = lambda url: prefetched.append(url) or "sha256-" + url
+    asset = lambda n: {"name": n, "browser_download_url": n}
+    rel = {"tag_name": "v1.0.0", "assets": [asset("x-1.0.0-linux-x86_64.tar.gz")]}
     APPS["x"] = ("X", "x")
     try:
         entry_for("x", rel, {"sources": {"x86_64-linux": {}, "aarch64-linux": {}}})
         raise AssertionError("accepted a release missing an arch")
     except RuntimeError:
         pass
-    assert entry_for("x", rel, {"sources": {"x86_64-linux": {}}})["version"] == "1.0.0"
+    old = entry_for("x", rel, {"sources": {"x86_64-linux": {}}})
+    assert old["version"] == "1.0.0"
+    assert gained_systems(old, rel, "x") is None
+    rel["assets"].append(asset("x-1.0.0-macos-universal.dmg"))
+    assert gained_systems(old, rel, "x") is None, "added darwin without its CLI zip"
+    rel["assets"].append(asset("x-cli-1.0.0-macos-universal.zip"))
+    assert gained_systems(old, rel, "x") == ["aarch64-darwin"]
+    prefetched.clear()
+    new = entry_for("x", rel, old)
+    assert prefetched == ["x-1.0.0-macos-universal.dmg", "x-cli-1.0.0-macos-universal.zip"]
+    assert new["sources"]["aarch64-darwin"]["cli"]["hash"] == "sha256-x-cli-1.0.0-macos-universal.zip"
+    assert gained_systems(new, {**rel, "tag_name": "v0.9.0"}, "x") is None
+    assert gained_systems(new, {**rel, "tag_name": "v1.0.1"}, "x") == []
     print("self-test ok")
 
 
@@ -117,15 +161,15 @@ def main(args):
         old = registry.get(app, {})
         try:
             release = latest_release(f"storytold/{app}")
-            new_version = release["tag_name"].removeprefix("v")
-            if old and version_key(new_version) <= version_key(old["version"]):
+            gained = gained_systems(old, release, app)
+            if gained is None:
                 continue
             behind.append(app)
-            if check:
-                print(f"{app}: {old.get('version', 'missing')} -> {new_version}")
-                continue
-            registry[app] = entry_for(app, release, old)
-            print(f"{app}: {old.get('version', 'new')} -> {new_version}")
+            change = f"{old.get('version', 'new')} -> {release['tag_name'].removeprefix('v')}"
+            change += f" (+{', '.join(gained)})" if old and gained else ""
+            if not check:
+                registry[app] = entry_for(app, release, old)
+            print(f"{app}: {change}")
         except Exception as e:  # noqa: BLE001 — keep the old entry, report, carry on
             print(f"{app}: FAILED: {e}", file=sys.stderr)
             failed.append(app)

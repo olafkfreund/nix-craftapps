@@ -4,9 +4,10 @@ Install the [ArtCraft](https://getartcraft.com/apps) Crafting Apps with Nix.
 
 [storytold](https://github.com/storytold) makes thirteen native creative apps,
 written in pure Rust. Each is an open-source, clean-room take on a familiar
-professional tool. This flake packages all thirteen for Linux. It gives you
-packages to run directly, a **NixOS module** and a **Home Manager module**,
-and you choose which apps to install.
+professional tool. This flake packages all thirteen for Linux and for macOS on
+Apple silicon. It gives you packages to run directly, a **NixOS module**, a
+**nix-darwin module** and a **Home Manager module**, and you choose which apps
+to install.
 
 | App           | Familiar as   | What it does                       |
 | ------------- | ------------- | ---------------------------------- |
@@ -25,8 +26,9 @@ and you choose which apps to install.
 | `deckcraft`   | PowerPoint    | Presentations and slide shows      |
 
 Every app installs two commands: the GUI (`photocraft`) and a command-line
-companion for scripting (`photocraft-cli`). It also installs a desktop
-launcher entry and icons.
+companion for scripting (`photocraft-cli`). On Linux it also installs a
+desktop launcher entry and icons; on macOS it installs the app bundle
+(`PhotoCraft.app`).
 
 > **Early software.** The apps are pre-1.0 and storytold releases them daily.
 > Expect rough edges. Your `flake.lock` keeps you on a version you know works
@@ -37,6 +39,7 @@ launcher entry and icons.
 - [Requirements](#requirements)
 - [Quick start: try an app without installing](#quick-start-try-an-app-without-installing)
 - [Install on NixOS](#install-on-nixos)
+- [Install on macOS with nix-darwin](#install-on-macos-with-nix-darwin)
 - [Install with Home Manager](#install-with-home-manager)
 - [Choosing apps](#choosing-apps)
 - [Option reference](#option-reference)
@@ -49,14 +52,15 @@ launcher entry and icons.
 
 ## Requirements
 
-- Linux on **x86_64** or **aarch64**. storytold publishes no Linux builds for
-  other platforms.
+- Linux on **x86_64** or **aarch64**, or macOS 11 or later on **Apple
+  silicon** (aarch64-darwin). Intel Macs are not supported: storytold's DMGs
+  are universal, but nixpkgs no longer supports x86_64-darwin.
 - Nix with flakes enabled. If `nix flake --help` fails, add
   `experimental-features = nix-command flakes` to `~/.config/nix/nix.conf`,
   or to `/etc/nix/nix.conf` on a multi-user install.
 - A graphical session, Wayland or X11. **On NixOS** the GPU needs nothing
   extra. **On other distributions** one extra step is needed; see
-  [docs/GPU.md](docs/GPU.md).
+  [docs/GPU.md](docs/GPU.md). **On macOS** nothing is needed.
 
 ## Quick start: try an app without installing
 
@@ -138,11 +142,50 @@ sudo nixos-rebuild switch --flake .#my-machine
 The apps appear in your launcher. The NixOS module also sets up the font
 directory the apps need; see [Fonts](#fonts).
 
+## Install on macOS with nix-darwin
+
+Add the input as in [Install on NixOS](#1-add-the-flake-input), then import
+the module in your `darwinConfigurations`:
+
+```nix
+{
+  outputs = { nix-darwin, nix-craftapps, ... }: {
+    darwinConfigurations.my-mac = nix-darwin.lib.darwinSystem {
+      modules = [
+        ./darwin-configuration.nix
+        nix-craftapps.darwinModules.default
+      ];
+    };
+  };
+}
+```
+
+Pick your apps with the same options as on NixOS:
+
+```nix
+{
+  programs.craftapps = {
+    enable = true;
+    apps.photocraft.enable = true;
+    apps.figcraft.enable = true;
+  };
+}
+```
+
+Rebuild with `sudo darwin-rebuild switch --flake .#my-mac`. nix-darwin puts
+the apps in `/Applications/Nix Apps`, and `photocraft` and `photocraft-cli` on
+your `PATH`.
+
+The apps are storytold's signed and notarized builds, copied unchanged, so
+Gatekeeper opens them without a warning. macOS has no `/usr/share/fonts`
+problem and needs no GPU setup, so the nix-darwin module has no `linkFonts`.
+
 ## Install with Home Manager
 
 The Home Manager module installs apps for one user, with no root access
 needed for the apps themselves. It has the same options as the NixOS module,
-apart from `linkFonts` (see [Fonts](#fonts)).
+apart from `linkFonts` (see [Fonts](#fonts)). It works on macOS too: Home
+Manager puts the app bundles in `~/Applications/Home Manager Apps`.
 
 Choose the section that matches how you run Home Manager.
 
@@ -167,6 +210,10 @@ the module for the user:
 ```
 
 Rebuild with `sudo nixos-rebuild switch --flake .#my-machine`.
+
+With nix-darwin, the same block goes in your nix-darwin modules, with
+`home-manager.darwinModules.home-manager` imported, and you rebuild with
+`darwin-rebuild`. macOS needs no font directory.
 
 **On NixOS you still need the font directory.** Also add
 `programs.craftapps = { enable = true; linkFonts = true; };` to the system
@@ -279,7 +326,7 @@ programs.craftapps = {
 };
 ```
 
-Both work the same in the NixOS and Home Manager modules.
+Both work the same in the NixOS, nix-darwin and Home Manager modules.
 
 ## Option reference
 
@@ -297,7 +344,7 @@ All options live under `programs.craftapps`.
 | `mcp.servers`          | attrs           | read-only    | The resulting servers: one `{ command, args }` per enabled app.                  |
 | `skill.enable`         | bool            | `false`      | Install the agent skill (see [Agent skill](#agent-skill)).                       |
 
-On NixOS with `mcp.enable`, the same servers are written to
+On NixOS and nix-darwin with `mcp.enable`, the same servers are written to
 `/etc/craftapps/mcp.json`. Home Manager does not write that file.
 
 `<name>` is any app from the table at the top.
@@ -331,7 +378,8 @@ This needs a Home Manager new enough to have `programs.mcp`; on older
 versions the module skips it. To check that Claude Code sees the servers,
 run `claude mcp list`.
 
-**NixOS without Home Manager.** The module writes `/etc/craftapps/mcp.json`.
+**NixOS or nix-darwin without Home Manager.** The module writes
+`/etc/craftapps/mcp.json`.
 Add its servers to Claude Code per user, and run this again after each
 rebuild that updates the apps, because the entries hold store paths:
 
@@ -344,8 +392,8 @@ while IFS=$'\t' read -r name json; do
 done
 ```
 
-With the NixOS module and Home Manager together, every Home Manager user also
-gets the servers through `programs.mcp`.
+With the NixOS or nix-darwin module and Home Manager together, every Home
+Manager user also gets the servers through `programs.mcp`.
 
 The module does not write `/etc/claude-code/managed-mcp.json`. Claude Code
 treats that file as exclusive control of MCP and ignores users' own servers,
@@ -384,7 +432,7 @@ how to use the apps headless, how to connect to a running app, and the file
 roots. For Claude Code it also installs `~/.claude/rules/craftapps.md`, a
 short routing rule loaded in every session (about 200 tokens), unless you set
 `programs.claude-code.rulesDir`. It is independent of `mcp.enable`. With the
-NixOS module, it applies to every Home Manager user.
+NixOS or nix-darwin module, it applies to every Home Manager user.
 
 If your own `programs.<agent>.skills` is a path (a whole skills directory),
 evaluation fails with a type error on `programs.<agent>.skills` when this is
@@ -392,14 +440,17 @@ on. Make it an attribute set (`skills.mine = ./mine;`) instead.
 
 ## Fonts
 
-The apps' text tools look for fonts in **`/usr/share/fonts` only**. They do
-not use fontconfig. Most distributions have that folder. NixOS does not.
+On Linux, the apps' text tools look for fonts in **`/usr/share/fonts`
+only**. They do not use fontconfig. Most distributions have that folder.
+NixOS does not. On macOS they use the system font folders
+(`/System/Library/Fonts`, `/Library/Fonts` and `~/Library/Fonts`).
 
 | You are on                     | What to do                                                     |
 | ------------------------------ | -------------------------------------------------------------- |
 | NixOS, using the NixOS module  | Nothing. `linkFonts = true` is the default.                    |
 | NixOS, using only Home Manager | Enable the NixOS module with `linkFonts = true` (see setup A). |
 | Another distribution           | Nothing. `/usr/share/fonts` already exists.                    |
+| macOS                          | Nothing. The apps use the macOS font folders.                  |
 
 With `linkFonts`, the module sets `fonts.fontDir.enable = true` and links
 `/usr/share/fonts` to `/run/current-system/sw/share/X11/fonts`. Every font in
@@ -413,19 +464,22 @@ Your `flake.lock` pins the app versions. To move to the newest releases:
 nix flake update nix-craftapps
 ```
 
-Then rebuild (`nixos-rebuild switch` or `home-manager switch`).
+Then rebuild (`nixos-rebuild switch`, `darwin-rebuild switch` or
+`home-manager switch`).
 
 This repository checks storytold's releases every day. When a release is
 out, a pull request adds it to `apps.json`, and CI builds and tests every app
-on both architectures before the change is merged.
+on x86_64 and aarch64 Linux and on Apple silicon macOS before the change is
+merged.
 
 To go back, run `git checkout flake.lock` before rebuilding. On NixOS you can
-also boot the previous generation.
+also boot the previous generation; with nix-darwin, run
+`sudo darwin-rebuild --rollback`.
 
 ## Uninstalling
 
-- **NixOS or Home Manager:** set `programs.craftapps.enable = false`, or
-  remove the block, then rebuild.
+- **NixOS, nix-darwin or Home Manager:** set
+  `programs.craftapps.enable = false`, or remove the block, then rebuild.
 - **`nix run` / `nix shell`:** nothing to remove. The next
   `nix-collect-garbage` frees the space.
 - **Fonts:** turning the NixOS module off stops it managing the
@@ -456,8 +510,9 @@ some other way, set that variable yourself.
 
 **`error: attribute '<app>' missing`, or `does not provide attribute
 'packages.<system>.<app>'`.** The app has no build for your platform in the
-pinned version. storytold publishes x86_64 and aarch64 builds for Linux only.
-Check the spelling too: names are lower case, like `photocraft`.
+pinned version. The flake has x86_64-linux, aarch64-linux and aarch64-darwin
+builds; there are none for Intel Macs. Check the spelling too: names are lower
+case, like `photocraft`.
 
 **An update broke an app.** Report it upstream at
 `https://github.com/storytold/<app>/issues`. Meanwhile, roll back as
@@ -470,17 +525,20 @@ described in [Updating](#updating), or pin one app to an older build with
   hash for each architecture. Nix refuses any download whose hash doesn't
   match.
 - **`package.nix`** is one generic builder for every app.
-  - It unpacks storytold's official Linux release tarball.
+  - On macOS it unpacks storytold's universal DMG and CLI zip, puts the app
+    bundle in `Applications/` and both commands in `bin/`, and changes
+    nothing inside them, so upstream's code signature stays valid.
+  - On Linux it unpacks storytold's official release tarball.
   - It uses `autoPatchelfHook` to point the binaries at Nix's glibc and ALSA.
   - It puts the libraries the apps load at startup on their library path:
     OpenGL, Vulkan, Wayland, X11, xkbcommon and D-Bus.
   - It installs the binaries, the desktop file, icons, metainfo and MIME
     types.
-- **`modules/`** holds the NixOS and Home Manager modules, which share their
-  option definitions.
+- **`modules/`** holds the NixOS, nix-darwin and Home Manager modules, which
+  share their option definitions.
 - **`scripts/update.py`** checks GitHub for new releases and refreshes
   `apps.json`. A daily GitHub Actions job runs it.
-  It opens a PR that merges itself once CI passes on x86_64 and aarch64.
+  It opens a PR that merges itself once CI passes on every platform.
 
 These are upstream's prebuilt binaries, not source builds: the
 `sourceProvenance` in each package's `meta` says `binaryNativeCode`. Building

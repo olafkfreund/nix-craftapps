@@ -127,9 +127,11 @@ For the full list, run the server without `--compact`.
 
 ## Troubleshooting
 
-- A GUI that exits at once on a fresh machine is usually a missing graphics
-  driver. The apps render through wgpu, which finds drivers only in
-  `/run/opengl-driver`. `WGPU_BACKEND=gl` forces the GLES path.
-- Text tools find fonts only in `/usr/share/fonts`.
+- A GUI that exits at once on a fresh Linux machine is usually a missing
+  graphics driver. The apps render through wgpu, which finds drivers only in
+  `/run/opengl-driver`. `WGPU_BACKEND=gl` forces the GLES path. On macOS
+  they use Metal and need no setup.
+- On Linux, text tools find fonts only in `/usr/share/fonts`. On macOS they
+  use the system font folders.
 - `<app>-cli --version` exits 0 and is the cheapest liveness check.
   `--help` is not consistent across the CLIs; use `<app>-cli help`.

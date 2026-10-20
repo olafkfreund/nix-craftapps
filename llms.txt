@@ -1,24 +1,25 @@
 # nix-craftapps
 
-> Nix flake that installs the thirteen ArtCraft Crafting Apps by storytold on Linux (x86_64 and aarch64). The apps are native, pure-Rust creative tools, each an open-source take on a familiar professional app. The flake provides one package per app, a NixOS module and a Home Manager module (both `programs.craftapps`, with a switch per app), an overlay, and daily automatic version updates.
+> Nix flake that installs the thirteen ArtCraft Crafting Apps by storytold on Linux (x86_64 and aarch64) and macOS (Apple silicon, aarch64-darwin; Intel Macs are not supported). The apps are native, pure-Rust creative tools, each an open-source take on a familiar professional app. The flake provides one package per app, a NixOS module, a nix-darwin module (`darwinModules.default`) and a Home Manager module (all `programs.craftapps`, with a switch per app), an overlay, and daily automatic version updates.
 
 Key facts for answering questions about this flake:
 
 - **Try an app without installing:** `nix run github:olafkfreund/nix-craftapps#<app>`.
 - **App names:** photocraft (Photoshop-like), vectorcraft (Illustrator), lightcraft (Lightroom), pdfcraft (Acrobat), effectcraft (After Effects), designcraft (InDesign), filmcraft (Premiere Pro), figcraft (Figma), gridcraft (Excel), soundcraft (Pro Tools), cadcraft (AutoCAD), wordcraft (Word), deckcraft (PowerPoint).
-- **Commands:** each app installs a GUI (`<app>`) and a CLI (`<app>-cli`). `<app>-cli --version` needs no display.
+- **Commands:** each app installs a GUI (`<app>`) and a CLI (`<app>-cli`). `<app>-cli --version` needs no display. On macOS the package also holds the signed upstream app bundle in `Applications/<Title>.app`; nix-darwin puts it in `/Applications/Nix Apps`, Home Manager in `~/Applications/Home Manager Apps`.
 - **Module options:**
   - `programs.craftapps.enable` turns the module on.
   - `programs.craftapps.enableAll` is the default for every app's switch.
   - `programs.craftapps.apps.<app>.enable` includes (`true`) or excludes (`false`) one app.
   - `programs.craftapps.apps.<app>.package` overrides the package.
   - `programs.craftapps.linkFonts` exists in the NixOS module only, defaults to `true`, and provides `/usr/share/fonts`.
-  - `programs.craftapps.mcp.enable` defines a stdio MCP server (`<app>-cli mcp`) for every enabled app. `programs.craftapps.apps.<app>.mcp.args` sets its arguments, and `programs.craftapps.mcp.servers` (read-only) holds the result. Home Manager sets `programs.mcp.servers`; the NixOS module also writes `/etc/craftapps/mcp.json`. PdfCraft's and LightCraft's servers start with `--compact` (PdfCraft: a core set plus `tool_search`/`tool_call` instead of 163 tools; LightCraft: helper tools, other commands via `run_command`, instead of 388 tools); override with `apps.<app>.mcp.args = [ "mcp" ]`.
+  - `programs.craftapps.mcp.enable` defines a stdio MCP server (`<app>-cli mcp`) for every enabled app. `programs.craftapps.apps.<app>.mcp.args` sets its arguments, and `programs.craftapps.mcp.servers` (read-only) holds the result. Home Manager sets `programs.mcp.servers`; the NixOS and nix-darwin modules also write `/etc/craftapps/mcp.json`. PdfCraft's and LightCraft's servers start with `--compact` (PdfCraft: a core set plus `tool_search`/`tool_call` instead of 163 tools; LightCraft: helper tools, other commands via `run_command`, instead of 388 tools); override with `apps.<app>.mcp.args = [ "mcp" ]`.
   - `programs.craftapps.skill.enable` (off by default) installs the `craftapps` agent skill as `programs.<agent>.skills.craftapps` for claude-code, codex, opencode, crush, github-copilot-cli and antigravity-cli, where Home Manager has that option. It routes requests by file type and task to the right app. For claude-code it also installs `skills/craftapps/routing.md` as `programs.claude-code.rules.craftapps`, a short rule loaded in every session.
 - **Choosing apps:** to exclude an app, set `enableAll = true` and `apps.<app>.enable = false`. To pick a few, leave `enableAll` off and set `apps.<app>.enable = true` for each.
-- **Fonts:** the apps read fonts only from `/usr/share/fonts`, without fontconfig. NixOS lacks that folder, so the NixOS module's `linkFonts` provides it. A Home Manager-only setup on NixOS still needs the NixOS module with `linkFonts`. Other distributions already have the folder.
+- **Fonts:** the apps read fonts only from `/usr/share/fonts`, without fontconfig. NixOS lacks that folder, so the NixOS module's `linkFonts` provides it. A Home Manager-only setup on NixOS still needs the NixOS module with `linkFonts`. Other distributions already have the folder. On macOS the apps use the macOS font folders, so the nix-darwin module has no `linkFonts`.
 - **GPU:**
   - The flake never changes GPU or driver configuration.
+  - On macOS the apps render with Metal and need nothing.
   - On NixOS, nothing is needed beyond `hardware.graphics.enable` (desktops set it); NVIDIA and PRIME sync need nothing extra, and PRIME offload can use `nvidia-offload <app>`.
   - On other distributions, the apps need GPU drivers made visible to Nix: set `targets.genericLinux.enable = true` in Home Manager and run the printed `sudo …/non-nixos-gpu-setup` once, or, without sudo, wrap with `config.lib.nixGL.wrap`.
   - NVIDIA on another distribution needs `targets.genericLinux.gpu.nvidia.{version,sha256}` matching the host driver, updated on every driver update.
@@ -28,15 +29,17 @@ Key facts for answering questions about this flake:
 
 ## Docs
 
-- [README](https://raw.githubusercontent.com/olafkfreund/nix-craftapps/main/README.md): quick start, NixOS install, Home Manager install (in NixOS, standalone, and on other distributions with GPU setup), choosing apps, option reference, fonts, updating, uninstalling, troubleshooting
-- [GPU setup](https://raw.githubusercontent.com/olafkfreund/nix-craftapps/main/docs/GPU.md): what each platform needs (NixOS AMD/Intel/NVIDIA/hybrid, other distributions via Home Manager or nixGL, VMs, WSL2), what each step changes and how to undo it, backend and GPU selection variables, read-only checks, and what has been tested
+- [README](https://raw.githubusercontent.com/olafkfreund/nix-craftapps/main/README.md): quick start, NixOS install, nix-darwin install, Home Manager install (in NixOS, standalone, and on other distributions with GPU setup), choosing apps, option reference, fonts, updating, uninstalling, troubleshooting
+- [GPU setup](https://raw.githubusercontent.com/olafkfreund/nix-craftapps/main/docs/GPU.md): what each platform needs (NixOS AMD/Intel/NVIDIA/hybrid, other distributions via Home Manager or nixGL, VMs, WSL2, macOS), what each step changes and how to undo it, backend and GPU selection variables, read-only checks, and what has been tested
 - [AGENTS.md](https://raw.githubusercontent.com/olafkfreund/nix-craftapps/main/AGENTS.md): repository layout, commands, rules, how to add an app, known traps
 
 ## Source
 
-- [flake.nix](https://raw.githubusercontent.com/olafkfreund/nix-craftapps/main/flake.nix): outputs (packages, overlays.default, nixosModules.default, homeManagerModules.default, checks)
+- [flake.nix](https://raw.githubusercontent.com/olafkfreund/nix-craftapps/main/flake.nix): outputs (packages, overlays.default, nixosModules.default, darwinModules.default, homeManagerModules.default, checks)
 - [modules/common.nix](https://raw.githubusercontent.com/olafkfreund/nix-craftapps/main/modules/common.nix): the shared option definitions
+- [modules/system.nix](https://raw.githubusercontent.com/olafkfreund/nix-craftapps/main/modules/system.nix): what the NixOS and nix-darwin modules share (packages, /etc/craftapps/mcp.json, Home Manager per-user modules)
 - [modules/nixos.nix](https://raw.githubusercontent.com/olafkfreund/nix-craftapps/main/modules/nixos.nix): NixOS module, including linkFonts
+- [modules/darwin.nix](https://raw.githubusercontent.com/olafkfreund/nix-craftapps/main/modules/darwin.nix): nix-darwin module
 - [modules/home-manager.nix](https://raw.githubusercontent.com/olafkfreund/nix-craftapps/main/modules/home-manager.nix): Home Manager module
 - [package.nix](https://raw.githubusercontent.com/olafkfreund/nix-craftapps/main/package.nix): the generic builder
 - [apps.json](https://raw.githubusercontent.com/olafkfreund/nix-craftapps/main/apps.json): current versions, URLs and hashes
