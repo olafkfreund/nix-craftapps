@@ -377,8 +377,13 @@ programs.craftapps.skill.enable = true;
 
 This installs one skill, `craftapps`, for every Home Manager agent that has a
 `programs.<agent>.skills` option: Claude Code, Codex, opencode, Crush, Copilot
-CLI and Antigravity CLI. It covers how to use the apps headless, how to
-connect to a running app, and the file roots. It is independent of
+CLI and Antigravity CLI. It tells agents which app to use for each request
+(for example .pptx → DeckCraft, .docx → WordCraft, .xlsx → GridCraft), so
+they use the installed apps instead of writing files by hand. It also covers
+how to use the apps headless, how to connect to a running app, and the file
+roots. For Claude Code it also installs `~/.claude/rules/craftapps.md`, a
+short routing rule loaded in every session (about 200 tokens). It is
+independent of
 `mcp.enable`. With the NixOS module, it applies to every Home Manager user.
 
 If your own `programs.<agent>.skills` is a path (a whole skills directory),

@@ -1,6 +1,6 @@
 ---
 name: craftapps
-description: Use the storytold Craft apps (CADCraft, DeckCraft, DesignCraft, EffectCraft, FigCraft, FilmCraft, GridCraft, LightCraft, PdfCraft, PhotoCraft, SoundCraft, VectorCraft, WordCraft) to create or edit DXF drawings, presentations, page layouts, motion graphics, UI designs, video, spreadsheets, photos, PDFs, audio, vector art and documents. Use when asked to drive the open app, work on a live document in a Craft app, or connect to a running Craft app, and when any craftapps MCP server or `<app>-cli` is available.
+description: "Create or edit files with the installed Craft apps instead of writing them by hand: slides, PowerPoint or .pptx → DeckCraft; Word document, letter, report, .docx/.odt/.rtf → WordCraft; spreadsheet, Excel, .xlsx/.xls/.ods/.csv → GridCraft; fill, sign, merge, OCR or redact a PDF, PDF to Word → PdfCraft; retouch an image, remove a background, Photoshop or .psd → PhotoCraft; raw photos, batch photo edits, Lightroom → LightCraft; logo, icon, illustration, SVG, Illustrator, .ai/.eps → VectorCraft; app or web UI, wireframe, prototype, Figma or .fig → FigCraft; brochure, magazine, InDesign, .idml, EPUB → DesignCraft; CAD, floor plan, AutoCAD, .dwg/.dxf → CADCraft; cut or edit a video, captions, Premiere → FilmCraft; motion graphics, animated titles, After Effects, Lottie → EffectCraft; record, mix or master audio, Pro Tools → SoundCraft. Also for driving an open Craft app or any Craft CLI or MCP server."
 ---
 
 # Craft apps
@@ -9,21 +9,49 @@ Thirteen desktop apps, each with a GUI (`<app>`) and a CLI (`<app>-cli`).
 Every app does its work through engine commands, so an agent never needs
 the GUI to get a result.
 
-| App | Makes |
-| --- | --- |
-| cadcraft | 2D/3D CAD drawings (DXF, DWG, SVG, PDF) |
-| deckcraft | presentations (.deckcraft, .pptx) |
-| designcraft | page layouts |
-| effectcraft | motion graphics compositions |
-| figcraft | interface designs |
-| filmcraft | video edits |
-| gridcraft | spreadsheets |
-| lightcraft | photo library and raw development |
-| pdfcraft | PDF inspection and editing |
-| photocraft | raster images (.pcraft) |
-| soundcraft | audio sessions |
-| vectorcraft | vector illustration |
-| wordcraft | word processor documents (.docx) |
+## Choose the app
+
+If you are asked to create, convert or edit a file type in the table below,
+use that Craft app's MCP server or CLI rather than a generic file-format
+skill or a library script. If the user names a tool or library, use that instead.
+
+Before routing, run `command -v <app>-cli`. If it is missing, say the app
+isn't installed and fall back.
+
+| You want | App | Opens | Saves / exports |
+| --- | --- | --- | --- |
+| slides, a deck, PowerPoint | deckcraft | .pptx, .deckcraft | .pptx, .pdf, .png/.jpg, .gif |
+| a Word document, letter, report | wordcraft | .docx, .doc (read only), .odt, .rtf, .md, .html, .txt | .docx, .pdf, .odt, .rtf, .html, .md, .txt |
+| a spreadsheet, Excel, CSV | gridcraft | .xlsx, .xlsm, .xls, .ods, .csv, .tsv, .json | .xlsx, .csv/.tsv, .json, .html, .pdf |
+| work on an existing PDF | pdfcraft | .pdf | .pdf, PDF/A, .docx, .pptx, .html, .rtf, .txt, page images |
+| edit one image, PSD, layers | photocraft | .psd/.psb, .png, .jpg, .tif, .webp, .exr | .psd, .png, .jpg, .tif, .webp, .gif |
+| raw photos, many photos, a library | lightcraft | ARW, NEF, RAF, CR3, .dng, .jpg, .tif, Lightroom catalogs | .jpg, .png, .tif, .psd, .webp, .avif, .jxl, .dng |
+| a logo, icon, illustration | vectorcraft | .svg, .pdf, .ai, .eps, .dxf, .psd, images | .svg, .pdf, .ai, .eps, .dxf, .png/.jpg |
+| app or web UI, a prototype | figcraft | .fig (best effort), .svg, images | .png, .jpg, .svg, .webp, .pdf |
+| print layout, a brochure, an ebook | designcraft | .idml, .indd (converted), images, PDF pages | .pdf (PDF/X-4, PDF/A), .epub, .idml, .html, .png/.jpg |
+| a CAD drawing, floor plan | cadcraft | .dxf, .dwg | .dxf, .dwg, .svg, .png, .pdf |
+| a video edit, captions | filmcraft | .mp4, .mov, audio, images, AAF | H.264/HEVC/ProRes renders, image sequences, EDL, FCPXML, OTIO, AAF |
+| motion graphics, Lottie | effectcraft | Lottie, footage | Lottie, H.264/HEVC/ProRes/WebM/GIF renders |
+| record, mix, master audio | soundcraft | .wav, .aiff, .flac, .mp3, .ogg, .m4a, MIDI | .wav, .aiff, .flac, stems, MIDI |
+
+### When two apps fit
+
+- **New PDF:** made by the app that makes the content (prose → wordcraft,
+  slides → deckcraft, sheets → gridcraft, print layout or PDF/X →
+  designcraft). pdfcraft is for an existing PDF: forms, signing, OCR,
+  merge, split, redact, PDF/A, and PDF → .docx/.pptx.
+- **.pptx:** deckcraft. designcraft's PPTX export only turns an existing
+  layout into slides.
+- **Photos:** raw files, many photos, grading or library work → lightcraft.
+  Pixel edits to one image (layers, background removal, PSD) → photocraft.
+- **Graphics:** logos, icons, SVG/AI/EPS → vectorcraft. UI screens and
+  prototypes → figcraft. Multi-page print or ebooks → designcraft.
+- **DXF:** engineering drawings and anything DWG → cadcraft. DXF as artwork
+  → vectorcraft, which cannot do DWG.
+- **Video and audio:** timeline editing → filmcraft. Motion graphics or
+  Lottie → effectcraft. Multitrack or MIDI audio → soundcraft. Audio inside
+  a video edit → filmcraft.
+- **A format fails:** run `<app>-cli help` and use what it lists.
 
 ## Headless first
 
