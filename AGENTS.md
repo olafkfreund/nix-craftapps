@@ -139,8 +139,9 @@ When storytold publishes a 14th app:
   `modules/common.nix`. pdfcraft and lightcraft default to `--compact`
   there (163 and 388 tools otherwise). photocraft denies all file access
   without roots, so it gets `--automation-read-root /
-  --automation-write-root /` there. Root flags can't be combined with
-  `--bridge`, and cadcraft, filmcraft, gridcraft and lightcraft reject them.
+  --automation-write-root /` there. A bridged app enforces its own roots,
+  so drop them when you switch an app to `--connect`, `--attach` or
+  `--bridge`; cadcraft, filmcraft, gridcraft and lightcraft reject them.
 - **Launching a GUI.** Running a GUI with an unknown flag such as `--help`
   opens a window instead of printing help. Use the `-cli` binary for
   anything headless.

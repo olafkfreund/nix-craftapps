@@ -118,3 +118,12 @@ Close #16.
 ## Rollback
 
 Revert the commit. PhotoCraft goes back to having no file access.
+
+## Deviations
+
+- Step 4: AGENTS.md no longer says root flags "can't be combined with
+  `--bridge`". Review could not confirm that for PhotoCraft. It now says
+  what the research showed: a bridged app enforces its own roots, so drop
+  them when switching to `--connect`, `--attach` or `--bridge`.
+- Step 5: the Claude Code run used `--strict-mcp-config`, so only the
+  rooted test server was loaded.
