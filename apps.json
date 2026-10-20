@@ -162,24 +162,24 @@
     "sources": {
       "aarch64-darwin": {
         "cli": {
-          "hash": "sha256-Vk99CHuIC38WqmCuUKHL6dN7TtRJ6ymyZG6lhEebqwc=",
-          "url": "https://github.com/storytold/gridcraft/releases/download/v0.8.0/gridcraft-cli-0.8.0-macos-universal.zip"
+          "hash": "sha256-djMn/ZJpILmnjSe8i68kgl65jonMJtT7LBJddT5OtFU=",
+          "url": "https://github.com/storytold/gridcraft/releases/download/v0.9.0/gridcraft-cli-0.9.0-macos-universal.zip"
         },
-        "hash": "sha256-JgYi/A4LGMyIFi8MIpR1m1j4oy76Q8pr9WnotIruKiM=",
-        "url": "https://github.com/storytold/gridcraft/releases/download/v0.8.0/gridcraft-0.8.0-macos-universal.dmg"
+        "hash": "sha256-eQJtZiVc2x1wiEMnWVpzykPi9fENCrS/IkB5cN6op0s=",
+        "url": "https://github.com/storytold/gridcraft/releases/download/v0.9.0/gridcraft-0.9.0-macos-universal.dmg"
       },
       "aarch64-linux": {
-        "hash": "sha256-DUyIKs3P1LVyGm3R7HTJjOD7Fg0CMZc6aUddpuyejn0=",
-        "url": "https://github.com/storytold/gridcraft/releases/download/v0.8.0/gridcraft-0.8.0-linux-aarch64.tar.gz"
+        "hash": "sha256-Hb2NbAU/nBTScDhzgJq22C1w+cXvIULQRnM9zj7VqiQ=",
+        "url": "https://github.com/storytold/gridcraft/releases/download/v0.9.0/gridcraft-0.9.0-linux-aarch64.tar.gz"
       },
       "x86_64-linux": {
-        "hash": "sha256-SgKeINqGutRnBjOc5FFqIERcExwNgvahFHciCMXYMbM=",
-        "url": "https://github.com/storytold/gridcraft/releases/download/v0.8.0/gridcraft-0.8.0-linux-x86_64.tar.gz"
+        "hash": "sha256-gRSC8uS7ZvjDXVm3nlMuHQgS02K6wk5j/W3cCETWa8k=",
+        "url": "https://github.com/storytold/gridcraft/releases/download/v0.9.0/gridcraft-0.9.0-linux-x86_64.tar.gz"
       }
     },
-    "tag": "v0.8.0",
+    "tag": "v0.9.0",
     "title": "GridCraft",
-    "version": "0.8.0"
+    "version": "0.9.0"
   },
   "lightcraft": {
     "description": "Lightroom-style photo library and raw processor",
@@ -266,24 +266,24 @@
     "sources": {
       "aarch64-darwin": {
         "cli": {
-          "hash": "sha256-QYUvBBWdZNYgVKnYmzX9kXfuzf21O1yLUoh9MdxM73E=",
-          "url": "https://github.com/storytold/soundcraft/releases/download/v0.8.0/soundcraft-cli-0.8.0-macos-universal.zip"
+          "hash": "sha256-G4LH7BdnffM87y338iYyF5a23vbBDZ74/9lTrfnt5b8=",
+          "url": "https://github.com/storytold/soundcraft/releases/download/v0.10.0/soundcraft-cli-0.10.0-macos-universal.zip"
         },
-        "hash": "sha256-QiHDE9JavBqspR0UlaGXNbXjwkCmggxWZ3nG4LTDUyA=",
-        "url": "https://github.com/storytold/soundcraft/releases/download/v0.8.0/soundcraft-0.8.0-macos-universal.dmg"
+        "hash": "sha256-U7Q012KwpNU541Qo60g4sD/RI+M7+5Pdbd/fsnSJ5Pg=",
+        "url": "https://github.com/storytold/soundcraft/releases/download/v0.10.0/soundcraft-0.10.0-macos-universal.dmg"
       },
       "aarch64-linux": {
-        "hash": "sha256-YR+EdO8EA9cd/UEVHXoDYxZsPrlwmZ+ZP/7QxYKnNPg=",
-        "url": "https://github.com/storytold/soundcraft/releases/download/v0.8.0/soundcraft-0.8.0-linux-aarch64.tar.gz"
+        "hash": "sha256-/F+8q7bMv6nhPWRZEzKvaTkkKinMYtvFUdAgVKpxL4g=",
+        "url": "https://github.com/storytold/soundcraft/releases/download/v0.10.0/soundcraft-0.10.0-linux-aarch64.tar.gz"
       },
       "x86_64-linux": {
-        "hash": "sha256-V6K4d21RiAzuaRGFaKOWwJ+sppSdy/UPGYedcdWW9cw=",
-        "url": "https://github.com/storytold/soundcraft/releases/download/v0.8.0/soundcraft-0.8.0-linux-x86_64.tar.gz"
+        "hash": "sha256-RkGNVv782s0obmppb7Uj9X9UXV8UHEb8crpzc4trbHA=",
+        "url": "https://github.com/storytold/soundcraft/releases/download/v0.10.0/soundcraft-0.10.0-linux-x86_64.tar.gz"
       }
     },
-    "tag": "v0.8.0",
+    "tag": "v0.10.0",
     "title": "SoundCraft",
-    "version": "0.8.0"
+    "version": "0.10.0"
   },
   "vectorcraft": {
     "description": "Illustrator-style vector illustration",
