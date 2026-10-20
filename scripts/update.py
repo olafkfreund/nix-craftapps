@@ -20,6 +20,7 @@ APPS = {
     "deckcraft": ("DeckCraft", "PowerPoint-style presentations and slide shows"),
     "designcraft": ("DesignCraft", "InDesign-style page layout and publishing"),
     "effectcraft": ("EffectCraft", "After Effects-style motion graphics and VFX"),
+    "figcraft": ("FigCraft", "Figma-style interface design and prototyping"),
     "filmcraft": ("FilmCraft", "Premiere-style video editor"),
     "gridcraft": ("GridCraft", "Excel-style spreadsheet"),
     "lightcraft": ("LightCraft", "Lightroom-style photo library and raw processor"),

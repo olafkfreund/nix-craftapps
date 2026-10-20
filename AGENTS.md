@@ -5,12 +5,12 @@ For using the flake, read [README.md](README.md).
 
 ## What this repository is
 
-A Nix flake that packages the twelve storytold "Craft" apps from their
+A Nix flake that packages the thirteen storytold "Craft" apps from their
 **prebuilt** Linux release tarballs. It does not build from source. The
 outputs are:
 
 - one package per app;
-- `default`, which is all twelve apps;
+- `default`, which is all thirteen apps;
 - an overlay;
 - a NixOS module and a Home Manager module, both under `programs.craftapps`;
 - checks.
@@ -33,7 +33,7 @@ scripts/update.py         refreshes apps.json from GitHub releases (stdlib only)
 ## Commands
 
 ```sh
-nix flake check -L                  # builds all 12, runs the cli, mcp, module + hm-module checks
+nix flake check -L                  # builds all 13, runs the cli, mcp, module + hm-module checks
 nix build .#photocraft              # one app
 nix fmt                             # nixfmt
 python3 scripts/update.py --self-test   # offline tests of the updater
@@ -68,7 +68,7 @@ you changed a workflow, run `actionlint` too.
 
 ## Adding a new Craft app
 
-When storytold publishes a 13th app:
+When storytold publishes a 14th app:
 
 1. Add it to the `APPS` table in `scripts/update.py` with a title and a
    one-line description.

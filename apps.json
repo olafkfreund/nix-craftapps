@@ -71,6 +71,24 @@
     "title": "EffectCraft",
     "version": "0.11.1"
   },
+  "figcraft": {
+    "description": "Figma-style interface design and prototyping",
+    "desktopId": "ai.storyteller.figcraft",
+    "repo": "storytold/figcraft",
+    "sources": {
+      "aarch64-linux": {
+        "hash": "sha256-pwg4uS/TAjUTuH+GZ+QvitysY0TwHGjTOU1osdeRYDk=",
+        "url": "https://github.com/storytold/figcraft/releases/download/v0.7.0/figcraft-0.7.0-linux-aarch64.tar.gz"
+      },
+      "x86_64-linux": {
+        "hash": "sha256-8932GU0rvVI80xld+Q+izVeC05Rvx4M7f2v4j9o3kI0=",
+        "url": "https://github.com/storytold/figcraft/releases/download/v0.7.0/figcraft-0.7.0-linux-x86_64.tar.gz"
+      }
+    },
+    "tag": "v0.7.0",
+    "title": "FigCraft",
+    "version": "0.7.0"
+  },
   "filmcraft": {
     "description": "Premiere-style video editor",
     "desktopId": "ai.storyteller.filmcraft",

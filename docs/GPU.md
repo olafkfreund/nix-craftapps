@@ -53,7 +53,7 @@ that step touches and how to undo it.
 
 ## How the apps use the GPU
 
-All twelve apps draw their windows with [wgpu](https://wgpu.rs), a
+All thirteen apps draw their windows with [wgpu](https://wgpu.rs), a
 cross-platform GPU library, through egui/eframe. On Linux, wgpu has two
 backends:
 

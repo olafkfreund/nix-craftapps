@@ -1,5 +1,5 @@
 {
-  description = "The ArtCraft Crafting Apps (storytold) for Nix: 12 pure-Rust creative apps";
+  description = "The ArtCraft Crafting Apps (storytold) for Nix: 13 pure-Rust creative apps";
 
   inputs.nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
 
