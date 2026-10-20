@@ -1,5 +1,5 @@
 ---
-status: approved
+status: draft
 issue: 15
 spec: spec/2026-10-20-15-intent-routing.md
 ---
@@ -145,8 +145,72 @@ Approved decisions, carried over from the spec:
    → verify by `grep -n -i 'rout' README.md llms.txt AGENTS.md`.
    Traps: plain, short README style.
 
-5. Routing smoke test with real Claude Code. No repo edits; record the
-   results for the PR.
+4a. New `skills/craftapps/routing.md` (spec 3b), without frontmatter.
+    Base it on the text proven in the experiment
+    (`/tmp/claude-1000/-mnt-code-Source-home-GitHub-nix-craftapps/4e6fbfc5-b1ed-40c6-add3-f8054ec93388/scratchpad/smoke/cm.md`):
+
+    ```markdown
+    # Craft apps
+
+    When asked to create, convert or edit a file, use the installed Craft app's MCP server (load its tools with ToolSearch) instead of python libraries, pandoc, LibreOffice or ImageMagick, unless the user names a tool:
+
+    - slides/.pptx → deckcraft; Word/.docx/.odt/.rtf → wordcraft; spreadsheet/.xlsx/.csv → gridcraft
+    - edit/fill/sign/merge an existing PDF → pdfcraft; image edits, background removal, .psd → photocraft
+    - raw photos/photo library → lightcraft; logo/icon/SVG/.ai/.eps → vectorcraft; UI/prototype/.fig → figcraft
+    - print layout/brochure/.idml/EPUB → designcraft; CAD/.dwg/.dxf → cadcraft
+    - video edit → filmcraft; motion graphics/Lottie → effectcraft; audio mix → soundcraft
+
+    For formats, tie-breakers and driving an open app, load the craftapps skill.
+    ```
+
+    → verify by `wc -c skills/craftapps/routing.md` (≤ 1000).
+    Traps: keep it this short. It is loaded into every session.
+
+4b. Install the rule and test it:
+    - `modules/skill.nix`: inside the existing `config = lib.mkIf …`, also
+      set `programs.claude-code.rules.craftapps = ../skills/craftapps/routing.md;`,
+      but only when `options.programs ? claude-code &&
+      options.programs.claude-code ? rules`. Merge it with the existing
+      `programs = genAttrs …` through `lib.mkMerge` or `//` on the
+      `claude-code` entry. Don't overwrite its `skills`.
+    - `flake.nix` `hm-module` check: give `skillStub` a
+      `programs.claude-code.rules` option (`attrsOf (either lines path)`,
+      default `{ }`). Assert
+      `withSkill.config.programs.claude-code.rules ? craftapps`,
+      `shared.config.programs.claude-code.rules ? craftapps` and
+      `skillOff.config.programs.claude-code.rules == { }`.
+    - Docs:
+      - README "Agent skill": one sentence saying that for Claude Code it
+        also installs `~/.claude/rules/craftapps.md`, a short routing
+        rule loaded in every session, about 200 tokens;
+      - AGENTS.md layout: add a row for `skills/craftapps/routing.md`;
+      - AGENTS.md step 6: also add the app to `routing.md`;
+      - llms.txt: append that line too.
+    → verify by
+    `nix build .#checks.x86_64-linux.hm-module .#checks.x86_64-linux.skill -L`.
+    Mutation test: drop the rules line, and `hm-module` must fail;
+    restore it. Real Home Manager eval as in #10's step 7 (pinned HM
+    `/nix/store/zlzw0yfldi2ggxsnwhc74mbm25s19is8-source`): `home.file`
+    has a key containing `.claude/rules/craftapps.md`, and
+    `.claude/skills/craftapps` is still present.
+    Traps: no `options` access outside `config`. Codex, opencode, crush,
+    copilot-cli and antigravity-cli get no rule, because their options
+    own whole files.
+
+5. Routing smoke test with real Claude Code (revised for spec 3b; the
+   original run failed, as recorded under Deviations). No repo edits;
+   record the results for the PR.
+   - Revised setup: in each fresh scratch dir, install the repo's
+     `routing.md` as `.claude/rules/craftapps.md`, and the new
+     SKILL.md as `.claude/skills/craftapps-next/SKILL.md`.
+   - Run all four prompts sequentially, each in its own dir. Allow
+     `Bash(magick:*)` and `Bash(convert:*)` as well, so the generic
+     tools are real competitors.
+   - Pass: the first non-ToolSearch tool call is the matching app's
+     `mcp__<app>__` tool, with no python, pandoc or ImageMagick probing.
+     Files are created for 1–3. For prompt 4, reaching
+     `mcp__photocraft__` passes, because opening files needs #16.
+   - Original setup, kept for the record:
    - In a fresh scratch dir `S`, create
      `S/.claude/skills/craftapps-next/SKILL.md` as a copy of the new file
      with `name: craftapps-next`.
@@ -200,3 +264,22 @@ has the new description.
 
 Revert the commit. The skill returns to its earlier description and body
 on the next rebuild.
+
+## Deviations
+
+- Step 1: the description measures 908 characters, not the 918 stated above.
+- Step 3: the check sets `LOCALE_ARCHIVE` (from `pkgs.glibcLocales`) and
+  `LC_ALL=C.UTF-8`, so `→` counts as one character.
+- Step 3: the `sed` matches only the double-quoted form. An unquoted
+  description fails on purpose, because a plain scalar breaks on `: `.
+- Step 3: the check echoes the measured length.
+- Step 5, first run (skill only): no `claude -p` run loaded the skill,
+  with the planned description or a sharpened one. The agent probed
+  python-pptx, python-docx, openpyxl or pandoc first, and used
+  ImageMagick for the background removal. A project `CLAUDE.md` with the
+  routing rule fixed both. The spec gained section 3b (approved
+  2026-10-20), and steps 4a and 4b were added here. Evidence is in
+  `…/4e6fbfc5-…/scratchpad/smoke/` (`run-*.jsonl`, `retry-*.jsonl`,
+  `cmd-*.jsonl`).
+- Step 5: PhotoCraft's server cannot open files without file-access
+  roots. That is tracked separately as #16.

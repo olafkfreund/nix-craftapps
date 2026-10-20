@@ -1,5 +1,5 @@
 ---
-status: approved
+status: draft
 issue: 15
 intent: intent/2026-10-20-15-intent-routing.md
 ---
@@ -91,6 +91,45 @@ frontmatter of `skills/craftapps/SKILL.md` and fails if:
 That stops a later edit from making the skill unloadable for some
 agents.
 
+### 3b. Always-on routing rule for Claude Code (added 2026-10-20)
+
+Added after the plan's step 5 smoke test; you approved the change on
+2026-10-20. With only the skill, no `claude -p` run loaded it, whether
+with the planned description or a sharpened one. The agent probed
+python-pptx, python-docx, openpyxl or pandoc first, and removed a
+background with ImageMagick instead of PhotoCraft. With a 12-line routing
+rule in an always-loaded `CLAUDE.md` and no skill, the letter went
+straight to WordCraft, and the background removal went to PhotoCraft
+even though ImageMagick was allowed. The agent then loaded the
+`craftapps` skill for the details. That rule costs 798 bytes, about 200
+tokens, in every session.
+
+So routing works in two layers:
+
+- **The rule decides the app.** A new file,
+  `skills/craftapps/routing.md`, holds the short intent → app list,
+  "use the Craft app's MCP server (load its tools with ToolSearch)
+  instead of python libraries, pandoc, LibreOffice or ImageMagick,
+  unless the user names a tool", and "for formats, tie-breakers and
+  bridge mode, load the craftapps skill". No frontmatter, so it loads
+  in every session.
+- **The skill supplies the details:** the description, the routing
+  table, the tie-breakers and bridge mode, as designed above.
+
+Install: `modules/skill.nix` also sets
+`programs.claude-code.rules.craftapps = ../skills/craftapps/routing.md`
+when `options.programs.claude-code ? rules`, behind the same
+`skill.enable`. Home Manager writes `~/.claude/rules/craftapps.md`, one
+file per rule, so it never touches a user's own `~/.claude/CLAUDE.md`
+(`claude-code/options.nix:316-343`, `lib.nix:38-42`).
+
+Claude Code only. The other five agents keep the skill alone:
+- Codex's `context` option owns the whole `~/.codex/AGENTS.md`;
+- opencode's `rules` was renamed to `context`, which also owns its file;
+- crush, copilot-cli and antigravity-cli have no rules-fragment option.
+
+Writing a whole file a user may already manage would clobber it.
+
 ### 4. Docs
 
 - README "Agent skill": one sentence saying the skill routes requests by
@@ -132,7 +171,17 @@ agents.
   characters, or one containing `<`) fails it.
 - `nix flake check`, the updater's `--self-test` and `nix fmt` are clean.
   CI passes on both architectures.
-- **Routing smoke test with real Claude Code.** Before merge, from a
+- `hm-module` check: with `skill.enable`, `programs.claude-code.rules`
+  has `craftapps`; with it off, it is empty (stub option shaped like
+  Home Manager's).
+- Real Home Manager eval: `home.file` has `.claude/rules/craftapps.md`.
+- **Routing smoke test (revised):** the pass condition is that the agent
+  calls the matching app's MCP tools without first probing generic
+  tools. The rule is installed as the scratch project's
+  `.claude/rules/craftapps.md`, alongside the skill. PhotoCraft may still
+  fail to open files until #16 (file-access roots) is fixed: reaching
+  `mcp__photocraft__` counts as routing correctly.
+- **Original smoke test (superseded; failed, which is why 3b exists):** Before merge, from a
   scratch directory, install the new file as a project skill named
   `craftapps-next` (so it doesn't clash with the installed `craftapps`),
   then run `claude -p --output-format stream-json` with four prompts:
