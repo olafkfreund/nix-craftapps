@@ -26,7 +26,10 @@ in
       }))
       # Only Claude Code has a per-name rules option; the others own whole files.
       (lib.optionalAttrs (options.programs ? claude-code && options.programs.claude-code ? rules) {
-        claude-code.rules.craftapps = ../skills/craftapps/routing.md;
+        # Home Manager forbids rules together with rulesDir.
+        claude-code.rules = lib.mkIf ((config.programs.claude-code.rulesDir or null) == null) {
+          craftapps = ../skills/craftapps/routing.md;
+        };
       })
     ];
   };

@@ -382,9 +382,9 @@ CLI and Antigravity CLI. It tells agents which app to use for each request
 they use the installed apps instead of writing files by hand. It also covers
 how to use the apps headless, how to connect to a running app, and the file
 roots. For Claude Code it also installs `~/.claude/rules/craftapps.md`, a
-short routing rule loaded in every session (about 200 tokens). It is
-independent of
-`mcp.enable`. With the NixOS module, it applies to every Home Manager user.
+short routing rule loaded in every session (about 200 tokens), unless you set
+`programs.claude-code.rulesDir`. It is independent of `mcp.enable`. With the
+NixOS module, it applies to every Home Manager user.
 
 If your own `programs.<agent>.skills` is a path (a whole skills directory),
 evaluation fails with a type error on `programs.<agent>.skills` when this is

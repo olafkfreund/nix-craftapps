@@ -283,3 +283,12 @@ on the next rebuild.
   `cmd-*.jsonl`).
 - Step 5: PhotoCraft's server cannot open files without file-access
   roots. That is tracked separately as #16.
+- Review fixes:
+  - The rule is skipped when the user sets
+    `programs.claude-code.rulesDir`, because Home Manager forbids
+    `rules` together with `rulesDir`. A `withRulesDir` hm-module case
+    asserts it, and a mutation test showed the case fails without the
+    guard.
+  - The `skill` check also rejects a `"` in the description.
+  - The `skill` check uses the built-in C.UTF-8, with no
+    `glibcLocales`; it still measures 908.
