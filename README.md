@@ -328,9 +328,8 @@ programs.claude-code.enableMcpIntegration = true;
 Codex, Copilot CLI and other clients have the same `enableMcpIntegration`
 switch; Cursor has it per profile (`programs.cursor.profiles.<name>`).
 This needs a Home Manager new enough to have `programs.mcp`; on older
-versions the module skips it. For other agents, set
-`programs.<agent>.enableMcpIntegration = true;`. To check that Claude Code
-sees the servers, run `claude mcp list`.
+versions the module skips it. To check that Claude Code sees the servers,
+run `claude mcp list`.
 
 **NixOS without Home Manager.** The module writes `/etc/craftapps/mcp.json`.
 Add its servers to Claude Code per user, and run this again after each
@@ -381,8 +380,8 @@ connect to a running app, and the file roots. It is independent of
 `mcp.enable`. With the NixOS module, it applies to every Home Manager user.
 
 If your own `programs.<agent>.skills` is a path (a whole skills directory),
-Home Manager reports conflicting definitions when this is on. Make it an
-attribute set (`skills.mine = ./mine;`) instead.
+evaluation fails with a type error on `programs.<agent>.skills` when this is
+on. Make it an attribute set (`skills.mine = ./mine;`) instead.
 
 ## Fonts
 

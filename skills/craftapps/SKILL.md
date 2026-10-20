@@ -76,7 +76,7 @@ If a flag is rejected, run `<app>-cli help` and use what it prints.
 
 ## File access roots
 
-Servers can confine file access with `--automation-read-root DIR` and
+Most servers (check `<app>-cli help`) can confine file access with `--automation-read-root DIR` and
 `--automation-write-root DIR` (repeatable on some apps). A root you leave
 out grants no access of that kind. The roots apply to the in-process
 engine only; a bridged app enforces its own, set when it was started.
