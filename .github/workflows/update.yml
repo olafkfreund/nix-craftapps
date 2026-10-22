@@ -31,7 +31,12 @@ jobs:
         with:
           branch: update/craft-apps
           title: "chore: update Craft apps"
-          commit-message: "chore: update Craft apps"
+          # [skip ci] stops the pull_request run GitHub would hold for approval;
+          # the dispatch below still runs CI and the automerge.
+          commit-message: |
+            chore: update Craft apps
+
+            [skip ci]
           body: |
             ${{ steps.update.outputs.summary }}
           delete-branch: true
