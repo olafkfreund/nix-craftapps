@@ -240,24 +240,24 @@
     "sources": {
       "aarch64-darwin": {
         "cli": {
-          "hash": "sha256-LtNjLKd2msQAKUPTEdzuEpY9ZVMX4b/zblDZQhxu0Lc=",
-          "url": "https://github.com/storytold/photocraft/releases/download/v0.14.0/photocraft-cli-0.14.0-macos-universal.zip"
+          "hash": "sha256-/obrT8UskmsbMzAXBcSW3xdnWA8qxdJBmS3hSm9DdRE=",
+          "url": "https://github.com/storytold/photocraft/releases/download/v0.15.1/photocraft-cli-0.15.1-macos-universal.zip"
         },
-        "hash": "sha256-sbgfHUtDNXjmudK5gA4Y2OX7YOu8OJd5GNNSnRvbFAo=",
-        "url": "https://github.com/storytold/photocraft/releases/download/v0.14.0/photocraft-0.14.0-macos-universal.dmg"
+        "hash": "sha256-ocB7fFLY9g53Lj+yAX//f7r8z4H6MPUdjiw2v602FGE=",
+        "url": "https://github.com/storytold/photocraft/releases/download/v0.15.1/photocraft-0.15.1-macos-universal.dmg"
       },
       "aarch64-linux": {
-        "hash": "sha256-Q+e0vdabxa10fR9hYa72+6SDnngHqG6wzR0AiJc5VhU=",
-        "url": "https://github.com/storytold/photocraft/releases/download/v0.14.0/photocraft-0.14.0-linux-aarch64.tar.gz"
+        "hash": "sha256-/y6hlF3ztBOxfGTsfAExwJOwnHF5lKR7TEbA2r8cgi8=",
+        "url": "https://github.com/storytold/photocraft/releases/download/v0.15.1/photocraft-0.15.1-linux-aarch64.tar.gz"
       },
       "x86_64-linux": {
-        "hash": "sha256-PR9gp2wlqvv1PyPP7dNoe9metvUwmSDhQNWIvTISyTY=",
-        "url": "https://github.com/storytold/photocraft/releases/download/v0.14.0/photocraft-0.14.0-linux-x86_64.tar.gz"
+        "hash": "sha256-tiK+QDVVEwVvgVKv6JXQoFwbw8NEoCf3cqmhL6PRwiM=",
+        "url": "https://github.com/storytold/photocraft/releases/download/v0.15.1/photocraft-0.15.1-linux-x86_64.tar.gz"
       }
     },
-    "tag": "v0.14.0",
+    "tag": "v0.15.1",
     "title": "PhotoCraft",
-    "version": "0.14.0"
+    "version": "0.15.1"
   },
   "soundcraft": {
     "description": "Pro Tools-style audio workstation",
