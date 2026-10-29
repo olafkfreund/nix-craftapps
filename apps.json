@@ -6,24 +6,24 @@
     "sources": {
       "aarch64-darwin": {
         "cli": {
-          "hash": "sha256-olgz0MMSTT3q4qEHQRbr6Cv/4IBPqt6AI2ftCWmOlHY=",
-          "url": "https://github.com/storytold/cadcraft/releases/download/v0.13.0/cadcraft-cli-0.13.0-macos-universal.zip"
+          "hash": "sha256-1vhof4lm/Cjhf+24XKZyu5bsugxUl3gd0ue1MZdixKQ=",
+          "url": "https://github.com/storytold/cadcraft/releases/download/v0.14.0/cadcraft-cli-0.14.0-macos-universal.zip"
         },
-        "hash": "sha256-U58nwfov55/i8cVi/p6wexeQ/9LNe/HkOOnHGTg66yk=",
-        "url": "https://github.com/storytold/cadcraft/releases/download/v0.13.0/cadcraft-0.13.0-macos-universal.dmg"
+        "hash": "sha256-BarhzDN0XAzUFx504Flx1iWymIS7SeAHAxpCrhrcAtI=",
+        "url": "https://github.com/storytold/cadcraft/releases/download/v0.14.0/cadcraft-0.14.0-macos-universal.dmg"
       },
       "aarch64-linux": {
-        "hash": "sha256-8ccp4uEae7uFekKJ4ivbh0zczukLQVP8IZSxasx6NOQ=",
-        "url": "https://github.com/storytold/cadcraft/releases/download/v0.13.0/cadcraft-0.13.0-linux-aarch64.tar.gz"
+        "hash": "sha256-ew0YEQXabxTxPvEJj6u3uTF8Hpei6MCpB1xMdDxC1jo=",
+        "url": "https://github.com/storytold/cadcraft/releases/download/v0.14.0/cadcraft-0.14.0-linux-aarch64.tar.gz"
       },
       "x86_64-linux": {
-        "hash": "sha256-04dVvrYYiXVr69k430kebuDeeMLzX9NRBaR5kJ/RypI=",
-        "url": "https://github.com/storytold/cadcraft/releases/download/v0.13.0/cadcraft-0.13.0-linux-x86_64.tar.gz"
+        "hash": "sha256-lQZ8hJ+CMFZIJJKZu4bmRbcwJ1qoxfGZZdgZkPg66ps=",
+        "url": "https://github.com/storytold/cadcraft/releases/download/v0.14.0/cadcraft-0.14.0-linux-x86_64.tar.gz"
       }
     },
-    "tag": "v0.13.0",
+    "tag": "v0.14.0",
     "title": "CADCraft",
-    "version": "0.13.0"
+    "version": "0.14.0"
   },
   "deckcraft": {
     "description": "PowerPoint-style presentations and slide shows",
@@ -32,24 +32,24 @@
     "sources": {
       "aarch64-darwin": {
         "cli": {
-          "hash": "sha256-Au+eoGAEmbNgNqSkQm9pA+hqJHSHBccujIrXPaA6GrY=",
-          "url": "https://github.com/storytold/deckcraft/releases/download/v0.11.1/deckcraft-cli-0.11.1-macos-universal.zip"
+          "hash": "sha256-39N0pa9xOTRL8G+7Ur628PJV5UJ2riC11FfOT5WKgyI=",
+          "url": "https://github.com/storytold/deckcraft/releases/download/v0.12.0/deckcraft-cli-0.12.0-macos-universal.zip"
         },
-        "hash": "sha256-wLTonABLMRh4Mq/OMS8nnxX1rbfbYYCNt0YI2CJybx0=",
-        "url": "https://github.com/storytold/deckcraft/releases/download/v0.11.1/deckcraft-0.11.1-macos-universal.dmg"
+        "hash": "sha256-/rflRUPBNrNJR5dGtgd5zFvz5diz0Vg4FW7RYAXSU9U=",
+        "url": "https://github.com/storytold/deckcraft/releases/download/v0.12.0/deckcraft-0.12.0-macos-universal.dmg"
       },
       "aarch64-linux": {
-        "hash": "sha256-FsagVYesqXipp1Vp8ZymDOr5QhX6QiGajSeB41bIuGU=",
-        "url": "https://github.com/storytold/deckcraft/releases/download/v0.11.1/deckcraft-0.11.1-linux-aarch64.tar.gz"
+        "hash": "sha256-IxLxwOC/Ex+qUl1x0mW6B3NCJ/0tF0r76gDpW8+T01M=",
+        "url": "https://github.com/storytold/deckcraft/releases/download/v0.12.0/deckcraft-0.12.0-linux-aarch64.tar.gz"
       },
       "x86_64-linux": {
-        "hash": "sha256-e/V6EKT892c+y2abZODlRUdXgO8+Tua/YDrrAPVE5pw=",
-        "url": "https://github.com/storytold/deckcraft/releases/download/v0.11.1/deckcraft-0.11.1-linux-x86_64.tar.gz"
+        "hash": "sha256-SkENPKpCPoc9Dcq1HJjgZYj1W9/PA+nB6RQJqGwI3j4=",
+        "url": "https://github.com/storytold/deckcraft/releases/download/v0.12.0/deckcraft-0.12.0-linux-x86_64.tar.gz"
       }
     },
-    "tag": "v0.11.1",
+    "tag": "v0.12.0",
     "title": "DeckCraft",
-    "version": "0.11.1"
+    "version": "0.12.0"
   },
   "designcraft": {
     "description": "InDesign-style page layout and publishing",
@@ -58,24 +58,24 @@
     "sources": {
       "aarch64-darwin": {
         "cli": {
-          "hash": "sha256-ukncFpntmPJ++OkzaiSgEfCG89GkbG8GnCeRv3lt6WA=",
-          "url": "https://github.com/storytold/designcraft/releases/download/v0.13.0/designcraft-cli-0.13.0-macos-universal.zip"
+          "hash": "sha256-bjWp4mYTSbMvHj92vA+Y3rItL+cdgq4VEFRR5PULx4s=",
+          "url": "https://github.com/storytold/designcraft/releases/download/v0.14.0/designcraft-cli-0.14.0-macos-universal.zip"
         },
-        "hash": "sha256-FNAguQ35F43ikNYk4BK9zrNTsVlf9beZHUiWuPQuoDs=",
-        "url": "https://github.com/storytold/designcraft/releases/download/v0.13.0/designcraft-0.13.0-macos-universal.dmg"
+        "hash": "sha256-k5L7Vj3gbaLspIeRpA+BL3IRA2lzYgFWWbP/dXfnsIE=",
+        "url": "https://github.com/storytold/designcraft/releases/download/v0.14.0/designcraft-0.14.0-macos-universal.dmg"
       },
       "aarch64-linux": {
-        "hash": "sha256-bXUhP5PA2zXt+I2EuKsTgr5BP4espb286I00hed02PU=",
-        "url": "https://github.com/storytold/designcraft/releases/download/v0.13.0/designcraft-0.13.0-linux-aarch64.tar.gz"
+        "hash": "sha256-gb/CZdXjU8pf5r49wY2wODUmw828cyj0yFpE8sPQ0EY=",
+        "url": "https://github.com/storytold/designcraft/releases/download/v0.14.0/designcraft-0.14.0-linux-aarch64.tar.gz"
       },
       "x86_64-linux": {
-        "hash": "sha256-UxTUa8Ugz1SDWi0SkzUb4f7RFiKOBVOTAZcp8E4PmcI=",
-        "url": "https://github.com/storytold/designcraft/releases/download/v0.13.0/designcraft-0.13.0-linux-x86_64.tar.gz"
+        "hash": "sha256-Jch751nTWoHKROH2Je1DBLFuWqtqA6EFG8pJioG/xUc=",
+        "url": "https://github.com/storytold/designcraft/releases/download/v0.14.0/designcraft-0.14.0-linux-x86_64.tar.gz"
       }
     },
-    "tag": "v0.13.0",
+    "tag": "v0.14.0",
     "title": "DesignCraft",
-    "version": "0.13.0"
+    "version": "0.14.0"
   },
   "effectcraft": {
     "description": "After Effects-style motion graphics and VFX",
@@ -84,24 +84,24 @@
     "sources": {
       "aarch64-darwin": {
         "cli": {
-          "hash": "sha256-4dFjoByMuk5bRT1Ss+vxeuRDp9Noz+ZppQJRFgi810o=",
-          "url": "https://github.com/storytold/effectcraft/releases/download/v0.17.0/effectcraft-cli-0.17.0-macos-universal.zip"
+          "hash": "sha256-5Hk34hwGDB90NWaVJuROu0WO88di6QTXAbczISvYWE0=",
+          "url": "https://github.com/storytold/effectcraft/releases/download/v0.18.0/effectcraft-cli-0.18.0-macos-universal.zip"
         },
-        "hash": "sha256-JBri5yzvx65w9YMBeo5rd2NwKiRoPb1khJ5WhpP5S60=",
-        "url": "https://github.com/storytold/effectcraft/releases/download/v0.17.0/effectcraft-0.17.0-macos-universal.dmg"
+        "hash": "sha256-eaDCSmRAGOs5tyLt21oVo0KAyGhWFx9qZBWjVBsYIAQ=",
+        "url": "https://github.com/storytold/effectcraft/releases/download/v0.18.0/effectcraft-0.18.0-macos-universal.dmg"
       },
       "aarch64-linux": {
-        "hash": "sha256-aWPtPxpL87oHjG1X6Yk6yb1VcpcCmurq44D29chVUCM=",
-        "url": "https://github.com/storytold/effectcraft/releases/download/v0.17.0/effectcraft-0.17.0-linux-aarch64.tar.gz"
+        "hash": "sha256-Fq/vHPLo/x5IcS9GL3+XMmltgff4GXjAp6wPfAkqpag=",
+        "url": "https://github.com/storytold/effectcraft/releases/download/v0.18.0/effectcraft-0.18.0-linux-aarch64.tar.gz"
       },
       "x86_64-linux": {
-        "hash": "sha256-zXrODXRzS3noUfGFN8FLKVO3/rXaJA9QBeaAVHahUpI=",
-        "url": "https://github.com/storytold/effectcraft/releases/download/v0.17.0/effectcraft-0.17.0-linux-x86_64.tar.gz"
+        "hash": "sha256-lNHYVpHVS6V/qG4Ehy+8xCbDPRvTZPH8l2sfYHNEiAs=",
+        "url": "https://github.com/storytold/effectcraft/releases/download/v0.18.0/effectcraft-0.18.0-linux-x86_64.tar.gz"
       }
     },
-    "tag": "v0.17.0",
+    "tag": "v0.18.0",
     "title": "EffectCraft",
-    "version": "0.17.0"
+    "version": "0.18.0"
   },
   "figcraft": {
     "description": "Figma-style interface design and prototyping",
@@ -110,24 +110,24 @@
     "sources": {
       "aarch64-darwin": {
         "cli": {
-          "hash": "sha256-E7rVqUZLlWADZZhxXHrjTVrQsK3LLGe6JXmK+G93QCk=",
-          "url": "https://github.com/storytold/figcraft/releases/download/v0.11.2/figcraft-cli-0.11.2-macos-universal.zip"
+          "hash": "sha256-FLJMfh6Molf7TfBLSyYc2n/OdbvOANRYAEaDZibZ48k=",
+          "url": "https://github.com/storytold/figcraft/releases/download/v0.12.1/figcraft-cli-0.12.1-macos-universal.zip"
         },
-        "hash": "sha256-KmJq+pxlrZaj0eqvjvX8pGVLimsADRyKOkwczHxDdrw=",
-        "url": "https://github.com/storytold/figcraft/releases/download/v0.11.2/figcraft-0.11.2-macos-universal.dmg"
+        "hash": "sha256-6EMhL7G0xu1WW8+VTc56xcpgONqkMPWOIy5igEXoQfk=",
+        "url": "https://github.com/storytold/figcraft/releases/download/v0.12.1/figcraft-0.12.1-macos-universal.dmg"
       },
       "aarch64-linux": {
-        "hash": "sha256-sZ33McF0bz3RYxIJtoyIGfYOnNqSeVj1uaXIcvmLEzo=",
-        "url": "https://github.com/storytold/figcraft/releases/download/v0.11.2/figcraft-0.11.2-linux-aarch64.tar.gz"
+        "hash": "sha256-ciaSh6r8/WgRAKMODsgGGaODx1+OG4Rf9zlzdU1dHlk=",
+        "url": "https://github.com/storytold/figcraft/releases/download/v0.12.1/figcraft-0.12.1-linux-aarch64.tar.gz"
       },
       "x86_64-linux": {
-        "hash": "sha256-adIdDTcXc4+dp50EvIbBUum4+RnmOVrpexy1azbN4rk=",
-        "url": "https://github.com/storytold/figcraft/releases/download/v0.11.2/figcraft-0.11.2-linux-x86_64.tar.gz"
+        "hash": "sha256-AKKfTMOCgH2ED10+m1n0yIKTVnia+7lWoJZJGCleSd0=",
+        "url": "https://github.com/storytold/figcraft/releases/download/v0.12.1/figcraft-0.12.1-linux-x86_64.tar.gz"
       }
     },
-    "tag": "v0.11.2",
+    "tag": "v0.12.1",
     "title": "FigCraft",
-    "version": "0.11.2"
+    "version": "0.12.1"
   },
   "filmcraft": {
     "description": "Premiere-style video editor",
@@ -136,24 +136,24 @@
     "sources": {
       "aarch64-darwin": {
         "cli": {
-          "hash": "sha256-132U8u/D7YjQwQGJ2XB8qHzP/tQQCPmV1AuJK4RHmZQ=",
-          "url": "https://github.com/storytold/filmcraft/releases/download/v0.13.0/filmcraft-cli-0.13.0-macos-universal.zip"
+          "hash": "sha256-ydyN/Zxj7bL3k/ByfcmBbkQy6lRfqM1zMdJClE2EMIc=",
+          "url": "https://github.com/storytold/filmcraft/releases/download/v0.14.0/filmcraft-cli-0.14.0-macos-universal.zip"
         },
-        "hash": "sha256-ExPv3jIMJTYcG9AVxH0YzErUDJIV4eq/Ko7F22pzlu0=",
-        "url": "https://github.com/storytold/filmcraft/releases/download/v0.13.0/filmcraft-0.13.0-macos-universal.dmg"
+        "hash": "sha256-n4dWT4P1XZ3qMs7rc6o8t0sVrsBTR90+Fj/Qpqvvayc=",
+        "url": "https://github.com/storytold/filmcraft/releases/download/v0.14.0/filmcraft-0.14.0-macos-universal.dmg"
       },
       "aarch64-linux": {
-        "hash": "sha256-5VBh2n9G3RRlN5rAceuFSZNyL07Oh+8ai3CyZZJ7aJQ=",
-        "url": "https://github.com/storytold/filmcraft/releases/download/v0.13.0/filmcraft-0.13.0-linux-aarch64.tar.gz"
+        "hash": "sha256-uIcnffY0hUlo6bsgtCpb80w1EDBAocrgOmwU3EBuYP4=",
+        "url": "https://github.com/storytold/filmcraft/releases/download/v0.14.0/filmcraft-0.14.0-linux-aarch64.tar.gz"
       },
       "x86_64-linux": {
-        "hash": "sha256-QOnWhfs+0bCiHJwCIR8ahJngmkfFUSRM5+6A8lhNOps=",
-        "url": "https://github.com/storytold/filmcraft/releases/download/v0.13.0/filmcraft-0.13.0-linux-x86_64.tar.gz"
+        "hash": "sha256-0qohPMCKvSHgWrURp4zDjxV8ryImmS8/yKXgSWo/fn0=",
+        "url": "https://github.com/storytold/filmcraft/releases/download/v0.14.0/filmcraft-0.14.0-linux-x86_64.tar.gz"
       }
     },
-    "tag": "v0.13.0",
+    "tag": "v0.14.0",
     "title": "FilmCraft",
-    "version": "0.13.0"
+    "version": "0.14.0"
   },
   "gridcraft": {
     "description": "Excel-style spreadsheet",
@@ -162,24 +162,24 @@
     "sources": {
       "aarch64-darwin": {
         "cli": {
-          "hash": "sha256-I6C3tMK8uS+5uiln0LUGCNmPcxYB72U63mRdAQ8SFeo=",
-          "url": "https://github.com/storytold/gridcraft/releases/download/v0.12.1/gridcraft-cli-0.12.1-macos-universal.zip"
+          "hash": "sha256-PbUpac92If39rr0SP3LVsd40P2PTtS7FpKlk9WBZhqw=",
+          "url": "https://github.com/storytold/gridcraft/releases/download/v0.13.0/gridcraft-cli-0.13.0-macos-universal.zip"
         },
-        "hash": "sha256-7iNPUeLnR9zyeP3phMhiGP3+L/cYjAG2mTlPyu9AM74=",
-        "url": "https://github.com/storytold/gridcraft/releases/download/v0.12.1/gridcraft-0.12.1-macos-universal.dmg"
+        "hash": "sha256-Z7agI7Rl7fhe9aMJ1JprAKCF4+o9yd3cAGCZazhRUWg=",
+        "url": "https://github.com/storytold/gridcraft/releases/download/v0.13.0/gridcraft-0.13.0-macos-universal.dmg"
       },
       "aarch64-linux": {
-        "hash": "sha256-ZUZfkHf6FJC8aDVRXtffvFYrXf5BdJPGwcB4OLFJ/6s=",
-        "url": "https://github.com/storytold/gridcraft/releases/download/v0.12.1/gridcraft-0.12.1-linux-aarch64.tar.gz"
+        "hash": "sha256-7L7w2DPK6mX2h5cU4Dd1NXg0S7w6161x2g9ZRJ/Cqm0=",
+        "url": "https://github.com/storytold/gridcraft/releases/download/v0.13.0/gridcraft-0.13.0-linux-aarch64.tar.gz"
       },
       "x86_64-linux": {
-        "hash": "sha256-HBdQ3W0mN2z4yK8itG3A7T2NXLsRXlVfD8fQz3qa6po=",
-        "url": "https://github.com/storytold/gridcraft/releases/download/v0.12.1/gridcraft-0.12.1-linux-x86_64.tar.gz"
+        "hash": "sha256-IMbFbsH/1rvP/ubN7ljPa1yt0vSgSkNg3XzGTVOtl+U=",
+        "url": "https://github.com/storytold/gridcraft/releases/download/v0.13.0/gridcraft-0.13.0-linux-x86_64.tar.gz"
       }
     },
-    "tag": "v0.12.1",
+    "tag": "v0.13.0",
     "title": "GridCraft",
-    "version": "0.12.1"
+    "version": "0.13.0"
   },
   "lightcraft": {
     "description": "Lightroom-style photo library and raw processor",
@@ -188,24 +188,24 @@
     "sources": {
       "aarch64-darwin": {
         "cli": {
-          "hash": "sha256-K+q4gRRcpNiOcl/bNYss9e8MCB6JP7CiwWoGvqZBIGQ=",
-          "url": "https://github.com/storytold/lightcraft/releases/download/v0.14.0/lightcraft-cli-0.14.0-macos-universal.zip"
+          "hash": "sha256-ZkCoxylv4bO9RDWToX2WxC9UnanfXrZZjFJgRV0X+Fw=",
+          "url": "https://github.com/storytold/lightcraft/releases/download/v0.15.0/lightcraft-cli-0.15.0-macos-universal.zip"
         },
-        "hash": "sha256-zehZHak/e1qnrQkTfMk8Hr87R0j+ieR3uwNiY9fJPnU=",
-        "url": "https://github.com/storytold/lightcraft/releases/download/v0.14.0/lightcraft-0.14.0-macos-universal.dmg"
+        "hash": "sha256-F1weaBh9kc+QAzqTAV+0y0UEVXVbePQeOUqeoJ53zek=",
+        "url": "https://github.com/storytold/lightcraft/releases/download/v0.15.0/lightcraft-0.15.0-macos-universal.dmg"
       },
       "aarch64-linux": {
-        "hash": "sha256-66CzyjcEtwI/xIWJdEPsqvQLN4VAqZIfWcnKdPL4z+A=",
-        "url": "https://github.com/storytold/lightcraft/releases/download/v0.14.0/lightcraft-0.14.0-linux-aarch64.tar.gz"
+        "hash": "sha256-OCFTi/2KI7Kl6CTEdi1Gsjpfjwb24KbG29MprMtJzWI=",
+        "url": "https://github.com/storytold/lightcraft/releases/download/v0.15.0/lightcraft-0.15.0-linux-aarch64.tar.gz"
       },
       "x86_64-linux": {
-        "hash": "sha256-uCM7k3PW6ZsRgMHDn9yxPUnEQfgAkncIMfqxlcTE/aI=",
-        "url": "https://github.com/storytold/lightcraft/releases/download/v0.14.0/lightcraft-0.14.0-linux-x86_64.tar.gz"
+        "hash": "sha256-CxrN78CFurszS5rdKQ3RpptQ6W772tLsFdRL1tZL/T0=",
+        "url": "https://github.com/storytold/lightcraft/releases/download/v0.15.0/lightcraft-0.15.0-linux-x86_64.tar.gz"
       }
     },
-    "tag": "v0.14.0",
+    "tag": "v0.15.0",
     "title": "LightCraft",
-    "version": "0.14.0"
+    "version": "0.15.0"
   },
   "pdfcraft": {
     "description": "Acrobat-style PDF reader, organizer and editor",
@@ -214,24 +214,24 @@
     "sources": {
       "aarch64-darwin": {
         "cli": {
-          "hash": "sha256-HpYNEE/6WPs0bAcclyPhpwFNYOTJO31X1GbHJDI63LI=",
-          "url": "https://github.com/storytold/pdfcraft/releases/download/v0.14.0/pdfcraft-cli-0.14.0-macos-universal.zip"
+          "hash": "sha256-AwTbIPNZfk6a0wRNZ/ecuJva1Jgzxq16YMDQ1qevqlA=",
+          "url": "https://github.com/storytold/pdfcraft/releases/download/v0.15.0/pdfcraft-cli-0.15.0-macos-universal.zip"
         },
-        "hash": "sha256-8L3eo/DXEUcNlfcUsjzM5hw4srvMqCHTl86NuwVkz3Q=",
-        "url": "https://github.com/storytold/pdfcraft/releases/download/v0.14.0/pdfcraft-0.14.0-macos-universal.dmg"
+        "hash": "sha256-wST8LtUSdllD+y6OdkvBTAedxbfXpUOczbNAHfeP1HI=",
+        "url": "https://github.com/storytold/pdfcraft/releases/download/v0.15.0/pdfcraft-0.15.0-macos-universal.dmg"
       },
       "aarch64-linux": {
-        "hash": "sha256-/mcRteIRvAFAXz2teZ8lL04bLMl2t8R/g/56l86+mDg=",
-        "url": "https://github.com/storytold/pdfcraft/releases/download/v0.14.0/pdfcraft-0.14.0-linux-aarch64.tar.gz"
+        "hash": "sha256-s4C8ekwo0F1+qV6yMIXKMixJyhohuLt5OJqOCDrpK50=",
+        "url": "https://github.com/storytold/pdfcraft/releases/download/v0.15.0/pdfcraft-0.15.0-linux-aarch64.tar.gz"
       },
       "x86_64-linux": {
-        "hash": "sha256-qT9RHof2MDbKX1MAsaehijzSKFIF3qsVOUyqbug8bx8=",
-        "url": "https://github.com/storytold/pdfcraft/releases/download/v0.14.0/pdfcraft-0.14.0-linux-x86_64.tar.gz"
+        "hash": "sha256-sWehjGCnsynwWlu/l+Mtxniq0/jVhm2OQ3j/JCc/gxM=",
+        "url": "https://github.com/storytold/pdfcraft/releases/download/v0.15.0/pdfcraft-0.15.0-linux-x86_64.tar.gz"
       }
     },
-    "tag": "v0.14.0",
+    "tag": "v0.15.0",
     "title": "PdfCraft",
-    "version": "0.14.0"
+    "version": "0.15.0"
   },
   "photocraft": {
     "description": "Photoshop-style image editor",
@@ -240,24 +240,24 @@
     "sources": {
       "aarch64-darwin": {
         "cli": {
-          "hash": "sha256-7MbgrueZBTjJnfzM7piQZnd+wWy5DWssnlsTblxgrpI=",
-          "url": "https://github.com/storytold/photocraft/releases/download/v0.16.0/photocraft-cli-0.16.0-macos-universal.zip"
+          "hash": "sha256-bt/5nMGXdQi+qbVWb1UTdOe470KiFQLuCEodlp8NVMA=",
+          "url": "https://github.com/storytold/photocraft/releases/download/v0.17.0/photocraft-cli-0.17.0-macos-universal.zip"
         },
-        "hash": "sha256-SJ4Ap/0Z9+kko6Bewzx7BX6kdmEptO7xMs6C/0LBBhk=",
-        "url": "https://github.com/storytold/photocraft/releases/download/v0.16.0/photocraft-0.16.0-macos-universal.dmg"
+        "hash": "sha256-bgkDFyp0QM5OcQAvVYW6Tv9Yj6P8mbeM2YERgMq9W4A=",
+        "url": "https://github.com/storytold/photocraft/releases/download/v0.17.0/photocraft-0.17.0-macos-universal.dmg"
       },
       "aarch64-linux": {
-        "hash": "sha256-m5mDdqSHamIIQvBFb3lpWxR5UNbxc5MO5NXadRMD4Qs=",
-        "url": "https://github.com/storytold/photocraft/releases/download/v0.16.0/photocraft-0.16.0-linux-aarch64.tar.gz"
+        "hash": "sha256-qUeN7is08nCh+EWn1/TaUBxSnUQ2gO4jwsi1iIZ9Ybg=",
+        "url": "https://github.com/storytold/photocraft/releases/download/v0.17.0/photocraft-0.17.0-linux-aarch64.tar.gz"
       },
       "x86_64-linux": {
-        "hash": "sha256-fBfzYz6/favydiji0mN9kYx8KlsWO4uQNHp4rN32Ngg=",
-        "url": "https://github.com/storytold/photocraft/releases/download/v0.16.0/photocraft-0.16.0-linux-x86_64.tar.gz"
+        "hash": "sha256-Uln5xCjI7jR4w1UA7OmHE1Ycr8BQ5MnrNUpQUPNusrg=",
+        "url": "https://github.com/storytold/photocraft/releases/download/v0.17.0/photocraft-0.17.0-linux-x86_64.tar.gz"
       }
     },
-    "tag": "v0.16.0",
+    "tag": "v0.17.0",
     "title": "PhotoCraft",
-    "version": "0.16.0"
+    "version": "0.17.0"
   },
   "soundcraft": {
     "description": "Pro Tools-style audio workstation",
@@ -266,24 +266,24 @@
     "sources": {
       "aarch64-darwin": {
         "cli": {
-          "hash": "sha256-eXdndw0hujDYsvrr+cqyWai8+k63XwRXYagOInNM39I=",
-          "url": "https://github.com/storytold/soundcraft/releases/download/v0.13.1/soundcraft-cli-0.13.1-macos-universal.zip"
+          "hash": "sha256-EE5WdM90HjV5FmuE/XpoczLw3ohRZfUKBeRsxQJmC3U=",
+          "url": "https://github.com/storytold/soundcraft/releases/download/v0.14.0/soundcraft-cli-0.14.0-macos-universal.zip"
         },
-        "hash": "sha256-XNTEWGL9yd3IwqZOVl0KF+cPL00jruV0Z6SBImgUP0s=",
-        "url": "https://github.com/storytold/soundcraft/releases/download/v0.13.1/soundcraft-0.13.1-macos-universal.dmg"
+        "hash": "sha256-k3fhZGcOy3akYQhorCT3gEQV2CzwAWwn8kzDzFuqQd8=",
+        "url": "https://github.com/storytold/soundcraft/releases/download/v0.14.0/soundcraft-0.14.0-macos-universal.dmg"
       },
       "aarch64-linux": {
-        "hash": "sha256-D2Mgpz/UH9+dv1wGn8kxJLnghxQaVoV361wbPjGyWew=",
-        "url": "https://github.com/storytold/soundcraft/releases/download/v0.13.1/soundcraft-0.13.1-linux-aarch64.tar.gz"
+        "hash": "sha256-kS7xV4M3U8Xsh8ef5270Kn9ox0b9EXiCy8LI1uHrNX0=",
+        "url": "https://github.com/storytold/soundcraft/releases/download/v0.14.0/soundcraft-0.14.0-linux-aarch64.tar.gz"
       },
       "x86_64-linux": {
-        "hash": "sha256-Ce5siEWTT+70u/TFwOLw/8o/yREm/XpqQGGx+DkHRW0=",
-        "url": "https://github.com/storytold/soundcraft/releases/download/v0.13.1/soundcraft-0.13.1-linux-x86_64.tar.gz"
+        "hash": "sha256-L4NQP+2mqiyNS8EsRPVxQixDifxmSpK77QktK/HVAK0=",
+        "url": "https://github.com/storytold/soundcraft/releases/download/v0.14.0/soundcraft-0.14.0-linux-x86_64.tar.gz"
       }
     },
-    "tag": "v0.13.1",
+    "tag": "v0.14.0",
     "title": "SoundCraft",
-    "version": "0.13.1"
+    "version": "0.14.0"
   },
   "vectorcraft": {
     "description": "Illustrator-style vector illustration",
@@ -292,24 +292,24 @@
     "sources": {
       "aarch64-darwin": {
         "cli": {
-          "hash": "sha256-3ubUR8QmFWYuqBphL+3QwiGxSsUdvnLkXz1DX9xRFkE=",
-          "url": "https://github.com/storytold/vectorcraft/releases/download/v0.17.0/vectorcraft-cli-0.17.0-macos-universal.zip"
+          "hash": "sha256-aU0hbMCsj/MtwcMv+jGNqeUinVi8gh43ju9vNzkoZ0Q=",
+          "url": "https://github.com/storytold/vectorcraft/releases/download/v0.18.0/vectorcraft-cli-0.18.0-macos-universal.zip"
         },
-        "hash": "sha256-C9P16kcpPNalUAFGMIm+o8bZjlumV/oAZ5nCvoeHUFo=",
-        "url": "https://github.com/storytold/vectorcraft/releases/download/v0.17.0/vectorcraft-0.17.0-macos-universal.dmg"
+        "hash": "sha256-boc/s56usujsXqgrrTZnB9buTzCAthV6YlxS73RjOHQ=",
+        "url": "https://github.com/storytold/vectorcraft/releases/download/v0.18.0/vectorcraft-0.18.0-macos-universal.dmg"
       },
       "aarch64-linux": {
-        "hash": "sha256-KMvHHO0LQ0my1CCPDy+SLBPsCZYnoyOw6z1eGxNy3KM=",
-        "url": "https://github.com/storytold/vectorcraft/releases/download/v0.17.0/vectorcraft-0.17.0-linux-aarch64.tar.gz"
+        "hash": "sha256-GRNYuUaJckn0pR3YFxBg6yhn7aB/fS6vG2PFwJnA6H4=",
+        "url": "https://github.com/storytold/vectorcraft/releases/download/v0.18.0/vectorcraft-0.18.0-linux-aarch64.tar.gz"
       },
       "x86_64-linux": {
-        "hash": "sha256-ZsKJ0L01S3HkzXhxk+oEgeOhzSOfKhgGgRDqNoUvwCY=",
-        "url": "https://github.com/storytold/vectorcraft/releases/download/v0.17.0/vectorcraft-0.17.0-linux-x86_64.tar.gz"
+        "hash": "sha256-dpSLUO943Ugqbs4G8QtwR5N7vAwF9c9rxD2IsH902CY=",
+        "url": "https://github.com/storytold/vectorcraft/releases/download/v0.18.0/vectorcraft-0.18.0-linux-x86_64.tar.gz"
       }
     },
-    "tag": "v0.17.0",
+    "tag": "v0.18.0",
     "title": "VectorCraft",
-    "version": "0.17.0"
+    "version": "0.18.0"
   },
   "wordcraft": {
     "description": "Word-style word processor",
@@ -318,23 +318,23 @@
     "sources": {
       "aarch64-darwin": {
         "cli": {
-          "hash": "sha256-3GgVpXoG/FpeSqd38HSk2NgBDsT/gT0AtuLBNVmqe88=",
-          "url": "https://github.com/storytold/wordcraft/releases/download/v0.11.0/wordcraft-cli-0.11.0-macos-universal.zip"
+          "hash": "sha256-3AMFkP3Zy1lxw4vHnK3s8w9o9tRrZ6RWqPU6RpkLbeQ=",
+          "url": "https://github.com/storytold/wordcraft/releases/download/v0.12.0/wordcraft-cli-0.12.0-macos-universal.zip"
         },
-        "hash": "sha256-DiAwsnFXpCvhUaKLrgOhFYnAhATRZtVdbQvd7WWw0is=",
-        "url": "https://github.com/storytold/wordcraft/releases/download/v0.11.0/wordcraft-0.11.0-macos-universal.dmg"
+        "hash": "sha256-JETrnKJ1X0ZVxV6X2d5jh28zihWIqzXpEqx284zqdwk=",
+        "url": "https://github.com/storytold/wordcraft/releases/download/v0.12.0/wordcraft-0.12.0-macos-universal.dmg"
       },
       "aarch64-linux": {
-        "hash": "sha256-o3NJWSjoG+UYSoqU5V2x7RSjrR5htKE/Rz0gJV85H8Y=",
-        "url": "https://github.com/storytold/wordcraft/releases/download/v0.11.0/wordcraft-0.11.0-linux-aarch64.tar.gz"
+        "hash": "sha256-j8wmRKzve0PD5GYm5H6S5VQqQyiOjgvr9Ln3nCKmbQs=",
+        "url": "https://github.com/storytold/wordcraft/releases/download/v0.12.0/wordcraft-0.12.0-linux-aarch64.tar.gz"
       },
       "x86_64-linux": {
-        "hash": "sha256-A0wke/basXKi7fsHZ96QZRJbhXgmxpFffvObn0OVHVo=",
-        "url": "https://github.com/storytold/wordcraft/releases/download/v0.11.0/wordcraft-0.11.0-linux-x86_64.tar.gz"
+        "hash": "sha256-zZq9DuehG5ha8cFXFlMzLJYHfl3MSLXhh7VcgvR1oz4=",
+        "url": "https://github.com/storytold/wordcraft/releases/download/v0.12.0/wordcraft-0.12.0-linux-x86_64.tar.gz"
       }
     },
-    "tag": "v0.11.0",
+    "tag": "v0.12.0",
     "title": "WordCraft",
-    "version": "0.11.0"
+    "version": "0.12.0"
   }
 }
