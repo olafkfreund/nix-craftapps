@@ -85,7 +85,9 @@ let
       runHook preInstall
       mkdir -p $out/Applications $out/bin $out/share/doc/${name}
       cp -R *.app $out/Applications/
-      makeWrapper $out/Applications/*.app/Contents/MacOS/* $out/bin/${name}
+      # Contents/MacOS can also hold the CLI (PhotoCraft 0.18.0 and later); the
+      # app's own executable is named after its title (CFBundleExecutable).
+      makeWrapper $out/Applications/${info.title}.app/Contents/MacOS/${info.title} $out/bin/${name}
       install -m755 ${name}-cli-*/${name}-cli $out/bin/
       find ${name}-cli-* -maxdepth 1 -type f ! -name ${name}-cli -exec cp -t $out/share/doc/${name} {} +
       runHook postInstall

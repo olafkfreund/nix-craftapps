@@ -60,8 +60,11 @@ you changed a workflow, run `actionlint` too.
   in `if name == …` branches in `package.nix`. Every app so far has the
   identical tarball layout: `bin/<app>`, `bin/<app>-cli`, and
   `share/{applications,icons,metainfo,mime,doc}`. On macOS every app has a
-  DMG holding one `<Title>.app`, and a zip holding
-  `<app>-cli-<version>-macos-universal/<app>-cli`.
+  DMG holding one `<Title>.app` whose executable is
+  `Contents/MacOS/<Title>`, and a zip holding
+  `<app>-cli-<version>-macos-universal/<app>-cli`. Some bundles also carry
+  the CLI in `Contents/MacOS`, so `package.nix` names the executable rather
+  than globbing that folder.
 - **The modules take packages from this flake** (`craftapps pkgs`), not from
   `pkgs.craftapps`. Consumers must not need the overlay.
 - **`apps.<name>.enable` defaults to `enableAll`.** It must not be OR-ed with
