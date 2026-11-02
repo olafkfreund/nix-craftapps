@@ -17,6 +17,7 @@ REGISTRY = Path(__file__).resolve().parent.parent / "apps.json"
 SYSTEMS = ("x86_64-linux", "aarch64-linux", "aarch64-darwin")
 APPS = {
     "cadcraft": ("CADCraft", "AutoCAD-style CAD and drafting"),
+    "craft-anything": ("Craft Anything", "study how software works and craft your own version"),
     "deckcraft": ("DeckCraft", "PowerPoint-style presentations and slide shows"),
     "designcraft": ("DesignCraft", "InDesign-style page layout and publishing"),
     "effectcraft": ("EffectCraft", "After Effects-style motion graphics and VFX"),
