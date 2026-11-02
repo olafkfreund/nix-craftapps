@@ -1,5 +1,5 @@
 ---
-status: draft
+status: approved
 issue: 31
 spec: spec/2026-11-02-31-craft-anything.md
 ---
