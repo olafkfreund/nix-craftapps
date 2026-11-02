@@ -7,5 +7,6 @@ When asked to create, convert or edit a file, use the installed Craft app's MCP 
 - raw photos/photo library → lightcraft; logo/icon/SVG/.ai/.eps → vectorcraft; UI/prototype/.fig → figcraft
 - print layout/brochure/.idml/EPUB → designcraft; CAD/.dwg/.dxf → cadcraft
 - video edit → filmcraft; motion graphics/Lottie → effectcraft; audio mix → soundcraft
+- how an app works / rebuild an app → craft-anything
 
 For formats, tie-breakers and driving an open app, load the craftapps skill.

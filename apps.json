@@ -25,6 +25,32 @@
     "title": "CADCraft",
     "version": "0.16.0"
   },
+  "craft-anything": {
+    "description": "study how software works and craft your own version",
+    "desktopId": "ai.storyteller.craft-anything",
+    "repo": "storytold/craft-anything",
+    "sources": {
+      "aarch64-darwin": {
+        "cli": {
+          "hash": "sha256-PCEn3tgC1B7Zpnn1lWLpfW+rU+ZRWdxfOYFd2xXOjbU=",
+          "url": "https://github.com/storytold/craft-anything/releases/download/v0.2.0/craft-anything-cli-0.2.0-macos-universal.zip"
+        },
+        "hash": "sha256-nOGKDQeLcjpLivdEcYOxIxfnYbqjf1z8c7zQgBBBn8k=",
+        "url": "https://github.com/storytold/craft-anything/releases/download/v0.2.0/craft-anything-0.2.0-macos-universal.dmg"
+      },
+      "aarch64-linux": {
+        "hash": "sha256-T4rCla8suRniZ5K35deuRXP4dIkuvznqvqAknGcHqcU=",
+        "url": "https://github.com/storytold/craft-anything/releases/download/v0.2.0/craft-anything-0.2.0-linux-aarch64.tar.gz"
+      },
+      "x86_64-linux": {
+        "hash": "sha256-qmcMFmtTJl03pk7FRM98q+z5k4AsJ8RzN0b3sWwSyyE=",
+        "url": "https://github.com/storytold/craft-anything/releases/download/v0.2.0/craft-anything-0.2.0-linux-x86_64.tar.gz"
+      }
+    },
+    "tag": "v0.2.0",
+    "title": "Craft Anything",
+    "version": "0.2.0"
+  },
   "deckcraft": {
     "description": "PowerPoint-style presentations and slide shows",
     "desktopId": "ai.storyteller.deckcraft",
