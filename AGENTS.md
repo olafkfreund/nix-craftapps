@@ -5,12 +5,12 @@ For using the flake, read [README.md](README.md).
 
 ## What this repository is
 
-A Nix flake that packages the thirteen storytold "Craft" apps from their
+A Nix flake that packages the fourteen storytold "Craft" apps from their
 **prebuilt** releases: the Linux tarballs, and on macOS the universal DMG plus
 the separate CLI zip. It does not build from source. The outputs are:
 
 - one package per app, for x86_64-linux, aarch64-linux and aarch64-darwin;
-- `default`, which is all thirteen apps;
+- `default`, which is all fourteen apps;
 - an overlay;
 - a NixOS module, a nix-darwin module and a Home Manager module, all under
   `programs.craftapps`;
@@ -39,7 +39,7 @@ scripts/update.py         refreshes apps.json from GitHub releases (stdlib only)
 ## Commands
 
 ```sh
-nix flake check -L                  # builds all 13, runs the cli, mcp, skill, (darwin-)module + hm-module checks
+nix flake check -L                  # builds all 14, runs the cli, mcp, skill, (darwin-)module + hm-module checks
 nix build .#photocraft              # one app
 nix fmt                             # nixfmt
 python3 scripts/update.py --self-test   # offline tests of the updater
@@ -60,11 +60,12 @@ you changed a workflow, run `actionlint` too.
   in `if name == …` branches in `package.nix`. Every app so far has the
   identical tarball layout: `bin/<app>`, `bin/<app>-cli`, and
   `share/{applications,icons,metainfo,mime,doc}`. On macOS every app has a
-  DMG holding one `<Title>.app` whose executable is
-  `Contents/MacOS/<Title>`, and a zip holding
-  `<app>-cli-<version>-macos-universal/<app>-cli`. Some bundles also carry
-  the CLI in `Contents/MacOS`, so `package.nix` names the executable rather
-  than globbing that folder.
+  DMG holding one `.app`, and a zip holding
+  `<app>-cli-<version>-macos-universal/<app>-cli`. The executable is the
+  bundle's `CFBundleExecutable`, which `package.nix` reads from `Info.plist`
+  (the `.app` name can differ: `Craft Anything.app` runs `craft-anything`).
+  `Contents/MacOS` may also hold the CLI, so `package.nix` names the
+  executable rather than globbing that folder.
 - **The modules take packages from this flake** (`craftapps pkgs`), not from
   `pkgs.craftapps`. Consumers must not need the overlay.
 - **`apps.<name>.enable` defaults to `enableAll`.** It must not be OR-ed with
@@ -82,7 +83,7 @@ you changed a workflow, run `actionlint` too.
 
 ## Adding a new Craft app
 
-When storytold publishes a 14th app:
+When storytold publishes a 15th app:
 
 1. Add it to the `APPS` table in `scripts/update.py` with a title and a
    one-line description.
@@ -112,8 +113,9 @@ When storytold publishes a 14th app:
   step 4 above is manual.
 - **PhotoCraft's own library check.** PhotoCraft runs `ldconfig -p` before it
   starts and refuses to launch on NixOS. The wrapper sets
-  `<APP>_SKIP_LIB_CHECK=1` for every app (`lib.toUpper name`), which also
-  covers any app that copies the check later.
+  `<APP>_SKIP_LIB_CHECK=1` for every app (`lib.toUpper name`, hyphens
+  turned into underscores), which also covers any app that copies the check
+  later.
 - **Fonts.** On Linux the text tools read `/usr/share/fonts` only, with no
   fontconfig. On macOS they read `/System/Library/Fonts`, `/Library/Fonts`
   and `~/Library/Fonts`, so the darwin module has no `linkFonts`. On NixOS,

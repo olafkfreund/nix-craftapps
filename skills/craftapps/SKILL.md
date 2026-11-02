@@ -1,11 +1,11 @@
 ---
 name: craftapps
-description: "Create or edit files with the installed Craft apps instead of writing them by hand: slides, PowerPoint or .pptx → DeckCraft; Word document, letter, report, .docx/.odt/.rtf → WordCraft; spreadsheet, Excel, .xlsx/.xls/.ods/.csv → GridCraft; fill, sign, merge, OCR or redact a PDF, PDF to Word → PdfCraft; retouch an image, remove a background, Photoshop or .psd → PhotoCraft; raw photos, batch photo edits, Lightroom → LightCraft; logo, icon, illustration, SVG, Illustrator, .ai/.eps → VectorCraft; app or web UI, wireframe, prototype, Figma or .fig → FigCraft; brochure, magazine, InDesign, .idml, EPUB → DesignCraft; CAD, floor plan, AutoCAD, .dwg/.dxf → CADCraft; cut or edit a video, captions, Premiere → FilmCraft; motion graphics, animated titles, After Effects, Lottie → EffectCraft; record, mix or master audio, Pro Tools → SoundCraft. Also for driving an open Craft app or any Craft CLI or MCP server."
+description: "Create or edit files with the installed Craft apps instead of writing them by hand: slides, PowerPoint or .pptx → DeckCraft; Word document, letter, report, .docx/.odt/.rtf → WordCraft; spreadsheet, Excel, .xlsx/.xls/.ods/.csv → GridCraft; fill, sign, merge, OCR or redact a PDF, PDF to Word → PdfCraft; retouch an image, remove a background, Photoshop or .psd → PhotoCraft; raw photos, batch photo edits, Lightroom → LightCraft; logo, icon, illustration, SVG, Illustrator, .ai/.eps → VectorCraft; app or web UI, wireframe, prototype, Figma or .fig → FigCraft; brochure, magazine, InDesign, .idml, EPUB → DesignCraft; CAD, floor plan, AutoCAD, .dwg/.dxf → CADCraft; cut or edit a video, captions, Premiere → FilmCraft; motion graphics, animated titles, After Effects, Lottie → EffectCraft; record, mix or master audio, Pro Tools → SoundCraft; understand how an app or program works, or rebuild your own version of it → Craft Anything. Also for driving an open Craft app or any Craft CLI or MCP server."
 ---
 
 # Craft apps
 
-Thirteen desktop apps, each with a GUI (`<app>`) and a CLI (`<app>-cli`).
+Fourteen desktop apps, each with a GUI (`<app>`) and a CLI (`<app>-cli`).
 Every app does its work through engine commands, so an agent never needs
 the GUI to get a result.
 
@@ -33,6 +33,7 @@ isn't installed and fall back.
 | a video edit, captions | filmcraft | .mp4, .mov, audio, images, AAF | H.264/HEVC/ProRes renders, image sequences, EDL, FCPXML, OTIO, AAF |
 | motion graphics, Lottie | effectcraft | Lottie, footage | Lottie, H.264/HEVC/ProRes/WebM/GIF renders |
 | record, mix, master audio | soundcraft | .wav, .aiff, .flac, .mp3, .ogg, .m4a, MIDI | .wav, .aiff, .flac, stems, MIDI |
+| how an existing app works, rebuild it | craft-anything | a target program, folder or URL (absolute path) | evidence, reports, project folder (*.cany) |
 
 ### When two apps fit
 
@@ -51,6 +52,7 @@ isn't installed and fall back.
 - **Video and audio:** timeline editing → filmcraft. Motion graphics or
   Lottie → effectcraft. Multitrack or MIDI audio → soundcraft. Audio inside
   a video edit → filmcraft.
+- **Study vs make:** understanding or re-creating an existing program → craft-anything. Making a file → the app for that file.
 - **A format fails:** run `<app>-cli help` and use what it lists.
 
 ## Headless first
@@ -87,6 +89,7 @@ server at it. The flag for the server differs by app:
 | soundcraft | `--connect PORT` |
 | vectorcraft | `--connect ADDR`, default 127.0.0.1:7979 |
 | wordcraft | `--connect HOST:PORT` |
+| craft-anything | no bridge flag; `--inbox DIR` passes questions and approvals to the open app |
 | pdfcraft | no bridge in `mcp`; see below |
 
 If a flag is rejected, run `<app>-cli help` and use what it prints.

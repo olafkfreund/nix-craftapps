@@ -140,6 +140,16 @@ Approved decisions, carried over from the spec:
    - No narrating comments.
    - Keep the docs' existing line wrapping.
 
+## Deviations
+
+- Step 2: `nix fmt` reflowed the `${ … }` expression onto three lines; it
+  is the same expression.
+- Step 4: `SKILL.md` "Thirteen desktop apps" → "Fourteen", which the plan
+  missed.
+- Step 5: `AGENTS.md` "builds all 13" → 14, which the plan missed. The
+  README row goes at the end of the table, which follows release order,
+  and is not padded to the column widths.
+
 ## Tests
 
 - `nix flake check -L` passes on x86_64-linux. It builds all fourteen and
