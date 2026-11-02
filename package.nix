@@ -62,7 +62,9 @@ let
     # Some apps pre-check their graphics libraries with `ldconfig -p`, which
     # cannot see the RUNPATH, and refuse to start; the libraries load fine.
     postFixup = ''
-      wrapProgram $out/bin/${name} --set-default ${lib.toUpper name}_SKIP_LIB_CHECK 1
+      wrapProgram $out/bin/${name} --set-default ${
+        lib.toUpper (lib.replaceStrings [ "-" ] [ "_" ] name)
+      }_SKIP_LIB_CHECK 1
     '';
   };
 
@@ -85,9 +87,12 @@ let
       runHook preInstall
       mkdir -p $out/Applications $out/bin $out/share/doc/${name}
       cp -R *.app $out/Applications/
-      # Contents/MacOS can also hold the CLI (PhotoCraft 0.18.0 and later); the
-      # app's own executable is named after its title (CFBundleExecutable).
-      makeWrapper $out/Applications/${info.title}.app/Contents/MacOS/${info.title} $out/bin/${name}
+      app=$(echo $out/Applications/*.app)
+      # The executable is CFBundleExecutable: PhotoCraft's matches its title,
+      # Craft Anything's is the machine name, and Contents/MacOS may hold the CLI too.
+      exe=$(sed -n '/<key>CFBundleExecutable<\/key>/{n;s/.*<string>\(.*\)<\/string>.*/\1/p;}' "$app/Contents/Info.plist")
+      [ -n "$exe" ] || { echo "no CFBundleExecutable in $app/Contents/Info.plist" >&2; exit 1; }
+      makeWrapper "$app/Contents/MacOS/$exe" $out/bin/${name}
       install -m755 ${name}-cli-*/${name}-cli $out/bin/
       find ${name}-cli-* -maxdepth 1 -type f ! -name ${name}-cli -exec cp -t $out/share/doc/${name} {} +
       runHook postInstall
