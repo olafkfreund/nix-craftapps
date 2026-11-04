@@ -240,24 +240,24 @@
     "sources": {
       "aarch64-darwin": {
         "cli": {
-          "hash": "sha256-tanU/CURYwneNhP9850mEzuafMdeNcH6U9uDCNOz/3c=",
-          "url": "https://github.com/storytold/pdfcraft/releases/download/v0.18.0/pdfcraft-cli-0.18.0-macos-universal.zip"
+          "hash": "sha256-CGsjOtfCvcFyv4wONZhV/efGvdaaW9Ge+0fwiSDP630=",
+          "url": "https://github.com/storytold/pdfcraft/releases/download/v0.18.1/pdfcraft-cli-0.18.1-macos-universal.zip"
         },
-        "hash": "sha256-LHvg6DAOO62TzNOQ6uFuw0K82TWxLcKC/aPwWJvHznI=",
-        "url": "https://github.com/storytold/pdfcraft/releases/download/v0.18.0/pdfcraft-0.18.0-macos-universal.dmg"
+        "hash": "sha256-VfhL5WOI1p8k3yJSL21CT42OaVKdtmnOCOoZhFXgjOs=",
+        "url": "https://github.com/storytold/pdfcraft/releases/download/v0.18.1/pdfcraft-0.18.1-macos-universal.dmg"
       },
       "aarch64-linux": {
-        "hash": "sha256-ZsNCCEE3GGH8OMLoySZgWF0P4/t4LQgAkMnAi/oXfvI=",
-        "url": "https://github.com/storytold/pdfcraft/releases/download/v0.18.0/pdfcraft-0.18.0-linux-aarch64.tar.gz"
+        "hash": "sha256-e5kgudjEzLw2LNfozG+Tn+ryP6x4sai4h5HY1Mk/8Bw=",
+        "url": "https://github.com/storytold/pdfcraft/releases/download/v0.18.1/pdfcraft-0.18.1-linux-aarch64.tar.gz"
       },
       "x86_64-linux": {
-        "hash": "sha256-yzZlzEXMeqa6AchouffGncTYAL71LUHP/qi/UDfE620=",
-        "url": "https://github.com/storytold/pdfcraft/releases/download/v0.18.0/pdfcraft-0.18.0-linux-x86_64.tar.gz"
+        "hash": "sha256-Qaa5+xaXDNNhDQXZhZlwAuQZv1J4+Gr2q0gHg/ib8fw=",
+        "url": "https://github.com/storytold/pdfcraft/releases/download/v0.18.1/pdfcraft-0.18.1-linux-x86_64.tar.gz"
       }
     },
-    "tag": "v0.18.0",
+    "tag": "v0.18.1",
     "title": "PdfCraft",
-    "version": "0.18.0"
+    "version": "0.18.1"
   },
   "photocraft": {
     "description": "Photoshop-style image editor",
@@ -344,23 +344,23 @@
     "sources": {
       "aarch64-darwin": {
         "cli": {
-          "hash": "sha256-kv6ypOlwthS9jHDCu6sCodYhvPTHLqKth0T5Bf34etg=",
-          "url": "https://github.com/storytold/wordcraft/releases/download/v0.15.0/wordcraft-cli-0.15.0-macos-universal.zip"
+          "hash": "sha256-iFdJIxOHqOghK1xnR9Qyz4PEmyJ9cCH/l/MrR0AQIXQ=",
+          "url": "https://github.com/storytold/wordcraft/releases/download/v0.15.1/wordcraft-cli-0.15.1-macos-universal.zip"
         },
-        "hash": "sha256-4Hw/WDg+0eNFWwuB6V9NEktr05U2UHQoBoaRjQRHiBU=",
-        "url": "https://github.com/storytold/wordcraft/releases/download/v0.15.0/wordcraft-0.15.0-macos-universal.dmg"
+        "hash": "sha256-juWUNjKOJFGDhsbPFAf3xsCB/KynA85eUxCTivfasS8=",
+        "url": "https://github.com/storytold/wordcraft/releases/download/v0.15.1/wordcraft-0.15.1-macos-universal.dmg"
       },
       "aarch64-linux": {
-        "hash": "sha256-GmDwoablab6jcBQVferAxATp+lgN991mWZvIhpKLmgY=",
-        "url": "https://github.com/storytold/wordcraft/releases/download/v0.15.0/wordcraft-0.15.0-linux-aarch64.tar.gz"
+        "hash": "sha256-HRFPe2cBeKHlvwJ5gNqw1PnBKVou7/0LetsUWM6kCag=",
+        "url": "https://github.com/storytold/wordcraft/releases/download/v0.15.1/wordcraft-0.15.1-linux-aarch64.tar.gz"
       },
       "x86_64-linux": {
-        "hash": "sha256-uqzxgVgSSrw9RdxEhb/Hel1xf4CsULgGk7ZQHCZpjl0=",
-        "url": "https://github.com/storytold/wordcraft/releases/download/v0.15.0/wordcraft-0.15.0-linux-x86_64.tar.gz"
+        "hash": "sha256-jG/KOAnqGsgWjE19k5LK3oSlD1QBi+H4gSG6TswEpVI=",
+        "url": "https://github.com/storytold/wordcraft/releases/download/v0.15.1/wordcraft-0.15.1-linux-x86_64.tar.gz"
       }
     },
-    "tag": "v0.15.0",
+    "tag": "v0.15.1",
     "title": "WordCraft",
-    "version": "0.15.0"
+    "version": "0.15.1"
   }
 }
