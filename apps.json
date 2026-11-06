@@ -32,24 +32,24 @@
     "sources": {
       "aarch64-darwin": {
         "cli": {
-          "hash": "sha256-FBi5gpFjBxNnCkxMz6kEjy4u81i+EMyajfUPD/WuQX4=",
-          "url": "https://github.com/storytold/craft-anything/releases/download/v0.3.0/craft-anything-cli-0.3.0-macos-universal.zip"
+          "hash": "sha256-N674IrvkPsKzuYEP8A9NOMkixqwz0MroQn64MIb+06o=",
+          "url": "https://github.com/storytold/craft-anything/releases/download/v0.4.0/craft-anything-cli-0.4.0-macos-universal.zip"
         },
-        "hash": "sha256-DA/Q68YB5dEnJlTwJ+morhSLSgxio29cUeA24Un86t4=",
-        "url": "https://github.com/storytold/craft-anything/releases/download/v0.3.0/craft-anything-0.3.0-macos-universal.dmg"
+        "hash": "sha256-zWSm64Mw7Uj+0NfMrFCddM9MmpVsUCVAX2tUmWSsh/8=",
+        "url": "https://github.com/storytold/craft-anything/releases/download/v0.4.0/craft-anything-0.4.0-macos-universal.dmg"
       },
       "aarch64-linux": {
-        "hash": "sha256-TcnA367Tp5vrX2t/xdpbPmq85ljAZ/VCmJHjXzRWKVQ=",
-        "url": "https://github.com/storytold/craft-anything/releases/download/v0.3.0/craft-anything-0.3.0-linux-aarch64.tar.gz"
+        "hash": "sha256-PqRjZoeZFNBDMNxad5+b+o4c+kRqofOjWrlNpub3lXg=",
+        "url": "https://github.com/storytold/craft-anything/releases/download/v0.4.0/craft-anything-0.4.0-linux-aarch64.tar.gz"
       },
       "x86_64-linux": {
-        "hash": "sha256-Z07Fn/va771XeRfgfJ1GRWIEOydaOIm6T2AjmhLwPVM=",
-        "url": "https://github.com/storytold/craft-anything/releases/download/v0.3.0/craft-anything-0.3.0-linux-x86_64.tar.gz"
+        "hash": "sha256-KNnr/7l26kRp+1QCJ0LbWfTZ9iPRgHE2n/TYAcSbi8A=",
+        "url": "https://github.com/storytold/craft-anything/releases/download/v0.4.0/craft-anything-0.4.0-linux-x86_64.tar.gz"
       }
     },
-    "tag": "v0.3.0",
+    "tag": "v0.4.0",
     "title": "Craft Anything",
-    "version": "0.3.0"
+    "version": "0.4.0"
   },
   "deckcraft": {
     "description": "PowerPoint-style presentations and slide shows",
