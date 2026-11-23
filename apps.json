@@ -240,24 +240,24 @@
     "sources": {
       "aarch64-darwin": {
         "cli": {
-          "hash": "sha256-M3qfZEdEtX4Q3kHFc2blPFzPiECk1dxzIrF7m4P9wvo=",
-          "url": "https://github.com/storytold/pdfcraft/releases/download/v0.21.1/pdfcraft-cli-0.21.1-macos-universal.zip"
+          "hash": "sha256-2biogHCJXm1czzzFPR3jU2IrYL2K+ZPhw5WbS+HK8No=",
+          "url": "https://github.com/storytold/pdfcraft/releases/download/v0.22.0/pdfcraft-cli-0.22.0-macos-universal.zip"
         },
-        "hash": "sha256-Gtyb89MZ5wfpJHAE2wWjKgWWNONxD+ebwU+S9onKTUo=",
-        "url": "https://github.com/storytold/pdfcraft/releases/download/v0.21.1/pdfcraft-0.21.1-macos-universal.dmg"
+        "hash": "sha256-rUXKUqeTx82huuGstnV7XuEvB7+uwizkNE5eVGA0BjQ=",
+        "url": "https://github.com/storytold/pdfcraft/releases/download/v0.22.0/pdfcraft-0.22.0-macos-universal.dmg"
       },
       "aarch64-linux": {
-        "hash": "sha256-sI7+QWwdpFCwSz5OxfA4nXHXWA9DmPntoG0z0EcTx3A=",
-        "url": "https://github.com/storytold/pdfcraft/releases/download/v0.21.1/pdfcraft-0.21.1-linux-aarch64.tar.gz"
+        "hash": "sha256-zhN3JlUBWOIsiHy49xAB47KdF0Gup0kuDw/0kFTi/gM=",
+        "url": "https://github.com/storytold/pdfcraft/releases/download/v0.22.0/pdfcraft-0.22.0-linux-aarch64.tar.gz"
       },
       "x86_64-linux": {
-        "hash": "sha256-wpGekETv/eMY5mgHrSohu7dKlVWzwLmfmtDEDPYc4l4=",
-        "url": "https://github.com/storytold/pdfcraft/releases/download/v0.21.1/pdfcraft-0.21.1-linux-x86_64.tar.gz"
+        "hash": "sha256-qJk/nuluh6zOz5CvQib/YKhLnheHrp/Y+kj/4Tlrw14=",
+        "url": "https://github.com/storytold/pdfcraft/releases/download/v0.22.0/pdfcraft-0.22.0-linux-x86_64.tar.gz"
       }
     },
-    "tag": "v0.21.1",
+    "tag": "v0.22.0",
     "title": "PdfCraft",
-    "version": "0.21.1"
+    "version": "0.22.0"
   },
   "photocraft": {
     "description": "Photoshop-style image editor",
