@@ -84,24 +84,24 @@
     "sources": {
       "aarch64-darwin": {
         "cli": {
-          "hash": "sha256-oXh4OzHhr0j3rytRZWjshVN6SE37zFBXsPA8re6QwKs=",
-          "url": "https://github.com/storytold/designcraft/releases/download/v0.20.1/designcraft-cli-0.20.1-macos-universal.zip"
+          "hash": "sha256-gUikLik7qagzUVaK2ThBC4hoSVlSZ5ZI9wGK1c0kXPM=",
+          "url": "https://github.com/storytold/designcraft/releases/download/v0.21.1/designcraft-cli-0.21.1-macos-universal.zip"
         },
-        "hash": "sha256-9Fsr9VQ8HYw30JqXHplCDW7z2XtuvjPjGzbSo8OesMI=",
-        "url": "https://github.com/storytold/designcraft/releases/download/v0.20.1/designcraft-0.20.1-macos-universal.dmg"
+        "hash": "sha256-mWTRNVbH4PA6v29Ksgveip1snbdE1NPMbGd1OGIGTwA=",
+        "url": "https://github.com/storytold/designcraft/releases/download/v0.21.1/designcraft-0.21.1-macos-universal.dmg"
       },
       "aarch64-linux": {
-        "hash": "sha256-IIw89zVl+nZcR+62AflP7EJegX0VzCEx36HB6+LQZiA=",
-        "url": "https://github.com/storytold/designcraft/releases/download/v0.20.1/designcraft-0.20.1-linux-aarch64.tar.gz"
+        "hash": "sha256-CszzA9olsOGtKwCk2BLekgekX+wjbBlCHZpATJ0pHdY=",
+        "url": "https://github.com/storytold/designcraft/releases/download/v0.21.1/designcraft-0.21.1-linux-aarch64.tar.gz"
       },
       "x86_64-linux": {
-        "hash": "sha256-6RYw1M31eMyx4vOfiOJOhSDxSC1RrkcUZX7kceIjf0Q=",
-        "url": "https://github.com/storytold/designcraft/releases/download/v0.20.1/designcraft-0.20.1-linux-x86_64.tar.gz"
+        "hash": "sha256-IR50ufXO5b/DzbRpg9C9sf29CRZL/YB/T/cHBpNdQK4=",
+        "url": "https://github.com/storytold/designcraft/releases/download/v0.21.1/designcraft-0.21.1-linux-x86_64.tar.gz"
       }
     },
-    "tag": "v0.20.1",
+    "tag": "v0.21.1",
     "title": "DesignCraft",
-    "version": "0.20.1"
+    "version": "0.21.1"
   },
   "effectcraft": {
     "description": "After Effects-style motion graphics and VFX",
@@ -110,24 +110,24 @@
     "sources": {
       "aarch64-darwin": {
         "cli": {
-          "hash": "sha256-J4HtoZQ3KtR/TAx9+LHThQGj6Qu0mSgvV+lZioWVhnM=",
-          "url": "https://github.com/storytold/effectcraft/releases/download/v0.24.1/effectcraft-cli-0.24.1-macos-universal.zip"
+          "hash": "sha256-9JjkB6gva6CAZxYAJTAeZHI3Bu/EXJY8SVoPf+14yP8=",
+          "url": "https://github.com/storytold/effectcraft/releases/download/v0.25.1/effectcraft-cli-0.25.1-macos-universal.zip"
         },
-        "hash": "sha256-ItARHR2qpxQu5iZqK4F00vTTdcTBLg38QKBNs9+zWFE=",
-        "url": "https://github.com/storytold/effectcraft/releases/download/v0.24.1/effectcraft-0.24.1-macos-universal.dmg"
+        "hash": "sha256-xUV5Mypm2LDzueAdinEgOVFu7Z9iS96c7+bRNLPK7Cg=",
+        "url": "https://github.com/storytold/effectcraft/releases/download/v0.25.1/effectcraft-0.25.1-macos-universal.dmg"
       },
       "aarch64-linux": {
-        "hash": "sha256-rRDERQZWgXYN6TUxF8bixFFn6rzM8O0ZveL1xayQhpU=",
-        "url": "https://github.com/storytold/effectcraft/releases/download/v0.24.1/effectcraft-0.24.1-linux-aarch64.tar.gz"
+        "hash": "sha256-pKlsjbdwMKsrLCQYNhrr70TtspeUtcBks7jIEenqpSM=",
+        "url": "https://github.com/storytold/effectcraft/releases/download/v0.25.1/effectcraft-0.25.1-linux-aarch64.tar.gz"
       },
       "x86_64-linux": {
-        "hash": "sha256-XOA5NpAUQif6kYboIwitY4pu9tn5dsmW5tA7W1G2Wns=",
-        "url": "https://github.com/storytold/effectcraft/releases/download/v0.24.1/effectcraft-0.24.1-linux-x86_64.tar.gz"
+        "hash": "sha256-byn/fgNZkJ/h2/b9PP2EMKA2I0m2EsXrLPyP7nueJ2A=",
+        "url": "https://github.com/storytold/effectcraft/releases/download/v0.25.1/effectcraft-0.25.1-linux-x86_64.tar.gz"
       }
     },
-    "tag": "v0.24.1",
+    "tag": "v0.25.1",
     "title": "EffectCraft",
-    "version": "0.24.1"
+    "version": "0.25.1"
   },
   "figcraft": {
     "description": "Figma-style interface design and prototyping",
