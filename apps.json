@@ -58,24 +58,24 @@
     "sources": {
       "aarch64-darwin": {
         "cli": {
-          "hash": "sha256-EJkvc8iKTANh3Q/sOk10kHMf+z6pZY7iJ0s5bjNBrwA=",
-          "url": "https://github.com/storytold/deckcraft/releases/download/v0.18.1/deckcraft-cli-0.18.1-macos-universal.zip"
+          "hash": "sha256-EoWxSCPNQT7ipma1Afi6UHbOK6BDk4FDvAS/Juxb8Og=",
+          "url": "https://github.com/storytold/deckcraft/releases/download/v0.19.1/deckcraft-cli-0.19.1-macos-universal.zip"
         },
-        "hash": "sha256-MyHRH2NTs/+d4yjyFAfXUn8fkCnIPatOOrc09RbToFU=",
-        "url": "https://github.com/storytold/deckcraft/releases/download/v0.18.1/deckcraft-0.18.1-macos-universal.dmg"
+        "hash": "sha256-pSM/KLAxt07cSgffKgBo1DuCzK39rIZfFFdl0oss50Y=",
+        "url": "https://github.com/storytold/deckcraft/releases/download/v0.19.1/deckcraft-0.19.1-macos-universal.dmg"
       },
       "aarch64-linux": {
-        "hash": "sha256-P70AXOOCyFOtBW3Ke5N4AvwO9rhWTspamaUrZwwVnpQ=",
-        "url": "https://github.com/storytold/deckcraft/releases/download/v0.18.1/deckcraft-0.18.1-linux-aarch64.tar.gz"
+        "hash": "sha256-IOuNgoR+GonPwm61uATIQG5m4MZOK/xgEjb0rQRvayE=",
+        "url": "https://github.com/storytold/deckcraft/releases/download/v0.19.1/deckcraft-0.19.1-linux-aarch64.tar.gz"
       },
       "x86_64-linux": {
-        "hash": "sha256-W659VWZjhiRBHvlo8lMqszWNwoCIQURYPkl8VjHbiiY=",
-        "url": "https://github.com/storytold/deckcraft/releases/download/v0.18.1/deckcraft-0.18.1-linux-x86_64.tar.gz"
+        "hash": "sha256-7HWqrvEKbcSBP36/D3/Y+YBSDFs9BRuj12IEyeXXb+o=",
+        "url": "https://github.com/storytold/deckcraft/releases/download/v0.19.1/deckcraft-0.19.1-linux-x86_64.tar.gz"
       }
     },
-    "tag": "v0.18.1",
+    "tag": "v0.19.1",
     "title": "DeckCraft",
-    "version": "0.18.1"
+    "version": "0.19.1"
   },
   "designcraft": {
     "description": "InDesign-style page layout and publishing",
@@ -344,23 +344,23 @@
     "sources": {
       "aarch64-darwin": {
         "cli": {
-          "hash": "sha256-NDl89vz3PuiujVPKsI+9/CEyYtu2dTwpZeu3zeN7hhY=",
-          "url": "https://github.com/storytold/wordcraft/releases/download/v0.18.1/wordcraft-cli-0.18.1-macos-universal.zip"
+          "hash": "sha256-8Ajbfh3T+BpPm6ZdNDWO1NqOMOv5GRJYvvP3vizDLFM=",
+          "url": "https://github.com/storytold/wordcraft/releases/download/v0.19.1/wordcraft-cli-0.19.1-macos-universal.zip"
         },
-        "hash": "sha256-ifbgqRD4rVqBXYAkx5Mk0gW1b80uBd7tAQ6QFvWBPew=",
-        "url": "https://github.com/storytold/wordcraft/releases/download/v0.18.1/wordcraft-0.18.1-macos-universal.dmg"
+        "hash": "sha256-3xPKv2O7JZEEXr9ngsF0QOfs7pVWVQ1t0q/+zZg4JbI=",
+        "url": "https://github.com/storytold/wordcraft/releases/download/v0.19.1/wordcraft-0.19.1-macos-universal.dmg"
       },
       "aarch64-linux": {
-        "hash": "sha256-P0r8BZg1c3itivmy43osFx9t1HTJIGyc8M9W6mhiWe0=",
-        "url": "https://github.com/storytold/wordcraft/releases/download/v0.18.1/wordcraft-0.18.1-linux-aarch64.tar.gz"
+        "hash": "sha256-Y9iy4CDSQQALVls4bNBbuiLQuXxIS18RwJzGMeUXSco=",
+        "url": "https://github.com/storytold/wordcraft/releases/download/v0.19.1/wordcraft-0.19.1-linux-aarch64.tar.gz"
       },
       "x86_64-linux": {
-        "hash": "sha256-MSoFfUbdgFl8EtzP0Ql84l7epAuqrrULy28BrBrrrbU=",
-        "url": "https://github.com/storytold/wordcraft/releases/download/v0.18.1/wordcraft-0.18.1-linux-x86_64.tar.gz"
+        "hash": "sha256-7I2MwrkgSsA9E4DOyRDe/fLohQ2T6bh9YYTq/vYZaLQ=",
+        "url": "https://github.com/storytold/wordcraft/releases/download/v0.19.1/wordcraft-0.19.1-linux-x86_64.tar.gz"
       }
     },
-    "tag": "v0.18.1",
+    "tag": "v0.19.1",
     "title": "WordCraft",
-    "version": "0.18.1"
+    "version": "0.19.1"
   }
 }
